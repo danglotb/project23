@@ -1,9 +1,14 @@
 var viewport_width;
 var viewport_height;
 
-var nb_object = 10;
+var nb_object = 1000;
 
 var list_object = new Array();
+
+var current_sum_fps = 0;
+var current_nb_fps = 0;
+var last_computed_fps = 0;
+
 
 function init_canvas() {
 	var canvas = document.createElement('canvas');
@@ -28,7 +33,11 @@ function init_canvas() {
 	for(var i =0; i < nb_object; i++)
 		list_object[i] = {id: i, x: Math.random()*(viewport_width-64), y: Math.random()*(viewport_height-64), angle:  Math.random()*Math.PI*2, speed: 2, width: 64, height: 64};
 
-	
+	setInterval(function(){ 
+		last_computed_fps = current_sum_fps/current_nb_fps;
+		current_sum_fps = 0;
+		current_nb_fps = 0;
+	}, 1000);
 }
 
 function draw_canvas(context, img) {
@@ -45,9 +54,12 @@ function draw_canvas(context, img) {
 	}
 
 	var time = performance.now()-start; 
-
+	
+	current_sum_fps = 1000/time;
+	current_nb_fps++;
+	
 	context.fillStyle = "#000";
-	context.fillText("FPS "+(1000/time),20,20);
+	context.fillText(last_computed_fps+" fps",20,20);
 
 	setTimeout(function(){ draw_canvas(context, img, viewport_width, viewport_height) }, 10);
 }
@@ -62,7 +74,7 @@ function compute_obj(context, img, obj) {
 	if(obj.y < 0 || obj.y+obj.height > viewport_height) {
 		obj.angle = -obj.angle;
 	}
-
+/*
 	for(var i =0; i < nb_object; i++) {
 		if(obj.id != i) {
 
@@ -81,8 +93,7 @@ function compute_obj(context, img, obj) {
 				list_object[i].angle = -list_object[i].angle;
 			}
 		}
-	}
-		list_object[i] = {x: Math.random()*(viewport_width-64), y: Math.random()*(viewport_height-64), angle:  Math.random()*Math.PI*2, speed: 2, width: 64, height: 64};
+	}*/
 }
 
 function draw_obj(context, img, obj) {

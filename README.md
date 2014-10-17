@@ -1,12 +1,14 @@
-==== Project23 : MMRORPG on WebApp ====
+Project23 : MMRORPG on WebApp
+==============================
 
-+-----------------------------+
-|	Contributors :            |
-|		-> Benjamin DANGLOT   |
-|		-> Pierre FALEZ       |
-|		-> Antoine PHILIPPE   |
-|		-> Simon FRANCOIS     |
-|		-> Nicolas CACHERA    |
-+-----------------------------+
+## Contributors :
+	* Benjamin DANGLOT
+	* Pierre FALEZ
+	* Antoine PHILIPPE
+	* Simon FRANCOIS
+	* Nicolas CACHERA
+	
+* * *
 
-#Prototype : contains benchmark.
+## Prototype : 
+	* benchmark canvas (Javascript and Dart)

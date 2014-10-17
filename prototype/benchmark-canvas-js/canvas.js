@@ -5,9 +5,11 @@ var nb_object = 1000;
 
 var list_object = new Array();
 
-var current_sum_fps = 0;
-var current_nb_fps = 0;
-var last_computed_fps = 0;
+var fps_number_last = 0;
+var fps_number_current = 0;
+
+var fps_average_total = 0;
+var fps_average_number = 0;
 
 
 function init_canvas() {
@@ -34,9 +36,12 @@ function init_canvas() {
 		list_object[i] = {id: i, x: Math.random()*(viewport_width-64), y: Math.random()*(viewport_height-64), angle:  Math.random()*Math.PI*2, speed: 2, width: 64, height: 64};
 
 	setInterval(function(){ 
-		last_computed_fps = current_sum_fps/current_nb_fps;
-		current_sum_fps = 0;
-		current_nb_fps = 0;
+		fps_number_last = fps_number_current;
+		fps_number_current = 0;
+		if(fps_number_last != 0) {
+			fps_average_total += fps_number_last;
+			fps_average_number++;
+		}
 	}, 1000);
 }
 
@@ -55,13 +60,12 @@ function draw_canvas(context, img) {
 
 	var time = performance.now()-start; 
 	
-	current_sum_fps = 1000/time;
-	current_nb_fps++;
+	fps_number_current++;
 	
 	context.fillStyle = "#000";
-	context.fillText(last_computed_fps+" fps",20,20);
+	context.fillText(fps_number_last+" fps (avg: "+(fps_average_total/fps_average_number)+")",20,20);
 
-	setTimeout(function(){ draw_canvas(context, img, viewport_width, viewport_height) }, 10);
+	setTimeout(function(){ draw_canvas(context, img, viewport_width, viewport_height) }, 1);
 }
 
 function compute_obj(context, img, obj) {

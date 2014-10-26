@@ -37,8 +37,8 @@ abstract class Container extends Component {
 	/* Getters & Setters */
 	
 	/* Setter of Layout */
-	Layout get getLayout								=> this._layout;
-				 set setLayout(Layout layout) => this._layout = layout;
+	Layout get getLayout                => this._layout;
+	       set setLayout(Layout layout) => this._layout = layout;
 	
 	/* Get the total number of component in this container */
 	int get getChildNumber => this._children.length;

@@ -33,15 +33,15 @@ abstract class Component {
 	/* Getters & Setters */
 	
 	/* Getters & setters of _visible */
-	bool get isVisible							=> this._visible;
+	bool get isVisible              => this._visible;
 	     set setVisible(bool state) => this._visible = state;
 	     
 	/* Getters & setters of _position */
-	Coordinates2D get getPosition													=> this._position;
-								set setPosition(Coordinates2D position) => this._position = position;
+	Coordinates2D get getPosition                         => this._position;
+	              set setPosition(Coordinates2D position) => this._position = position;
 	
 	/* Getters & setters of _size */
-	Vector2D get getSize 								=> this._size;
-					 set setSize(Vector2D size) => this._size = size;
+	Vector2D get getSize                => this._size;
+	         set setSize(Vector2D size) => this._size = size;
 								
 }

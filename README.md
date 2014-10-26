@@ -12,3 +12,6 @@ Project23 : MMRORPG on WebApp
 
 ## Prototype : 
 	* benchmark canvas (Javascript and Dart)
+	
+## Branches :
+	* ui : User interface

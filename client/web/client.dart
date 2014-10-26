@@ -1,5 +1,13 @@
 import 'dart:html';
+import 'ui/ui.dart' as ui;
 
 void main() {
-	print('test');
+	CanvasElement canvas = querySelector('#canvas');
+	
+	//resize canvas
+  canvas.width =  window.innerWidth;
+  canvas.height =  window.innerHeight;
+ 
+	Window.initialize(canvas.context2D);
+
 }

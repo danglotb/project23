@@ -10,14 +10,14 @@ abstract class Component {
 	Vectore2D _size;
 	
 	/* The style of the component */
-	ComponentStyleUI _style;
+	ComponentStyle _style;
 	
 	/* True if the component is visible, else false */
 	bool _visible;
 	
 	/* Constructors */
 	
-	Component(ComponentStyleUI style) {
+	Component(ComponentStyle style) {
 		this._style = style;
 		// To do : Init class variables
 	}

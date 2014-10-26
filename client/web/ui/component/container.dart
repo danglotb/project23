@@ -1,7 +1,7 @@
 part of ui;
 
 /* A container of components */
-abstract class Container extends Component {
+class Container extends Component {
 	
 	/* The list of components in this container */
 	List<Component> _children;

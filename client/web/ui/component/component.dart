@@ -4,10 +4,10 @@ part of ui;
 abstract class Component {
 	
 	/* The position of the component in the window */
-	Coordinates2D _position;
+	utils.Coordinates2D _position;
 	
 	/* The size of the component */
-	Vectore2D _size;
+	utils.Vector2D _size;
 	
 	/* The style of the component */
 	ComponentStyle _style;
@@ -25,7 +25,9 @@ abstract class Component {
 	/* Methods */
 	
 	/* Draw the component */
-	void draw();
+	void draw() {
+		_style.draw(this);
+	}
 	
 	/* Spread the event to the component */
 	void dispatchEvent(Event event);

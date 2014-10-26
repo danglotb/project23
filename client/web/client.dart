@@ -1,8 +1,8 @@
 import 'dart:html' as dart;
 
 import 'ui/ui.dart' as ui;
-
-import 'window.dart';
+import 'utils/utils.dart' as utils;
+import 'core/core.dart' as core;
 
 void main() {
 	dart.CanvasElement canvas = dart.querySelector('#canvas');
@@ -11,8 +11,16 @@ void main() {
   canvas.width =  dart.window.innerWidth;
   canvas.height =  dart.window.innerHeight;
  
-	Window.initialize(canvas.context2D);
+	core.Window.initialize(canvas);
 	
-	Window.run();
+	ui.Container container = new ui.Container();
+	container.setLayout(new ui.VerticalLayout());
+	container.addChild(new ui.Bidon("#f00", new ui.BidonStyle()));
+	container.addChild(new ui.Bidon("#f00", new ui.BidonStyle()));
+	container.addChild(new ui.Bidon("#f00", new ui.BidonStyle()));
+	
+	core.Window.getInstance().setContent(new ui.Bidon(new ui.BidonStyle()));
+	
+	core.Window.getInstance().run();
 
 }

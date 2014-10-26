@@ -1,3 +1,3 @@
 library ui;
 
-part 'component.dart';
+part 'component/component.dart';

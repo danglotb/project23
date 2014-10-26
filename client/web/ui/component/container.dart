@@ -31,19 +31,20 @@ abstract class Container extends Component {
 	
 	/* Add a component in this container */
 	void addChild(Component component) {
-		this._children.add(componenent);
+		this._children.add(component);
 	}
 	
 	/* Getters & Setters */
 	
 	/* Setter of Layout */
-	void set setLayout(Layout layout) => this._layout = layout;
+	Layout get getLayout								=> this._layout;
+				 set setLayout(Layout layout) => this._layout = layout;
 	
 	/* Get the total number of component in this container */
 	int get getChildNumber => this._children.length;
 	
 	/* Get the indexth component in the list */
-	int getChild(int index) {
+	Component getChild(int index) {
 		return this._children.elementAt(index);
 	}
 	

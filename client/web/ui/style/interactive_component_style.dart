@@ -5,6 +5,6 @@ abstract class InteractiveComponentStyle extends ComponentStyle {
 
 	/* Constructors */
 	
-	InteractiveComponentStyle() {}
+	InteractiveComponentStyle(): super();
 
 }

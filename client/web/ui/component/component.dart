@@ -1,5 +1,6 @@
 part of ui;
 
+/* A component of the window */
 abstract class Component {
 	
 	/* The position of the component in the window */
@@ -29,18 +30,10 @@ abstract class Component {
 	/* Spread the event to the component */
 	void dispatchEvent(Event event);
 	
-	/* Setters */
+	/* Getters & Setters */
 	
-	/* Set _visible to state */
-	void setVisible(bool state) {
-		this._visible = state;
-	}
-	
-	/* Getters */
-	
-	/* Return true if the component is visible, else false */
-	bool isVisible() {
-		return this._visible;
-	}
+	/* Getters & setters of _visible */
+	bool get isVisible							=> this._visible;
+	     set setVisible(bool state) => this._visible = state;
 	
 }

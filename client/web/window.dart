@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'ui/ui.dart' as ui;
 
 class Window {
 	
@@ -27,7 +28,23 @@ class Window {
 		return _instance;
 	}
 	
+	/*
+	 * Set the content pane
+	 */
 	static void setContent(ui.Component component) {
 		_instance._content = component; 
+	}
+	
+	/*
+	 * Start the paint of the window
+	 */
+	static void run() {
+		_run(0);
+	}
+	
+	static void _run(num timer) {
+		print(timer);
+		_instance._content.draw();
+		window.requestAnimationFrame(_run);
 	}
 }

@@ -7,7 +7,7 @@ abstract class Component {
 	Coordinates2D _position;
 	
 	/* The size of the component */
-	Vectore2D _size;
+	Vector2D _size;
 	
 	/* The style of the component */
 	ComponentStyle _style;

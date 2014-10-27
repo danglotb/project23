@@ -30,7 +30,10 @@ class Cursor extends SelectableComponent {
 		this._value = init<min?min:init>max?max:init;
 		
 		this._min = min;
-		this._max = max;		
+		this._max = max;
+
+		this._valueChangedListener = new List<Function>();
+		
 	}
 	
 	/* Methods */

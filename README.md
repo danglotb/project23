@@ -1,5 +1,5 @@
-Project23 : MMRORPG on WebApp
-==============================
+Project23 : MMORPG on WebApp
+============================
 
 ## Contributors :
 	* Benjamin DANGLOT
@@ -12,3 +12,6 @@ Project23 : MMRORPG on WebApp
 
 ## Prototype : 
 	* benchmark canvas (Javascript and Dart)
+	
+## Pro'Tips :
+	* Button freaking great in pubspec.yaml('run pub get' or/and 'run pub build') if you have any problems ;)

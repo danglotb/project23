@@ -7,6 +7,7 @@ class Gameboard {
 	int _width;
 	html.CanvasElement canvas;
 	html.ImageElement beuh, sand;
+	Player player;
 	
 	Gameboard(int height, int width , html.CanvasElement canvas, {List<Case> gameCase}) {
 		
@@ -22,6 +23,8 @@ class Gameboard {
 		
 		this._height = height; 
 		this._width = width;
+		
+		this.player = new Player(0,0);
 		
 		if (gameCase != null)
 			this._gameboardTab = gameCase;
@@ -51,5 +54,6 @@ class Gameboard {
 					canvas.context2D.drawImageScaled(this.sand, x*50, y*50, 50,50);
 			}
 		}
+		canvas.context2D.drawImageScaled(this.player.getSkin(), this.player.x*50, this.player.y*50, 50 ,50);
 	}
 }

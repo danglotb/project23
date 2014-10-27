@@ -3,7 +3,7 @@ part of game;
 class LoaderManager{
 	
 	LoaderManager(){
-		var dir = new io.Directory('./web/game/sprites');
+/*		var dir = new io.Directory('./web/game/sprites');
 		core.List<html.ImageElement> liste = new core.List<html.ImageElement>();
 		html.ImageElement pic;
 		dir.list(recursive: true, followLinks: false)
@@ -13,7 +13,7 @@ class LoaderManager{
 			liste.add(pic);
 			core.print(entity.path);
 		});
-		}
+		*/}
 }
 
 
@@ -47,8 +47,8 @@ class SpriteManager{
 
 
 
-void main(){
+/*void main(){
 	//RessourceManager rm = new RessourceManager();
 	LoaderManager lm = new LoaderManager();
 	
-}
+}*/

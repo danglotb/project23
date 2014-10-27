@@ -1,5 +1,7 @@
-import 'dart:html';
+import 'dart:html' as html;
+import 'game/game.dart';
 
 void main() {
-	print('test');
+	html.CanvasElement canvas = html.querySelector("#main-frame");
+  Gameboard gb = new Gameboard(10,10,canvas);
 }

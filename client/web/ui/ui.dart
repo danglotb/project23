@@ -17,6 +17,8 @@ part 'component/selectable_component.dart';
 part 'component/toggleable_component.dart';
 part 'component/bidon.dart';
 part 'component/cursor.dart';
+part 'component/checkbox_container.dart';
+part 'component/label.dart';
 
 /*
  * Style

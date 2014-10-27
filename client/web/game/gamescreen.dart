@@ -6,7 +6,7 @@ class GameScreen {
 	HUD _hud;
 	
 	void draw() {
-		this._gameboard.draw();
+		this._gameboard.draw(0);
 		this._hud.draw();
 	}
 	

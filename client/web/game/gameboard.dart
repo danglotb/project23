@@ -25,7 +25,7 @@ class Gameboard {
 		this._width = width;
 		
 		this.player = new Player(0,0);
-		
+		canvas.onClick.listen(anime);
 		if (gameCase != null)
 			this._gameboardTab = gameCase;
 		else {
@@ -35,25 +35,33 @@ class Gameboard {
 		//
 		this.sand = new html.ImageElement(src:"sand.png");
     this.sand.onLoad.listen((e) {
-			draw();
+			draw(0);
     });
     
   	this.beuh = new html.ImageElement(src:"beuh.png");
       this.beuh.onLoad.listen((e) {
-  			draw();
+  			draw(0);
       });
     //
 	}
 	
-	void draw() {
+	void anime(html.MouseEvent e) {
+		this.player.setTarget(e.client.x, e.client.y);
+	}
+	
+	void draw(num timer) {
+		
 		for (int y = 0 ; y < this._height ; y++) {
-			for (int x = 0 ; x < this._width ; x++) {
-				if (this._gameboardTab[x+(y*this._height)].getSpriteValue() == 1)
-					canvas.context2D.drawImageScaled(this.beuh, x*50, y*50, 50,50);
-				else
-					canvas.context2D.drawImageScaled(this.sand, x*50, y*50, 50,50);
-			}
-		}
-		canvas.context2D.drawImageScaled(this.player.getSkin(), this.player.x*50, this.player.y*50, 50 ,50);
+      			for (int x = 0 ; x < this._width ; x++) {
+      				if (this._gameboardTab[x+(y*this._height)].getSpriteValue() == 1)
+      					canvas.context2D.drawImageScaled(this.beuh, x*50, y*50, 50,50);
+      				else
+      					canvas.context2D.drawImageScaled(this.sand, x*50, y*50, 50,50);
+      			}
+      		}
+		canvas.context2D.drawImageScaled(this.player.getSkin(), this.player.x, this.player.y, 50 ,50);
+  		if (this.player.onMove)
+  			this.player.move();
+  	html.window.requestAnimationFrame(draw);
 	}
 }

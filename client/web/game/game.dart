@@ -7,3 +7,4 @@ part 'hud.dart';
 part 'gameboard.dart';
 part 'case.dart';
 part 'player.dart';
+part 'camera.dart';

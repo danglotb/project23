@@ -45,7 +45,10 @@ class Gameboard {
 	void draw() {
 		for (int y = 0 ; y < this._height ; y++) {
 			for (int x = 0 ; x < this._width ; x++) {
-				canvas.context2D.drawImageScaled(this.beuh, x*50, y*50, 50,50);
+				if (this._gameboardTab[x+(y*this._height)].getSpriteValue() == 1)
+					canvas.context2D.drawImageScaled(this.beuh, x*50, y*50, 50,50);
+				else
+					canvas.context2D.drawImageScaled(this.sand, x*50, y*50, 50,50);
 			}
 		}
 	}

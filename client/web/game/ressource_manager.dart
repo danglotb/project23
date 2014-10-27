@@ -3,15 +3,15 @@ part of game;
 class LoaderManager{
 	
 	LoaderManager(){
-		var dir = new io.Directory('./web/game/sprites');
-		core.List<html.ImageElement> liste = new core.List<html.ImageElement>();
+		var dir = new Directory('./web/game/sprites');
+		List<html.ImageElement> liste = new List<html.ImageElement>();
 		html.ImageElement pic;
 		dir.list(recursive: true, followLinks: false)
-			.listen((io.FileSystemEntity entity){
+			.listen((FileSystemEntity entity){
 			pic = new html.ImageElement();
 			pic.src = entity.path;
 			liste.add(pic);
-			core.print(entity.path);
+			print(entity.path);
 		});
 		}
 }

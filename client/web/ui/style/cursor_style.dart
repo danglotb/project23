@@ -19,13 +19,13 @@ class CursorStyle extends SelectableComponentStyle {
 		String color = "#000";
     
 		if(castModel.isPushed()) {
-     	color = "#222";
+     	color = "#444";
     } else if(castModel.isOverflew()) {
-    	color = "#111";
+    	color = "#222";
     }
 
 		/* Start position */
-		num x = castModel.getPosition().x + 100;
+		num x = castModel.getPosition().x;
 		num y = castModel.getPosition().y + castModel.getSize().y/2;
 		
 		/* Drawing */
@@ -33,8 +33,8 @@ class CursorStyle extends SelectableComponentStyle {
                                           ..fillStyle = color
                                           ..strokeStyle = "#000"
                                           ..moveTo(x, y)
-                                          ..lineTo(x + castModel.getSize().x - 200, y)
-                                          ..arc(x + (castModel.getValue() * 100)/(castModel.getMax() - castModel.getMin()), y, 20, 0, 2 * math.PI)
+                                          ..lineTo(x + castModel.getSize().x, y)
+                                          ..arc(x + (castModel.getValue()/(castModel.getMax() - castModel.getMin())) * castModel.getSize().x, y, 20, 0, 2 * math.PI)
                                           ..fill()
                                           ..stroke();
 	}

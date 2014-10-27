@@ -40,6 +40,26 @@ class Cursor extends SelectableComponent {
 		this._valueChangedListener.add(fun);
 	}
 	
+	void dispatchEvent(Event event) {
+		
+		super.dispatchEvent(event);
+		
+		if(event.getType() == EventType.MOUSE_PUSH || this._pushed) {
+			
+			num mousePosX = event.getMousePosition().x;
+  		num mousePosY = event.getMousePosition().y;
+  		num cursorPosMinX = this._position.x;
+  		num cursorPosMaxX = this._position.x + this._size.x;
+  		num cursorPosY = this._position.y + this._size.y/2;			
+			
+  		this._value = (mousePosX - cursorPosMinX)/this._size.x * (this._max - this._min);
+  		print(this._value.toString());
+  		draw();
+		
+		}
+  		
+  }
+	
 	/* Getters & Setters */
 	
 	/* Get the selected value */

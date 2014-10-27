@@ -11,14 +11,31 @@ class Container extends Component {
 	
 	/* Constructors */
 	
-	Container(ComponentStyle style) : super(style);
+	Container([ComponentStyle style]) : super(style) {
+		this._children = new List<Component>();
+		this._layout = new PassifLayout();
+	}
 	
 	/* Methods */
 	
 	/* Draw the component */
 	void draw() {
+		if(this._visible) {
+			
+			if(_style != null)
+				_style.draw(this);
+			
+			for(Component component in this._children) {
+				component.draw();
+			}
+		}
+	}
+	
+	/* Validate the component */
+	void validate() {
+		_layout.validate(this);
 		for(Component component in this._children) {
-			component.draw();
+			component.validate();
 		}
 	}
 	
@@ -31,19 +48,27 @@ class Container extends Component {
 	
 	/* Add a component in this container */
 	void addChild(Component component) {
-		this._children.add(componenent);
+		this._children.add(component);
 	}
 	
 	/* Getters & Setters */
 	
 	/* Setter of Layout */
-	void set setLayout(Layout layout) => this._layout = layout;
+	Layout getLayout() {
+		return this._layout;
+	}
+	
+	void setLayout(Layout layout) {
+		this._layout = layout;
+	}
 	
 	/* Get the total number of component in this container */
-	int get getChildNumber => this._children.length;
+	int getChildNumber() {
+		return this._children.length;
+	}
 	
 	/* Get the indexth component in the list */
-	int getChild(int index) {
+	Component getChild(int index) {
 		return this._children.elementAt(index);
 	}
 	

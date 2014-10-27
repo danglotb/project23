@@ -19,6 +19,9 @@ abstract class Component {
 	
 	Component(ComponentStyle style) {
 		this._style = style;
+		this._position = new utils.Coordinates2D(0, 0);
+		this._size = new utils.Vector2D(0, 0);
+		this._visible = true;
 		// To do : Init class variables
 	}
 	
@@ -26,16 +29,47 @@ abstract class Component {
 	
 	/* Draw the component */
 	void draw() {
-		_style.draw(this);
+		if(this._visible && this._style != null)
+			_style.draw(this);
+	}
+	
+	/* Validate the component */
+	void validate() {
+
 	}
 	
 	/* Spread the event to the component */
-	void dispatchEvent(Event event);
+	void dispatchEvent(Event event) {
+
+	}
 	
 	/* Getters & Setters */
 	
 	/* Getters & setters of _visible */
-	bool get isVisible							=> this._visible;
-	     set setVisible(bool state) => this._visible = state;
+	bool isVisible() {
+		return this._visible;
+	}
 	
+	void setVisible(bool state) {
+		this._visible = state;
+	}
+	     
+	/* Getters & setters of _position */
+	utils.Coordinates2D getPosition() {
+		return this._position;
+	}
+
+	void setPosition(utils.Coordinates2D position) {
+		this._position = position;
+	}
+	
+	/* Getters & setters of _size */
+	utils.Vector2D getSize() {
+		return this._size;
+	}
+	
+	void setSize(utils.Vector2D size) {
+		this._size = size;
+	}
+								
 }

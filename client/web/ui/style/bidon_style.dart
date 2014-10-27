@@ -1,6 +1,6 @@
 part of ui;
 
-class BidonStyle extends ComponentStyle {
+class BidonStyle extends InteractiveComponentStyle {
 	
 	BidonStyle() {
 		
@@ -8,9 +8,21 @@ class BidonStyle extends ComponentStyle {
 	
 	void draw(Component model) {
 		Bidon castModel = model as Bidon;
-		core.Window.getInstance().getContext()..fillStyle = castModel.getColor()
-																					..rect(0, 0, core.Window.getInstance().getSize().x, core.Window.getInstance().getSize().y)
-																					..fill();
 		
+		String color = "#f00";
+		
+		if(castModel.isPushed()) {
+    	color = "#00f";
+    }
+		else if(castModel.isOverflew()) {
+			color = "#0f0";
+		}
+			
+		core.Window.getInstance().getContext()..beginPath()
+																					..fillStyle = color
+																					..strokeStyle = "#000"
+																					..rect(castModel.getPosition().x, castModel.getPosition().y, castModel.getSize().x, castModel.getSize().y)
+																					..fill()
+																					..stroke();
 	}
 }

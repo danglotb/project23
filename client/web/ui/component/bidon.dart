@@ -1,19 +1,10 @@
 part of ui;
 
-class Bidon extends Component {
-	
-	String _color;
+class Bidon extends InteractiveComponent {
 	
 	Bidon(BidonStyle bidon) : super(bidon) {
-		
-	}
 
-	void dispatchEvent(Event event) {
-		
 	}
 	
-	String getColor() {
-		return _color;
-	}
 	
 }

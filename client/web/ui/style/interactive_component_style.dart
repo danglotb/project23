@@ -1,10 +1,11 @@
 part of ui;
 
 /* A Style of a component */
-abstract class InteractiveComponentStyle extends ComponentStyle {
+abstract class InteractiveComponentStyle extends ContainerStyle {
 
 	/* Constructors */
-	
-	InteractiveComponentStyle() {}
+	InteractiveComponentStyle() {
+		
+	}
 
 }

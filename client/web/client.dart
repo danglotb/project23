@@ -1,25 +1,32 @@
-import 'dart:html' as dart;
+import 'dart:html' as html;
 
 import 'ui/ui.dart' as ui;
 import 'utils/utils.dart' as utils;
 import 'core/core.dart' as core;
 
 void main() {
-	dart.CanvasElement canvas = dart.querySelector('#canvas');
+	html.CanvasElement canvas = html.querySelector('#canvas');
 	
 	//resize canvas
-  canvas.width =  dart.window.innerWidth;
-  canvas.height =  dart.window.innerHeight;
+  canvas.width =  html.window.innerWidth;
+  canvas.height =  html.window.innerHeight;
  
 	core.Window.initialize(canvas);
 	
 	ui.Container container = new ui.Container();
 	container.setLayout(new ui.VerticalLayout());
-	container.addChild(new ui.Bidon("#f00", new ui.BidonStyle()));
-	container.addChild(new ui.Bidon("#f00", new ui.BidonStyle()));
-	container.addChild(new ui.Bidon("#f00", new ui.BidonStyle()));
+	container.addChild(new ui.Bidon(new ui.BidonStyle()));
+	container.addChild(new ui.Bidon(new ui.BidonStyle()));
 	
-	core.Window.getInstance().setContent(new ui.Bidon(new ui.BidonStyle()));
+	ui.Container container2 = new ui.Container();
+	container2.setLayout(new ui.VerticalLayout());
+	container.addChild(container2);
+	
+	container2.addChild(new ui.Bidon(new ui.BidonStyle()));
+	container2.addChild(new ui.Bidon(new ui.BidonStyle()));
+	container2.addChild(new ui.Bidon(new ui.BidonStyle()));
+	
+	core.Window.getInstance().setContent(container);
 	
 	core.Window.getInstance().run();
 

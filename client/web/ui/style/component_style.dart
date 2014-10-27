@@ -5,7 +5,9 @@ abstract class ComponentStyle {
 
 	/* Constructors */
 	
-	ComponentStyle() {}
+	ComponentStyle() {
+		
+	}
 	
 	/* Methods */
 	

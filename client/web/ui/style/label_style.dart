@@ -1,5 +1,5 @@
 part of ui;
 
-abstract class LabelStyle extends SelectableComponentStyle {
+abstract class LabelStyle extends InteractiveComponentStyle {
 	
 }

@@ -19,6 +19,7 @@ part 'component/bidon.dart';
 part 'component/cursor.dart';
 part 'component/checkbox_container.dart';
 part 'component/label.dart';
+part 'component/text_label.dart';
 
 /*
  * Style
@@ -30,6 +31,8 @@ part 'style/selectable_component_style.dart';
 part 'style/toggleable_component_style.dart';
 part 'style/bidon_style.dart';
 part 'style/cursor_style.dart';
+part 'style/label_style.dart';
+part 'style/text_label_style.dart';
 
 /*
  * Layout

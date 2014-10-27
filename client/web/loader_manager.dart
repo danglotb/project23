@@ -1,6 +1,6 @@
 part of ressource_manager;
 
-final _SPRITES_FOLDER = 'sprites/';
+final String _SPRITES_FOLDER = 'sprites/';
 
 class LoaderManager{
 	var _values;
@@ -16,10 +16,21 @@ class LoaderManager{
 	}
 	
 	 processString(String fileContent){
-		print(fileContent.toString());
-		_values = JSON.decode(fileContent);
+		_values = fileContent.split('\n');
+		List<String> elem;
+	for(var sprite in _values){		
+		if(!sprite.startsWith("#")){
+				elem = sprite.split(';');
+				print("0 : " + elem[0] + '  1 : ' + elem[1]);	
+				_map[elem[0]] = new ImageObject(elem[1].toString(), elem[2].toString(), elem[0].toString());
+        		
+		}
+			
+	}
+
+		/*_values = JSON.decode(fileContent);
 		print(_values.forEach());
-		_values.forEach((k,v) => _map[k.toString()] = new ImageObject(50, 50,_SPRITES_FOLDER + v.toString()));
+		_values.forEach((k,v) => _map[k.toString()] = new ImageObject(50, 50,_SPRITES_FOLDER + v.toString()));*/
 	}
 	 
 	ImageObject getImage(String imageName){
@@ -30,21 +41,21 @@ class LoaderManager{
 
 class ImageObject{
 	
-	int _width;
-	int _height;
+	String _width;
+	String _height;
 	ImageElement _img;
 	
-	ImageObject(int width, int height, String src){
+	ImageObject(String width, String height, String src){
 		this._width = width;
 		this._height = height;
 		this._img = new ImageElement(src: src);
 	}
 	
-	int getWidth(){
+	String getWidth(){
 		return this._width;
 	}
 	
-	int getHeight(){
+	String getHeight(){
 		return this._height;
 	}
 	

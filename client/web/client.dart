@@ -1,5 +1,5 @@
-import 'dart:html';
+import 'ressource_manager.dart';
 
 void main() {
-	print('test');
+	LoaderManager lm = new LoaderManager();
 }

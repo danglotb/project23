@@ -3,6 +3,7 @@ library ui;
 import '../utils/utils.dart' as utils;
 import '../core/core.dart' as core;
 import 'dart:html' as html;
+import "dart:math" as math;
 
 part 'event.dart';
 
@@ -14,6 +15,7 @@ part 'component/container.dart';
 part 'component/interactive_component.dart';
 part 'component/selectable_component.dart';
 part 'component/bidon.dart';
+part 'component/cursor.dart';
 
 /*
  * Style
@@ -23,6 +25,7 @@ part 'style/container_style.dart';
 part 'style/interactive_component_style.dart';
 part 'style/selectable_component_style.dart';
 part 'style/bidon_style.dart';
+part 'style/cursor_style.dart';
 
 /*
  * Layout

@@ -24,7 +24,7 @@ void main() {
 	
 	container2.addChild(new ui.Bidon(new ui.BidonStyle()));
 	container2.addChild(new ui.Bidon(new ui.BidonStyle()));
-	container2.addChild(new ui.Bidon(new ui.BidonStyle()));
+	container2.addChild(new ui.Cursor(0, 0, 5, new ui.CursorStyle()));
 	
 	core.Window.getInstance().setContent(container);
 	

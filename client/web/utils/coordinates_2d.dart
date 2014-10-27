@@ -9,4 +9,9 @@ class Coordinates2D {
 		this.x = x;
 		this.y = y;
 	}
+	
+	operator== (Coordinates2D coordinates) {
+		return this.x == coordinates.x && this.y == coordinates.y;
+	}
+	
 }

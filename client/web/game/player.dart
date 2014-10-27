@@ -2,35 +2,42 @@ part of game;
 
 class Player {
 	
-	//TODO CHANGE COORDINATES
-	int x, y;
-	int tx, ty;
+	utils.Coordinates2D _coordinates, _targetCoordinates;
 	bool onMove;
 	html.ImageElement skin;
 	
-	Player(int x, int y) {
-		this.x = x;
-		this.y = y;
+	List<utils.Coordinates2D> path;
+	
+	Player(utils.Coordinates2D coordinates) {
+		this._coordinates = coordinates;
 		this.onMove = false;
 		this.skin = new html.ImageElement(src:'char.png');
 	}
 	
 	html.ImageElement getSkin() => this.skin;
-	
-	int getX() => this.x;
-	int getY() => this.y;
+	utils.Coordinates2D getCoordinates2D() => this._coordinates;
 	
 	void setTarget(int x, int y) {
-		this.tx = x; this.ty = y;
+		this._targetCoordinates = new utils.Coordinates2D(x, y);
 		this.onMove = true;
 	}
 	
 	void move() {
 		if (onMove) {
-			tx!=x?tx>x?x++:x--:x;
-			ty!=y?ty>y?y++:y--:y;
-			if (tx == x && ty == y)
-				onMove = false;
+			if (this._targetCoordinates.x != this._coordinates.x) {
+				if (this._targetCoordinates.x > this._coordinates.x) 
+					this._coordinates.x++;
+				 else
+					this._coordinates.x--;
+			}
+			if (this._targetCoordinates.y != this._coordinates.y) {
+				if (this._targetCoordinates.y > this._coordinates.y) 
+					this._coordinates.y++;
+				 else
+					this._coordinates.y--;
+			}
+				if (this._coordinates == this._targetCoordinates)
+					onMove = false;
 		}
 	}
 	

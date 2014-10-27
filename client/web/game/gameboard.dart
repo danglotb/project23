@@ -3,14 +3,17 @@ part of game;
 class Gameboard {
 	
 	List<Case> _gameboardTab;
-	int _height;
-	int _width;
+	utils.Vector2D _dimensions;
+
+	Camera _camera;
+	
 	html.CanvasElement canvas;
 	html.ImageElement beuh, sand;
+	
 	Player player;
 	
-	Gameboard(int height, int width , html.CanvasElement canvas, {List<Case> gameCase}) {
-		
+	Gameboard(utils.Vector2D dimensions , html.CanvasElement canvas, {List<Case> gameCase}) {
+		this._camera = new Camera(new utils.Vector2D(10,10), new utils.Coordinates2D(0,0));
 		//TO REMOVE
 		this.canvas = canvas;
 	  this.canvas.width =  html.window.innerWidth;
@@ -19,17 +22,17 @@ class Gameboard {
     										..fillStyle = "#eee"
     										..rect(0, 0, html.window.innerWidth, html.window.innerHeight)
     										..fill();
+		canvas.onClick.listen(setTarget);
+		canvas.onKeyDown.listen(moveCamera);
 		//
 		
-		this._height = height; 
-		this._width = width;
+		this._dimensions = dimensions;
+		this.player = new Player(new utils.Coordinates2D(0, 0));
 		
-		this.player = new Player(0,0);
-		canvas.onClick.listen(anime);
 		if (gameCase != null)
 			this._gameboardTab = gameCase;
 		else {
-			this._gameboardTab = new List(this._height*this._width);
+			this._gameboardTab = new List(dimensions.x * dimensions.y);
 		}
 		
 		//
@@ -45,23 +48,42 @@ class Gameboard {
     //
 	}
 	
-	void anime(html.MouseEvent e) {
+	void setTarget(html.MouseEvent e) {
 		this.player.setTarget(e.client.x, e.client.y);
 	}
 	
+	void moveCamera(html.KeyboardEvent e) {
+		print("MOVE CAMERA");
+		switch (e.keyCode) {
+		case 37:
+			this._camera.getCoordinates().x--;
+			break;
+		case 38:
+			this._camera.getCoordinates().y--;
+			break;
+		case 39:
+    	this._camera.getCoordinates().x++;
+    	break;
+		case 40:
+    	this._camera.getCoordinates().y++;
+    	break;
+		}
+	}
+	
 	void draw(num timer) {
-		
-		for (int y = 0 ; y < this._height ; y++) {
-      			for (int x = 0 ; x < this._width ; x++) {
-      				if (this._gameboardTab[x+(y*this._height)].getSpriteValue() == 1)
+		for (int y = this._camera.getCoordinates().y ; y < this._camera.getDimensions().y ; y++) {
+      			for (int x = this._camera.getCoordinates().x ; x < this._camera.getDimensions().y ; x++) {
+      				if (this._gameboardTab[x+(y*this._camera.getDimensions().y)].getSpriteValue() == 1)
       					canvas.context2D.drawImageScaled(this.beuh, x*50, y*50, 50,50);
       				else
       					canvas.context2D.drawImageScaled(this.sand, x*50, y*50, 50,50);
       			}
       		}
-		canvas.context2D.drawImageScaled(this.player.getSkin(), this.player.x, this.player.y, 50 ,50);
-  		if (this.player.onMove)
-  			this.player.move();
+		canvas.context2D.drawImageScaled(this.player.getSkin(), this.player.getCoordinates2D().x, 
+		this.player.getCoordinates2D().y, 50 ,50);
+ 			if (this.player.onMove)
+ 				this.player.move();
+ 				
   	html.window.requestAnimationFrame(draw);
 	}
 }

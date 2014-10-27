@@ -2,12 +2,16 @@ part of game;
 
 class Case {
 	
-	int x, y; // TODO change this coordinate with the Coordinates object
+	/**
+	 * Coordinates2D of the case
+	 */
+	utils.Coordinates2D coordinates;
 	
 	/**
 	 * the index of the sprite
 	 */
 	int _spriteValue;
+	
 	/**
 	 * boolean to know if the case is passable or not 
 	 */
@@ -16,9 +20,8 @@ class Case {
 	/**
 	 * Constructor
 	 */
-	Case(int x, int y,{bool passable, int spriteValue}){
-		this.x = x;
-		this.y = y;
+	Case(utils.Coordinates2D coordinates, {bool passable, int spriteValue}){
+		this.coordinates = coordinates;
 		
 		if (passable != null)
 			this._passable = passable;

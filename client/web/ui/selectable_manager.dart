@@ -44,6 +44,15 @@ class SelectableManager {
 	}
 	
 	void next() {
-		
+		if(this._currentSelected != null) {
+			for(int i=0; i<_selectables.length; i++) {
+				if(this._currentSelected == this._selectables[i]) {
+					this._selectables[i].setSelected(false);
+					this._currentSelected = this._selectables[(i+1)%_selectables.length];
+					this._currentSelected.setSelected(true);
+					break;
+				}
+			}
+		}
 	}
 }

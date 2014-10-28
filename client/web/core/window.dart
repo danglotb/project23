@@ -12,6 +12,11 @@ class Window {
 	ui.Component _content;
 	utils.Vector2D _size;
 	
+	//fps
+	int _currentFpsNumber;
+	int _lastFpsNumber;
+	int _lastTimerSec;
+	
 	_Window() {
 		
 	}
@@ -31,8 +36,16 @@ class Window {
 				new ui.Event(ui.EventType.MOUSE_RELEASE, mousePosition:new utils.Coordinates2D(e.client.x, e.client.y))));
 		canvas.addEventListener('mouseout', (e) => _instance._dispatchEvent(
 				new ui.Event(ui.EventType.MOUSE_OUT)));
-		html.window.addEventListener('keydown', (e) => _instance._dispatchEvent(
-				new ui.Event(ui.EventType.KEY_PUSHED, keyCode: e.keyCode)));	
+		html.window.addEventListener('keypress', (e) {
+			_instance._dispatchEvent(new ui.Event(ui.EventType.KEY_PRESSED, charCode: e.charCode));
+		});	
+		html.window.addEventListener('keydown', (e) {
+			_instance._dispatchEvent(new ui.Event(ui.EventType.KEY_PUSHED, keyCode: e.keyCode));
+			//prevent browser to focus out of canvas when tab pressed
+			if(e.keyCode == 9) { //tab
+				e.preventDefault();
+			}
+		});	
   }
   	
 	/*
@@ -72,10 +85,20 @@ class Window {
 	 * Start the paint of the window
 	 */
 	void run() {
+		this._currentFpsNumber = 0;
+		this._lastFpsNumber = 0;
+		this._lastTimerSec = 0;
 		_run(0);
 	}
 	
 	void _run(num timer) {
+		_currentFpsNumber++;
+		
+		if(this._lastTimerSec+1000 <= timer) {
+			_lastFpsNumber = _currentFpsNumber;
+			_currentFpsNumber = 0;
+			this._lastTimerSec += 1000;
+		}
 		_context..beginPath()
 		        ..fillStyle = "#fff"
 		        ..rect(0, 0, _size.x, _size.y)
@@ -89,10 +112,20 @@ class Window {
 	
 	void _drawDebug(num timer) {
 		_context..fillStyle = "#000"
-						..fillText("timer : "+timer.toString(), 10, 20);
+						..font = "16px arial"
+						..fillText("timer : "+timer.toInt().toString()+" - fps : "+this._lastFpsNumber.toString(), 10, 20);
 	}
 	
 	void _dispatchEvent(ui.Event event) {
+		
+		//selectable
+		if(event.getType() == ui.EventType.KEY_PUSHED) {
+			if(event.getKeyCode() == 9) { //tab
+				ui.SelectableManager.getInstance().next();
+				event.setComsumed();
+			}
+		}
+		
 		_content.dispatchEvent(event);
 	}
 	

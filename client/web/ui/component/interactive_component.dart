@@ -1,41 +1,50 @@
 part of ui;
 
+typedef void ListenerInteractiveFunc(InteractiveComponent source);
+
+
 abstract class InteractiveComponent extends Container {
 	
 	bool _overflew;
 	bool _pushed;
 	bool _enable;
 	
-	List<ListenerStateFunc> _overflewInListeners;
-	List<ListenerStateFunc> _overflewOutListeners;
-	List<ListenerStateFunc> _pushedListeners;
-	List<ListenerStateFunc> _releasedListeners;
+	List<ListenerInteractiveFunc> _overflewInListeners;
+	List<ListenerInteractiveFunc> _overflewOutListeners;
+	List<ListenerInteractiveFunc> _pushedListeners;
+	List<ListenerInteractiveFunc> _releasedListeners;
+	List<ListenerInteractiveFunc> _clickListeners;
 	
 	InteractiveComponent(InteractiveComponentStyle style) : super(style) {
 		this._overflew = false;
 		this._pushed = false;
 		this._enable = true;
 		
-		this._overflewInListeners = new List<ListenerStateFunc>();
-		this._overflewOutListeners = new List<ListenerStateFunc>();
-		this._pushedListeners = new List<ListenerStateFunc>();
-		this._releasedListeners = new List<ListenerStateFunc>();
+		this._overflewInListeners = new List<ListenerInteractiveFunc>();
+		this._overflewOutListeners = new List<ListenerInteractiveFunc>();
+		this._pushedListeners = new List<ListenerInteractiveFunc>();
+		this._releasedListeners = new List<ListenerInteractiveFunc>();
+		this._clickListeners = new List<ListenerInteractiveFunc>();
 	}
 	
-	void addOverflewInListener(ListenerStateFunc function) {
+	void addOverflewInListener(ListenerInteractiveFunc function) {
 		_overflewInListeners.add(function);
 	}
 	
-	void addOverflewOutListener(ListenerStateFunc function) {
+	void addOverflewOutListener(ListenerInteractiveFunc function) {
 		_overflewOutListeners.add(function);
 	}
 		
-	void addPushedListener(ListenerStateFunc function) {
+	void addPushedListener(ListenerInteractiveFunc function) {
 		_pushedListeners.add(function);
 	}
 
-	void addReleasedListener(ListenerStateFunc function) {
+	void addReleasedListener(ListenerInteractiveFunc function) {
 		_releasedListeners.add(function);
+	}
+	
+	void addClickListener(ListenerInteractiveFunc function) {
+		_clickListeners.add(function);
 	}
 	
 	void setEnable(bool state) {
@@ -71,7 +80,7 @@ abstract class InteractiveComponent extends Container {
 				
 				//overflew in event
 				if(!this._overflew) {
-					this._overflewInListeners.forEach((el) => el());
+					this._overflewInListeners.forEach((el) => el(this));
 					this._overflew = true;
 				}
 				
@@ -81,7 +90,7 @@ abstract class InteractiveComponent extends Container {
 				
 				//overflew out event
 				if(this._overflew) {
-					this._overflewOutListeners.forEach((el) => el());
+					this._overflewOutListeners.forEach((el) => el(this));
 					this._overflew = false;
 				}
 				
@@ -94,7 +103,7 @@ abstract class InteractiveComponent extends Container {
 					&& !event.isComsumed()) {
 				
 				if(!this._pushed) {
-					this._pushedListeners.forEach((el) => el());
+					this._pushedListeners.forEach((el) => el(this));
 					this._pushed = true;
 				}
 				
@@ -103,17 +112,21 @@ abstract class InteractiveComponent extends Container {
 		}
 		else if(event.getType() == EventType.MOUSE_RELEASE) {
 			if(this._pushed) {
-				this._releasedListeners.forEach((el) => el());
+				this._releasedListeners.forEach((el) => el(this));
 				this._pushed = false;
+				
+				if(this._overflew) {
+					this._clickListeners.forEach((el) => el(this));
+				}
 			}
 		}
 		else if(event.getType() == EventType.MOUSE_OUT) {
 			if(this._pushed) {
-				this._releasedListeners.forEach((el) => el());
+				this._releasedListeners.forEach((el) => el(this));
 				this._pushed = false;
 			}
 			if(this._overflew) {
-				this._overflewOutListeners.forEach((el) => el());
+				this._overflewOutListeners.forEach((el) => el(this));
 				this._overflew = false;
 			}
 		}

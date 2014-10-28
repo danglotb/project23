@@ -54,7 +54,7 @@ class BasicTextFieldStyle extends TextFieldStyle {
 																					..stroke();
 		//text
 		core.Window.getInstance().getContext()..fillStyle = "#000"
-		    																	..font="50px Arial"
+		    																	..font= BasicStyleManager.getInstance().getConfig().getFontSize().toString()+" Arial"
         																	..fillText(castModel.getText()+(this._blinkOn ? "|" : ""), castModel.getPosition().x, castModel.getPosition().y+castModel.getSize().y/2);
 	}
 }

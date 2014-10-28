@@ -17,21 +17,15 @@ void main() {
 	container.setLayout(new ui.VerticalLayout());
 	
 	ui.Bidon bidon = new ui.Bidon(new ui.BidonStyle());
-	bidon..addOverflewInListener(() => print('overflew in'))
-			 ..addOverflewOutListener(() => print('overflew out'))
-			 ..addPushedListener(() => print('pushed'))
-			 ..addReleasedListener(() => print('released'));
+	bidon..addOverflewInListener((s) => print('overflew in'))
+			 ..addOverflewOutListener((s) => print('overflew out'))
+			 ..addPushedListener((s) => print('pushed'))
+			 ..addReleasedListener((s) => print('released'))
+			 ..addClickListener((s) => print('cliked'));
 	
 	container.addChild(bidon);
 	container.addChild(new ui.TextField(new ui.BasicTextFieldStyle()));
-	
-	ui.Container container2 = new ui.Container();
-	container2.setLayout(new ui.VerticalLayout());
-	container.addChild(container2);
-	
-	container2.addChild(new ui.Bidon(new ui.BidonStyle()));
-	container2.addChild(new ui.TextLabel('test', new ui.TextLabelStyle()));
-	container2.addChild(new ui.Cursor(0, 0, 5, new ui.CursorStyle()));
+	container.addChild(new ui.Bidon(new ui.BidonStyle()));
 	
 	core.Window.getInstance().setContent(container);
 	

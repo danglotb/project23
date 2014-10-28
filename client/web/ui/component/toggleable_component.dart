@@ -1,5 +1,7 @@
 part of ui;
 
+typedef void ListenerToggleableFunc(ToggleableComponent source);
+
 /* A toggleable component */
 abstract class ToggleableComponent extends SelectableComponent{
 
@@ -7,13 +9,26 @@ abstract class ToggleableComponent extends SelectableComponent{
 	bool _toggled;
 	
 	/* List of listener */
-	List<Function> _toggledListener;
+	List<ListenerToggleableFunc> _toggledListener;
 	
 	/* Constructors */
 	
 	ToggleableComponent(ToggleableComponentStyle style) : super(style) {
 		this._toggled = false;
-		this._toggledListener = new List<Function>();
+		this._toggledListener = new List<ListenerToggleableFunc>();
 	}
 	
+	addToggledListener(ListenerToggleableFunc func) {
+		this._toggledListener.add(func);
+	}
+	
+	void dispatchEvent(Event event) {
+		bool wasPushed = this._pushed;
+		
+		super.dispatchEvent(event);
+		
+		if(wasPushed && !this._pushed && this._overflew) {
+			this._toggledListener.forEach((el) => el(this));
+		}
+	}
 }

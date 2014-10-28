@@ -5,6 +5,7 @@ import '../core/core.dart' as core;
 import 'dart:html' as html;
 import 'dart:async' as async;
 import "dart:math" as math;
+
 part 'event.dart';
 part 'selectable_manager.dart';
 
@@ -40,6 +41,7 @@ part 'style/label_style.dart';
 part 'style/text_label_style.dart';
 
 //Basic style
+part 'style/basic/basic_style_manager.dart';
 part 'style/basic/basic_text_field_style.dart';
 /*
  * Layout
@@ -47,5 +49,3 @@ part 'style/basic/basic_text_field_style.dart';
 part 'layout/layout.dart';
 part 'layout/passif_layout.dart';
 part 'layout/vertical_layout.dart';
-
-typedef void ListenerStateFunc();

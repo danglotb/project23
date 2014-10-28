@@ -1,13 +1,15 @@
 part of ui;
 
+typedef void ListenerSelectableFunc(SelectableComponent source);
+
 abstract class SelectableComponent extends InteractiveComponent {
 	
 	bool _selected;
-	List<ListenerStateFunc> _selectedListeners;
+	List<ListenerSelectableFunc> _selectedListeners;
 	
 	SelectableComponent(SelectableComponentStyle style) : super(style) {
 		this._selected = false;
-		this._selectedListeners = new List<ListenerStateFunc>();
+		this._selectedListeners = new List<ListenerSelectableFunc>();
 	}
 	
 	void setSelected(bool state) {
@@ -18,7 +20,7 @@ abstract class SelectableComponent extends InteractiveComponent {
 		return this._selected;
 	}
 	
-	void addSelectedListener(ListenerStateFunc function) {
+	void addSelectedListener(ListenerSelectableFunc function) {
 		this._selectedListeners.add(function);
 	}
 	
@@ -33,6 +35,7 @@ abstract class SelectableComponent extends InteractiveComponent {
 		
 		if(this._pushed) {
 			SelectableManager.getInstance().select(this);
+			this._selectedListeners.forEach((el) => el(this));
 		}
 	}
 	

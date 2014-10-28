@@ -4,7 +4,7 @@ import '../utils/utils.dart' as utils;
 import '../core/core.dart' as core;
 import 'dart:html' as html;
 import 'dart:async' as async;
-
+import "dart:math" as math;
 part 'event.dart';
 part 'selectable_manager.dart';
 
@@ -17,7 +17,12 @@ part 'component/interactive_component.dart';
 part 'component/selectable_component.dart';
 part 'component/text_input.dart';
 part 'component/text_field.dart';
+part 'component/toggleable_component.dart';
 part 'component/bidon.dart';
+part 'component/cursor.dart';
+part 'component/checkbox_container.dart';
+part 'component/label.dart';
+part 'component/text_label.dart';
 
 /*
  * Style
@@ -28,7 +33,11 @@ part 'style/interactive_component_style.dart';
 part 'style/selectable_component_style.dart';
 part 'style/text_input_style.dart';
 part 'style/text_field_style.dart';
+part 'style/toggleable_component_style.dart';
 part 'style/bidon_style.dart';
+part 'style/cursor_style.dart';
+part 'style/label_style.dart';
+part 'style/text_label_style.dart';
 
 //Basic style
 part 'style/basic/basic_text_field_style.dart';

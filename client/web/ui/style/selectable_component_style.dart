@@ -5,4 +5,5 @@ abstract class SelectableComponentStyle extends InteractiveComponentStyle {
 	SelectableComponentStyle() {
 		
 	}
+
 }

@@ -76,6 +76,10 @@ class Window {
 	}
 	
 	void _run(num timer) {
+		_context..beginPath()
+		        ..fillStyle = "#fff"
+		        ..rect(0, 0, _size.x, _size.y)
+		        ..fill();
 		_instance._content.draw();
 		if(ACTIVE_DEBUG) {
 			_instance._drawDebug(timer);

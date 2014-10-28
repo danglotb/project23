@@ -22,5 +22,19 @@ abstract class SelectableComponent extends InteractiveComponent {
 		this._selectedListeners.add(function);
 	}
 	
+	void addedToWindow() {
+		this._addedToWindow = true;
+		
+		SelectableManager.getInstance().add(this);
+	}
+	
+	void dispatchEvent(Event event) {
+		super.dispatchEvent(event);
+		
+		if(this._pushed) {
+			SelectableManager.getInstance().select(this);
+		}
+	}
+	
 	
 }

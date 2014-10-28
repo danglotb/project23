@@ -15,6 +15,9 @@ abstract class Component {
 	/* True if the component is visible, else false */
 	bool _visible;
 	
+	/* is added to window */
+	bool _addedToWindow;
+	
 	/* Constructors */
 	
 	Component(ComponentStyle style) {
@@ -22,7 +25,15 @@ abstract class Component {
 		this._position = new utils.Coordinates2D(0, 0);
 		this._size = new utils.Vector2D(0, 0);
 		this._visible = true;
+		this._addedToWindow = false;
 		// To do : Init class variables
+	}
+	
+	/*
+	 * Function called when component is added to window
+	 */
+	void addedToWindow() {
+		this._addedToWindow = true;
 	}
 	
 	/* Methods */

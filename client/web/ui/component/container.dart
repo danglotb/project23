@@ -50,6 +50,15 @@ class Container extends Component {
 	void addChild(Component component) {
 		this._children.add(component);
 	}
+
+	void addedToWindow() {
+		this._addedToWindow = true;
+		
+		for(Component component in this._children) {
+			component.addedToWindow();
+		}
+	}
+	
 	
 	/* Getters & Setters */
 	

@@ -1,6 +1,6 @@
 part of ui;
 
-class Bidon extends InteractiveComponent {
+class Bidon extends SelectableComponent {
 	
 	Bidon(BidonStyle bidon) : super(bidon) {
 

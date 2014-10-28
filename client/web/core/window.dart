@@ -29,6 +29,10 @@ class Window {
 				new ui.Event(ui.EventType.MOUSE_PUSH, mousePosition:new utils.Coordinates2D(e.client.x, e.client.y))));
 		canvas.addEventListener('mouseup', (e) => _instance._dispatchEvent(
 				new ui.Event(ui.EventType.MOUSE_RELEASE, mousePosition:new utils.Coordinates2D(e.client.x, e.client.y))));
+		canvas.addEventListener('mouseout', (e) => _instance._dispatchEvent(
+				new ui.Event(ui.EventType.MOUSE_OUT)));
+		html.window.addEventListener('keydown', (e) => _instance._dispatchEvent(
+				new ui.Event(ui.EventType.KEY_PUSHED, keyCode: e.keyCode)));	
   }
   	
 	/*
@@ -53,10 +57,13 @@ class Window {
 	 * Set the content pane
 	 */
 	void setContent(ui.Component component) {
+		ui.SelectableManager.getInstance().reset();
+		
 		_content = component;
 		_content.setPosition(new utils.Coordinates2D(0, 0));
 		_content.setSize(new utils.Vector2D(_size.x, _size.y));
 		_content.validate();
+		_content. addedToWindow();
 	}
 	
 

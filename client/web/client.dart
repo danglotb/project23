@@ -15,8 +15,15 @@ void main() {
 	
 	ui.Container container = new ui.Container();
 	container.setLayout(new ui.VerticalLayout());
-	container.addChild(new ui.Bidon(new ui.BidonStyle()));
-	container.addChild(new ui.Bidon(new ui.BidonStyle()));
+	
+	ui.Bidon bidon = new ui.Bidon(new ui.BidonStyle());
+	bidon..addOverflewInListener(() => print('overflew in'))
+			 ..addOverflewOutListener(() => print('overflew out'))
+			 ..addPushedListener(() => print('pushed'))
+			 ..addReleasedListener(() => print('released'));
+	
+	container.addChild(bidon);
+	container.addChild(new ui.TextField(new ui.BasicTextFieldStyle()));
 	
 	ui.Container container2 = new ui.Container();
 	container2.setLayout(new ui.VerticalLayout());

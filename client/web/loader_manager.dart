@@ -19,9 +19,9 @@ class LoaderManager{
 		_values = fileContent.split('\n');
 		List<String> elem;
 	for(var sprite in _values){		
-		if(!sprite.startsWith("#")){
+		if(!sprite.startsWith("#") && sprite.length > 2){
 				elem = sprite.split(';');
-				print("0 : " + elem[0] + '  1 : ' + elem[1]);	
+				print("0 : " + elem[0] + '  1 : ' + elem[1] + " 2 :" + elem[2]);	
 				_map[elem[0]] = new ImageObject(elem[1].toString(), elem[2].toString(), elem[0].toString());
         		
 		}

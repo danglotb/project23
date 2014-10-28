@@ -1,5 +1,5 @@
-{
-	"file":"Tiles.png", 
-	"width":50,
-	"heigth":50
-}
+Tiles.png;50;50
+Tiles.png;50;50
+#comments are ignored
+
+#so are blank lines

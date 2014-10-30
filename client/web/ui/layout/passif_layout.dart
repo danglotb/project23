@@ -6,8 +6,12 @@ class PassifLayout extends Layout {
 		
 	}
 	
-	void validate(Container model) {
+	void validate() {
 		
+	}
+	
+	utils.Vector2D getMinimalSize() {
+		return new utils.Vector2D(0,0);
 	}
 	
 }

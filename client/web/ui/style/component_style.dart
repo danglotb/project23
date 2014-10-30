@@ -2,6 +2,8 @@ part of ui;
 
 /* A Style of a component */
 abstract class ComponentStyle {
+	
+	utils.Vector2D _minimalSize;
 
 	/* Constructors */
 	
@@ -13,5 +15,9 @@ abstract class ComponentStyle {
 	
 	/* Draw the component model */
 	void draw(Component model);
+	
+	utils.Vector2D getMinimalSize() {
+		return this._minimalSize;
+	}
 	
 }

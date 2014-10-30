@@ -13,7 +13,6 @@ class Container extends Component {
 	
 	Container([ComponentStyle style]) : super(style) {
 		this._children = new List<Component>();
-		this._layout = new PassifLayout();
 	}
 	
 	/* Methods */
@@ -33,7 +32,8 @@ class Container extends Component {
 	
 	/* Validate the component */
 	void validate() {
-		_layout.validate(this);
+		if(this._layout != null)
+			_layout.validate();
 		for(Component component in this._children) {
 			component.validate();
 		}
@@ -49,6 +49,16 @@ class Container extends Component {
 	/* Add a component in this container */
 	void addChild(Component component) {
 		this._children.add(component);
+		
+		if(this._addedToWindow)
+			component.addedToWindow();
+	}
+	
+	void clearChild() {
+		for(Component component in this._children) {
+			component.removedToWindow();
+		}
+		this._children.clear();
 	}
 
 	void addedToWindow() {
@@ -56,6 +66,14 @@ class Container extends Component {
 		
 		for(Component component in this._children) {
 			component.addedToWindow();
+		}
+	}
+	
+	void removedToWindow() {
+		this._addedToWindow = false;
+		
+		for(Component component in this._children) {
+			component.removedToWindow();
 		}
 	}
 	
@@ -69,6 +87,7 @@ class Container extends Component {
 	
 	void setLayout(Layout layout) {
 		this._layout = layout;
+		this._layout.setModel(this);
 	}
 	
 	/* Get the total number of component in this container */
@@ -79,6 +98,10 @@ class Container extends Component {
 	/* Get the indexth component in the list */
 	Component getChild(int index) {
 		return this._children.elementAt(index);
+	}
+	
+	utils.Vector2D getMinimalSize() {
+		return this._layout == null ? super.getMinimalSize() : this._layout.getMinimalSize();
 	}
 	
 }

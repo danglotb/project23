@@ -5,19 +5,35 @@ class VerticalLayout extends Layout {
 	
 	/* Constructor */
 	
-	VerticalLayout(): super();
+	VerticalLayout() {
+		
+	}
 	
 	/* Methods */
 
 	/* Order the container's children */
-	void validate(Container model) {
+	void validate() {
 		
 		num totalY = 0;
-		for(int i = 0; i<model.getChildNumber(); i++) {
-			model.getChild(i).setPosition(new utils.Coordinates2D(model.getPosition().x, model.getPosition().y+model.getSize().y~/model.getChildNumber()*i));
-			model.getChild(i).setSize(new utils.Vector2D(model.getSize().x, i == model.getChildNumber()-1 ? model.getSize().y-totalY :  model.getSize().y~/model.getChildNumber()));
-			totalY += model.getSize().y~/model.getChildNumber();
+		for(int i = 0; i<this._model.getChildNumber(); i++) {
+			this._model.getChild(i).setPosition(new utils.Coordinates2D(this._model.getPosition().x, this._model.getPosition().y+this._model.getSize().y~/this._model.getChildNumber()*i));
+			this._model.getChild(i).setSize(new utils.Vector2D(this._model.getSize().x, i == this._model.getChildNumber()-1 ? this._model.getSize().y-totalY :  this._model.getSize().y~/this._model.getChildNumber()));
+			totalY += this._model.getSize().y~/this._model.getChildNumber();
 		}
+	}
+	
+	utils.Vector2D getMinimalSize() {
+		int minX = 0;
+		int minY = 0;
+		
+		for(int i = 0; i<this._model.getChildNumber(); i++) {
+			utils.Vector2D currentMin = this._model.getChild(i).getMinimalSize();
+			if(currentMin.x > minX) {
+				minX = currentMin.x;
+			}
+			minY += currentMin.y;
+		}
+		return new utils.Vector2D(minX,minY);
 	}
 	
 }

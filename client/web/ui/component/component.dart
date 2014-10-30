@@ -36,6 +36,10 @@ abstract class Component {
 		this._addedToWindow = true;
 	}
 	
+	void removedToWindow() {
+		this._addedToWindow = false;
+	}
+	
 	/* Methods */
 	
 	/* Draw the component */
@@ -81,6 +85,10 @@ abstract class Component {
 	
 	void setSize(utils.Vector2D size) {
 		this._size = size;
+	}
+	
+	utils.Vector2D getMinimalSize() {
+		return this._style != null ? this._style.getMinimalSize() : new utils.Vector2D(0, 0);
 	}
 								
 }

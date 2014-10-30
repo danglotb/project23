@@ -28,6 +28,16 @@ class SelectableManager {
 	
 	void add(SelectableComponent component) {
 		this._selectables.add(component);
+		print("add "+component.runtimeType.toString());
+	}
+	
+	void remove(SelectableComponent component) {
+		this._selectables.remove(component);
+		
+		if(this._currentSelected == component)
+			this._currentSelected = null;
+		
+		print("del "+component.runtimeType.toString());
 	}
 	
 	void reset() {

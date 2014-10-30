@@ -30,6 +30,10 @@ abstract class SelectableComponent extends InteractiveComponent {
 		SelectableManager.getInstance().add(this);
 	}
 	
+	void removedToWindow() {
+		SelectableManager.getInstance().remove(this);
+	}
+	
 	void dispatchEvent(Event event) {
 		super.dispatchEvent(event);
 		

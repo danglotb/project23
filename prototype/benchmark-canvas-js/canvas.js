@@ -1,7 +1,7 @@
 var viewport_width;
 var viewport_height;
 
-var nb_object = 1000;
+var nb_object = 200;
 
 var list_object = new Array();
 

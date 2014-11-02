@@ -8,7 +8,7 @@ class Gameboard {
 	Camera _camera;
 	
 	html.CanvasElement canvas;
-	html.ImageElement beuh, sand;
+	html.ImageElement grass, sand;
 	
 	Player player;
 	
@@ -41,8 +41,8 @@ class Gameboard {
 			draw(0);
     });
     
-  	this.beuh = new html.ImageElement(src:"beuh.png");
-      this.beuh.onLoad.listen((e) {
+  	this.grass = new html.ImageElement(src:"grass.png");
+      this.grass.onLoad.listen((e) {
   			draw(0);
       });
     //
@@ -74,16 +74,17 @@ class Gameboard {
 		for (int y = this._camera.getCoordinates().y ; y < this._camera.getDimensions().y ; y++) {
       			for (int x = this._camera.getCoordinates().x ; x < this._camera.getDimensions().y ; x++) {
       				if (this._gameboardTab[x+(y*this._camera.getDimensions().y)].getSpriteValue() == 1)
-      					canvas.context2D.drawImageScaled(this.beuh, x*50, y*50, 50,50);
+      					canvas.context2D.drawImageScaled(this.grass, x*50, y*50, 50,50);
       				else
       					canvas.context2D.drawImageScaled(this.sand, x*50, y*50, 50,50);
       			}
       		}
+		
 		canvas.context2D.drawImageScaled(this.player.getSkin(), this.player.getCoordinates2D().x, 
 		this.player.getCoordinates2D().y, 50 ,50);
  			if (this.player.onMove)
  				this.player.move();
- 				
+ 			
   	html.window.requestAnimationFrame(draw);
 	}
 }

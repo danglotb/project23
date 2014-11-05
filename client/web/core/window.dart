@@ -11,6 +11,7 @@ class Window {
 	html.CanvasRenderingContext2D _context;
 	ui.Component _content;
 	utils.Vector2D _size;
+	utils.Vector2D _offset;
 	
 	//fps
 	int _currentFpsNumber;
@@ -24,16 +25,17 @@ class Window {
 	/*
 	 * Initialize window singleton
 	 */
-	static void initialize(html.CanvasElement canvas) {
+	static void initialize(html.CanvasElement canvas, utils.Vector2D margin) {
 		_instance = new Window();
 		_instance._context = canvas.context2D;
 		_instance._size = new utils.Vector2D(canvas.width, canvas.height);
+		_instance._offset = margin;
 		canvas.addEventListener('mousemove', (e) => _instance._dispatchEvent(
-				new ui.Event(ui.EventType.MOUSE_MOVE, mousePosition:new utils.Coordinates2D(e.client.x, e.client.y))));
+				new ui.Event(ui.EventType.MOUSE_MOVE, mousePosition:new utils.Coordinates2D(e.client.x-_instance._offset.x, e.client.y-_instance._offset.y))));
 		canvas.addEventListener('mousedown', (e) => _instance._dispatchEvent(
-				new ui.Event(ui.EventType.MOUSE_PUSH, mousePosition:new utils.Coordinates2D(e.client.x, e.client.y))));
+				new ui.Event(ui.EventType.MOUSE_PUSH, mousePosition:new utils.Coordinates2D(e.client.x-_instance._offset.x, e.client.y-_instance._offset.y))));
 		canvas.addEventListener('mouseup', (e) => _instance._dispatchEvent(
-				new ui.Event(ui.EventType.MOUSE_RELEASE, mousePosition:new utils.Coordinates2D(e.client.x, e.client.y))));
+				new ui.Event(ui.EventType.MOUSE_RELEASE, mousePosition:new utils.Coordinates2D(e.client.x-_instance._offset.x, e.client.y-_instance._offset.y))));
 		canvas.addEventListener('mouseout', (e) => _instance._dispatchEvent(
 				new ui.Event(ui.EventType.MOUSE_OUT)));
 		html.window.addEventListener('keypress', (e) {
@@ -64,6 +66,10 @@ class Window {
 	
 	utils.Vector2D getSize() {
 		return _size;
+	}
+	
+	utils.Vector2D getOffset() {
+		return _offset;
 	}
 	
 	/*

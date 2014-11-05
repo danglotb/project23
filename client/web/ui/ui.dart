@@ -44,8 +44,10 @@ part 'style/text_label_style.dart';
 
 //Basic style
 part 'style/basic/basic_style_manager.dart';
+part 'style/basic/basic_container_style.dart';
 part 'style/basic/basic_button_style.dart';
 part 'style/basic/basic_text_field_style.dart';
+part 'style/basic/basic_text_label_style.dart';
 
 //Menu style
 part 'style/menu/menu_button_style.dart';
@@ -57,11 +59,14 @@ part 'style/menu/menu_button_style.dart';
 part 'layout/layout.dart';
 part 'layout/passif_layout.dart';
 part 'layout/vertical_layout.dart';
+part 'layout/vertical_passif_layout.dart';
 part 'layout/vertical_divide_layout.dart';
 part 'layout/vertical_gap_layout.dart';
+part 'layout/center_layout.dart';
 
 /*
  * Screen
  */
 
 part 'screen/screen_menu_unlogged.dart';
+part 'screen/screen_menu_unlogged_home.dart';

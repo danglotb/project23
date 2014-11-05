@@ -18,6 +18,8 @@ abstract class Component {
 	/* is added to window */
 	bool _addedToWindow;
 	
+	utils.Rect _border;
+	
 	/* Constructors */
 	
 	Component(ComponentStyle style) {
@@ -26,6 +28,7 @@ abstract class Component {
 		this._size = new utils.Vector2D(0, 0);
 		this._visible = true;
 		this._addedToWindow = false;
+		this._border = new utils.Rect();
 		// To do : Init class variables
 	}
 	
@@ -88,7 +91,16 @@ abstract class Component {
 	}
 	
 	utils.Vector2D getMinimalSize() {
-		return this._style != null ? this._style.getMinimalSize() : new utils.Vector2D(0, 0);
+		utils.Vector2D tmp = this._style != null ? this._style.getMinimalSize() : new utils.Vector2D(0, 0);
+		return tmp+new utils.Vector2D(this._border.left+this._border.right, this._border.top+this._border.bottom);
+	}
+	
+	void setBorder(utils.Rect border) {
+		this._border = border;
+	}
+	
+	utils.Rect getBorder() {
+		return this._border;
 	}
 								
 }

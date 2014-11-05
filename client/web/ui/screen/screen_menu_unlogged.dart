@@ -11,7 +11,7 @@ class ScreenMenuUnlogged extends Container {
 	Button _homeButton;
 	Button _signupButton;
 	
-	ScreenMenuUnlogged() : super() {
+	ScreenMenuUnlogged() : super(new BasicContainerStyle(backgroundColor: "#444")) {
 		setScreen(SCREEN_HOME);
 	}
 		
@@ -23,7 +23,7 @@ class ScreenMenuUnlogged extends Container {
 		//clear
 		this.clearChild();
 		
-		setLayout(new VerticalDivideLayout(leftPartFixed: true, leftPartSize: 200));
+		this.setLayout(new VerticalDivideLayout(leftPartFixed: true, leftPartSize: 200));
 		
 		//left part : button list
 		Container mainLeftPart = new Container();
@@ -55,7 +55,12 @@ class ScreenMenuUnlogged extends Container {
 		
 		
 		addChild(mainLeftPart);
-		addChild(new Bidon(new BidonStyle()));
+		
+		switch(screen) {
+			case SCREEN_HOME:
+				addChild(new ScreenMenuUnloggedHome());
+				break;
+		}
 		
 		validate();
 	}

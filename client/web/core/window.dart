@@ -43,8 +43,8 @@ class Window {
 		});	
 		html.window.addEventListener('keydown', (e) {
 			_instance._dispatchEvent(new ui.Event(ui.EventType.KEY_PUSHED, keyCode: e.keyCode));
-			//prevent browser to focus out of canvas when tab pressed
-			if(e.keyCode == 9) { //tab
+			//prevent browser to do bad event when tab or backspace pressed
+			if(e.keyCode == 9 || e.keyCode == 8) {
 				e.preventDefault();
 			}
 		});	

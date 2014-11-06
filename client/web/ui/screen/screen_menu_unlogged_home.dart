@@ -9,18 +9,37 @@ class ScreenMenuUnloggedHome extends Container {
 		Container logginPart = new Container();
 		logginPart.setLayout(new CenterLayout(width: 400, height: 500));
 		
-		Container logginPartInner = new Container(new BasicContainerStyle(backgroundColor: "#ddd"));
+		Container logginPartInner = new Container(new BasicContainerStyle(backgroundColor: "#fff"));
 		logginPart.addChild(logginPartInner);
 		
 		logginPartInner.setLayout(new VerticalPassifLayout());
+		
+		Container logginField = new Container();
+		logginField.setLayout(new VerticalLayout());
+		logginPartInner.addChild(logginField);
+		
 		TextLabel loginL = new TextLabel("Nom de compte", new BasicTextLabelStyle());
-		loginL.setSize(new utils.Vector2D(250, 50));
+		loginL.setMinimalSize(new utils.Vector2D(250, 50));
+		logginField.addChild(loginL);
 		TextField loginTF = new TextField(new BasicTextFieldStyle());
-		loginTF.setSize(new utils.Vector2D(250, 50));
-		logginPartInner.addChild(loginTF);
+		loginTF.setMinimalSize(new utils.Vector2D(250, 50));
+		logginField.addChild(loginTF);
+		
+		logginField.pack();
+		
+		Container passwordField = new Container();
+		passwordField.setLayout(new VerticalLayout());
+		logginPartInner.addChild(passwordField);		
+		
+		TextLabel passwordL = new TextLabel("Mot de passe", new BasicTextLabelStyle());
+		passwordL.setMinimalSize(new utils.Vector2D(250, 50));
+		passwordField.addChild(passwordL);
 		TextField passwordTF = new TextField(new BasicTextFieldStyle());
-		passwordTF.setSize(new utils.Vector2D(250, 50));
-		logginPartInner.addChild(passwordTF);
+		passwordTF.setMinimalSize(new utils.Vector2D(250, 50));
+		passwordField.addChild(passwordTF);
+		
+		passwordField.pack();
+		
 		Button connectionB = new Button("Connexion", new BasicButtonStyle());
 		connectionB.setSize(new utils.Vector2D(250, 50));
 		logginPartInner.addChild(connectionB);

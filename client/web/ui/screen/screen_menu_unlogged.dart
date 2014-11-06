@@ -49,8 +49,8 @@ class ScreenMenuUnlogged extends Container {
 		
 		Container downButtonMenu = new Container();
 		downButtonMenu.setLayout(new VerticalLayout());
-		downButtonMenu.addChild(new Button("Aide", new BasicButtonStyle()));
-		downButtonMenu.addChild(new Button("A propros", new BasicButtonStyle()));
+		downButtonMenu.addChild(new Button("Aide", new MenuButtonStyle(false)));
+		downButtonMenu.addChild(new Button("A propros", new MenuButtonStyle(false)));
 		mainLeftPart.addChild(downButtonMenu);
 		
 		

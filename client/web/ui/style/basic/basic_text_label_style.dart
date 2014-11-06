@@ -8,10 +8,7 @@ class BasicTextLabelStyle extends TextLabelStyle {
 		
 		core.Window.getInstance().getContext()..font = "30px arial"
 																					..textAlign = "left"
-																					..fillStyle = "#fff"
-																					..shadowColor = "#000"
-                                          ..shadowBlur = 5
-                                        	..fillText(castModel.getText(), castModel.getPosition().x, castModel.getPosition().y+(castModel.getSize().y)/2+10)
-                                          ..shadowBlur = 0;
+																					..fillStyle = "#222"
+                                        	..fillText(castModel.getText(), castModel.getPosition().x, castModel.getPosition().y+(castModel.getSize().y)/2+10);
 	}
 }

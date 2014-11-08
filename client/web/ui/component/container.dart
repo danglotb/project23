@@ -101,6 +101,9 @@ class Container extends Component {
 	}
 	
 	utils.Vector2D getMinimalSize() {
+		if(this._minimalSize.x != 0 || this._minimalSize.y != 0)
+			return this._minimalSize;
+		
 		return this._layout == null ? super.getMinimalSize() : this._layout.getMinimalSize();
 	}
 	

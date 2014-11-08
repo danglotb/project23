@@ -9,10 +9,15 @@ void main() {
 		html.CanvasElement canvas = html.querySelector('#canvas');
    	
 		//resize canvas
-		canvas.width =  html.window.innerWidth;
-		canvas.height =  html.window.innerHeight;
-    
-		core.Window.initialize(canvas);
+		utils.Vector2D screenSize = core.ResolutionManager.initialize(new utils.Vector2D(html.window.innerWidth, html.window.innerHeight));
+		canvas.width =  screenSize.x;
+		canvas.height =  screenSize.y;
+		
+		utils.Vector2D margin = new utils.Vector2D((html.window.innerWidth-screenSize.x)~/2, (html.window.innerHeight-screenSize.y)~/2);
+		
+		canvas.style.marginLeft = margin.x.toString()+"px";
+		canvas.style.marginTop  = margin.y.toString()+"px";
+		core.Window.initialize(canvas, margin);
 		/*
 	   	ui.Container container = new ui.Container();
 	   	container.setLayout(new ui.VerticalLayout());

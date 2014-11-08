@@ -59,14 +59,15 @@ class MenuButtonStyle extends ButtonStyle {
 		
 		core.Window.getInstance().getContext()..font = "30px arial"
 																					..textAlign = "left"
-																					..fillStyle = "#fff";
+																					..fillStyle = "#fff"
+																					..textBaseline = 'middle';
 		
 		html.TextMetrics metric = core.Window.getInstance().getContext().measureText(castModel.getText());
 		
 		
 		core.Window.getInstance().getContext()..shadowColor = "#000"
 																					..shadowBlur = 5
-																					..fillText(castModel.getText(), castModel.getPosition().x+(castModel.getSize().x-metric.width)/2, castModel.getPosition().y+(castModel.getSize().y)/2+10);
+																					..fillText(castModel.getText(), castModel.getPosition().x+(castModel.getSize().x-metric.width)/2, castModel.getPosition().y+(castModel.getSize().y)/2);
 		core.Window.getInstance().getContext().shadowBlur = 0;
 	}
 	

@@ -6,7 +6,7 @@ class BasicButtonStyle extends ButtonStyle {
 
 	
 	BasicButtonStyle() {
-		this._spriteButton = new html.ImageElement(src: "image/ui/menu-button-sprite.png");
+		this._spriteButton = new html.ImageElement(src: "image/ui/button-sprite.png");
 	}
 	
 	void draw(Component model) {
@@ -15,58 +15,67 @@ class BasicButtonStyle extends ButtonStyle {
 		if(castModel.isSelected()) {
 			if(castModel.isPushed()) {
 				if(castModel.isOverflew()) {
-					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 105, 0, 13, 74, castModel.getPosition().x, castModel.getPosition().y, 13, castModel.getSize().y)
-    																						..drawImageScaledFromSource(this._spriteButton, 118, 0, 1, 74, castModel.getPosition().x+13, castModel.getPosition().y, castModel.getSize().x-13, castModel.getSize().y);
+					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 161, 0, 11, 80, castModel.getPosition().x, castModel.getPosition().y, 11, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 172, 0, 1, 80, castModel.getPosition().x+11, castModel.getPosition().y, castModel.getSize().x-22, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 173, 0, 11, 80, castModel.getPosition().x+castModel.getSize().x-11, castModel.getPosition().y, 11, castModel.getSize().y);
 				}
 				else {
-					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 90, 0, 13, 74, castModel.getPosition().x, castModel.getPosition().y, 13, castModel.getSize().y)
-    																						..drawImageScaledFromSource(this._spriteButton, 103, 0, 1, 74, castModel.getPosition().x+13, castModel.getPosition().y, castModel.getSize().x-13, castModel.getSize().y);
+					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 138, 0, 11, 80, castModel.getPosition().x, castModel.getPosition().y, 11, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 149, 0, 1, 80, castModel.getPosition().x+11, castModel.getPosition().y, castModel.getSize().x-22, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 150, 0, 11, 80, castModel.getPosition().x+castModel.getSize().x-11, castModel.getPosition().y, 11, castModel.getSize().y);
 				}
 			}
 			else {
 				if(castModel.isOverflew()) {
-					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 75, 0, 13, 74, castModel.getPosition().x, castModel.getPosition().y, 13, castModel.getSize().y)
-    																						..drawImageScaledFromSource(this._spriteButton, 88, 0, 1, 74, castModel.getPosition().x+13, castModel.getPosition().y, castModel.getSize().x-13, castModel.getSize().y);
+					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 115, 0, 11, 80, castModel.getPosition().x, castModel.getPosition().y, 11, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 126, 0, 1, 80, castModel.getPosition().x+11, castModel.getPosition().y, castModel.getSize().x-22, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 127, 0, 11, 80, castModel.getPosition().x+castModel.getSize().x-11, castModel.getPosition().y, 11, castModel.getSize().y);
 				}
 				else {
-					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 60, 0, 13, 74, castModel.getPosition().x, castModel.getPosition().y, 13, castModel.getSize().y)
-    																						..drawImageScaledFromSource(this._spriteButton, 73, 0, 1, 74, castModel.getPosition().x+13, castModel.getPosition().y, castModel.getSize().x-13, castModel.getSize().y);
+					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 92, 0, 11, 80, castModel.getPosition().x, castModel.getPosition().y, 11, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 103, 0, 1, 80, castModel.getPosition().x+11, castModel.getPosition().y, castModel.getSize().x-22, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 104, 0, 11, 80, castModel.getPosition().x+castModel.getSize().x-11, castModel.getPosition().y, 11, castModel.getSize().y);
 				}
 			}
 		}
 		else {
 			if(castModel.isPushed()) {
 				if(castModel.isOverflew()) {
-					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 45, 0, 13, 74, castModel.getPosition().x, castModel.getPosition().y, 13, castModel.getSize().y)
-    																						..drawImageScaledFromSource(this._spriteButton, 58, 0, 1, 74, castModel.getPosition().x+13, castModel.getPosition().y, castModel.getSize().x-13, castModel.getSize().y);
+					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 69, 0, 11, 80, castModel.getPosition().x, castModel.getPosition().y, 11, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 80, 0, 1, 80, castModel.getPosition().x+11, castModel.getPosition().y, castModel.getSize().x-22, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 81, 0, 11, 80, castModel.getPosition().x+castModel.getSize().x-11, castModel.getPosition().y, 11, castModel.getSize().y);
 				}
 				else {
-					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 30, 0, 13, 74, castModel.getPosition().x, castModel.getPosition().y, 13, castModel.getSize().y)
-    																						..drawImageScaledFromSource(this._spriteButton, 43, 0, 1, 74, castModel.getPosition().x+13, castModel.getPosition().y, castModel.getSize().x-13, castModel.getSize().y);
+					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 46, 0, 11, 80, castModel.getPosition().x, castModel.getPosition().y, 11, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 57, 0, 1, 80, castModel.getPosition().x+11, castModel.getPosition().y, castModel.getSize().x-22, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 58, 0, 11, 80, castModel.getPosition().x+castModel.getSize().x-11, castModel.getPosition().y, 11, castModel.getSize().y);
 				}
 			}
 			else {
 				if(castModel.isOverflew()) {
-					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 15, 0, 13, 74, castModel.getPosition().x, castModel.getPosition().y, 13, castModel.getSize().y)
-    																						..drawImageScaledFromSource(this._spriteButton, 28, 0, 1, 74, castModel.getPosition().x+13, castModel.getPosition().y, castModel.getSize().x-13, castModel.getSize().y);
+					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 23, 0, 11, 80, castModel.getPosition().x, castModel.getPosition().y, 11, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 34, 0, 1, 80, castModel.getPosition().x+11, castModel.getPosition().y, castModel.getSize().x-22, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 35, 0, 11, 80, castModel.getPosition().x+castModel.getSize().x-11, castModel.getPosition().y, 11, castModel.getSize().y);
 				}
 				else {
-					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 0, 0, 13, 74, castModel.getPosition().x, castModel.getPosition().y, 13, castModel.getSize().y)
-    																						..drawImageScaledFromSource(this._spriteButton, 13, 0, 1, 74, castModel.getPosition().x+13, castModel.getPosition().y, castModel.getSize().x-13, castModel.getSize().y);
+					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteButton, 0, 0, 11, 80, castModel.getPosition().x, castModel.getPosition().y, 11, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 11, 0, 1, 80, castModel.getPosition().x+11, castModel.getPosition().y, castModel.getSize().x-22, castModel.getSize().y)
+      																					..drawImageScaledFromSource(this._spriteButton, 12, 0, 11, 80, castModel.getPosition().x+castModel.getSize().x-11, castModel.getPosition().y, 11, castModel.getSize().y);
 				}
 			}
 		}
 		
 		core.Window.getInstance().getContext()..font = "30px arial"
 																					..textAlign = "left"
-																					..fillStyle = "#fff";
+																					..fillStyle = "#fff"
+																				 	..textBaseline = 'middle';
 		
 		html.TextMetrics metric = core.Window.getInstance().getContext().measureText(castModel.getText());
 		
 		
 		core.Window.getInstance().getContext()..shadowColor = "#000"
 																					..shadowBlur = 5
-																					..fillText(castModel.getText(), castModel.getPosition().x+(castModel.getSize().x-metric.width)/2, castModel.getPosition().y+(castModel.getSize().y)/2+10);
+																					..fillText(castModel.getText(), castModel.getPosition().x+(castModel.getSize().x-metric.width)/2, castModel.getPosition().y+(castModel.getSize().y)/2);
 		core.Window.getInstance().getContext().shadowBlur = 0;
 	}
 	

@@ -12,11 +12,15 @@ abstract class Component {
 	/* The style of the component */
 	ComponentStyle _style;
 	
+	utils.Vector2D _minimalSize;
+	
 	/* True if the component is visible, else false */
 	bool _visible;
 	
 	/* is added to window */
 	bool _addedToWindow;
+	
+	utils.Rect _border;
 	
 	/* Constructors */
 	
@@ -26,6 +30,8 @@ abstract class Component {
 		this._size = new utils.Vector2D(0, 0);
 		this._visible = true;
 		this._addedToWindow = false;
+		this._border = new utils.Rect();
+		this._minimalSize = new utils.Vector2D(0, 0);
 		// To do : Init class variables
 	}
 	
@@ -87,8 +93,28 @@ abstract class Component {
 		this._size = size;
 	}
 	
+	void setMinimalSize(utils.Vector2D size) {
+		this._minimalSize = size;
+	}
+	
 	utils.Vector2D getMinimalSize() {
-		return this._style != null ? this._style.getMinimalSize() : new utils.Vector2D(0, 0);
+		if(this._minimalSize.x != 0 || this._minimalSize.y != 0)
+			return this._minimalSize;
+		
+		utils.Vector2D tmp = this._style != null ? this._style.getMinimalSize() : new utils.Vector2D(0, 0);
+		return tmp+new utils.Vector2D(this._border.left+this._border.right, this._border.top+this._border.bottom);
+	}
+	
+	void setBorder(utils.Rect border) {
+		this._border = border;
+	}
+	
+	utils.Rect getBorder() {
+		return this._border;
+	}
+	
+	void pack() {
+		this._size = this.getMinimalSize();
 	}
 								
 }

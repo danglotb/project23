@@ -107,4 +107,6 @@ class Container extends Component {
 		return this._layout == null ? super.getMinimalSize() : this._layout.getMinimalSize();
 	}
 	
+	//pack in layout?
+	
 }

@@ -63,6 +63,7 @@ part 'layout/vertical_passif_layout.dart';
 part 'layout/vertical_divide_layout.dart';
 part 'layout/vertical_gap_layout.dart';
 part 'layout/center_layout.dart';
+part 'layout/border_layout.dart';
 
 /*
  * Screen

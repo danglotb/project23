@@ -33,7 +33,6 @@ class VerticalLayout extends Layout {
 			}
 			minY += currentMin.y;
 		}
-
 		return new utils.Vector2D(minX,minY);
 	}
 	

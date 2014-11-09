@@ -17,6 +17,8 @@ class CenterLayout extends Layout {
 	}
 	
 	void validate() {
+		assert(this._model.getChildNumber() == 1);
+		
 		this._model.getChild(0).setSize(this.getMinimalSize());
 		this._model.getChild(0).setPosition(new utils.Coordinates2D(this._model.getPosition().x+(this._model.getSize().x-this._model.getChild(0).getSize().x)/2, this._model.getPosition().y+(this._model.getSize().y-this._model.getChild(0).getSize().y)/2));
 		

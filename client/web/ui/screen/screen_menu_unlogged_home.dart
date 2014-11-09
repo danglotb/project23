@@ -7,7 +7,7 @@ class ScreenMenuUnloggedHome extends Container {
 		this.setLayout(new VerticalDivideLayout(leftPartFixed: true, leftPartSize: 400));
 		
 		Container logginPart = new Container();
-		logginPart.setLayout(new CenterLayout(width: 400, height: 500));
+		logginPart.setLayout(new CenterLayout(width: 380, height: 500));
 		
 		Container logginPartInner = new Container(new BasicContainerStyle(backgroundColor: "#fff"));
 		logginPart.addChild(logginPartInner);
@@ -15,27 +15,38 @@ class ScreenMenuUnloggedHome extends Container {
 		logginPartInner.setLayout(new VerticalPassifLayout());
 		
 		Container logginField = new Container();
-		logginField.setLayout(new VerticalLayout());
+		logginField.setLayout(new VerticalPassifLayout());
 		logginPartInner.addChild(logginField);
 		
-		TextLabel loginL = new TextLabel("Nom de compte", new BasicTextLabelStyle());
-		loginL.setMinimalSize(new utils.Vector2D(250, 50));
-		logginField.addChild(loginL);
-		TextField loginTF = new TextField(new BasicTextFieldStyle());
-		loginTF.setMinimalSize(new utils.Vector2D(250, 50));
-		logginField.addChild(loginTF);
+		Container loginLBorder = new Container();
+		loginLBorder.setLayout(new BorderLayout(bottom : 5));
 		
+		TextLabel loginL = new TextLabel("Nom de compte", new BasicTextLabelStyle());
+		loginL.setSize(new utils.Vector2D(250, 50));
+		loginLBorder.addChild(loginL);
+		loginLBorder.pack();
+
+		logginField.addChild(loginLBorder);
+		TextField loginTF = new TextField(new BasicTextFieldStyle());
+		loginTF.setSize(new utils.Vector2D(250, 50));
+		logginField.addChild(loginTF);
 		logginField.pack();
 		
 		Container passwordField = new Container();
-		passwordField.setLayout(new VerticalLayout());
+		passwordField.setLayout(new VerticalPassifLayout());
 		logginPartInner.addChild(passwordField);		
 		
+		Container passwordLBorder = new Container();
+		passwordLBorder.setLayout(new BorderLayout(bottom : 5));
+		
 		TextLabel passwordL = new TextLabel("Mot de passe", new BasicTextLabelStyle());
-		passwordL.setMinimalSize(new utils.Vector2D(250, 50));
-		passwordField.addChild(passwordL);
+		passwordL.setSize(new utils.Vector2D(250, 50));
+		passwordLBorder.addChild(passwordL);
+		passwordLBorder.pack();
+		
+		passwordField.addChild(passwordLBorder);
 		TextField passwordTF = new TextField(new BasicTextFieldStyle());
-		passwordTF.setMinimalSize(new utils.Vector2D(250, 50));
+		passwordTF.setSize(new utils.Vector2D(250, 50));
 		passwordField.addChild(passwordTF);
 		
 		passwordField.pack();

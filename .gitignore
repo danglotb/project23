@@ -1,2 +1,15 @@
 # dart generate files
+*.lock
 client/packages/*
+client/web/packages/*
+client/web/core/packages/*
+client/web/images/packages/*
+client/web/images/ui/packages/*
+client/web/ui/component/packages/*
+client/web/ui/layout/packages/*
+client/web/ui/packages/*
+client/web/ui/screen/packages/*
+client/web/ui/style/menu/packages/*
+client/web/ui/style/basic/packages/*
+client/web/ui/style/packages/*
+client/web/utils/packages/*

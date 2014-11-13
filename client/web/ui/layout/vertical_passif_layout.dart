@@ -31,7 +31,6 @@ class VerticalPassifLayout extends Layout {
 			}
 			minY += currentMin.y;
 		}
-		print("vplm ("+this._model.getChildNumber().toString()+") : "+minY.toString());
 		return new utils.Vector2D(minX,minY);
 	}
 	

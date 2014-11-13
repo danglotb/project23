@@ -71,15 +71,37 @@ abstract class InteractiveComponent extends Container {
 		return this._pushed;
 	}
 	
+	
+	void _onOverflowIn(Event event) {
+		
+	}
+	
+	void _onOverflowOut(Event event) {
+		
+	}
+	
+	void _onPush(Event event) {
+		
+	}
+	
+	void _onRelease(Event event) {
+		
+	}
+	
+	void _onClick(Event event) {
+		
+	}
+	
 	void dispatchEvent(Event event) {
+		
+		InteractiveComponentStyle castStyle = this._style as InteractiveComponentStyle;
 
 		if(event.getType() == EventType.MOUSE_MOVE) {
-			if(event.getMousePosition().x >= this.getPosition().x && event.getMousePosition().x < this.getPosition().x+this.getSize().x 
-					&& event.getMousePosition().y >= this.getPosition().y && event.getMousePosition().y < this.getPosition().y+this.getSize().y
-					&& !event.isComsumed()) {
+			if(castStyle.isInteractiveArea(event.getMousePosition()) && !event.isComsumed()) {
 				
 				//overflew in event
 				if(!this._overflew) {
+					this._onOverflowIn(event);
 					this._overflewInListeners.forEach((el) => el(this));
 					this._overflew = true;
 				}
@@ -90,6 +112,7 @@ abstract class InteractiveComponent extends Container {
 				
 				//overflew out event
 				if(this._overflew) {
+					this._onOverflowOut(event);
 					this._overflewOutListeners.forEach((el) => el(this));
 					this._overflew = false;
 				}
@@ -98,11 +121,10 @@ abstract class InteractiveComponent extends Container {
 			}
 		}
 		else if(event.getType() == EventType.MOUSE_PUSH) {
-			if(event.getMousePosition().x >= this.getPosition().x && event.getMousePosition().x < this.getPosition().x+this.getSize().x 
-					&& event.getMousePosition().y >= this.getPosition().y && event.getMousePosition().y < this.getPosition().y+this.getSize().y
-					&& !event.isComsumed()) {
+			if(castStyle.isInteractiveArea(event.getMousePosition()) && !event.isComsumed()) {
 				
 				if(!this._pushed) {
+					this._onPush(event);
 					this._pushedListeners.forEach((el) => el(this));
 					this._pushed = true;
 				}
@@ -112,20 +134,24 @@ abstract class InteractiveComponent extends Container {
 		}
 		else if(event.getType() == EventType.MOUSE_RELEASE) {
 			if(this._pushed) {
+				this._onRelease(event);
 				this._releasedListeners.forEach((el) => el(this));
 				this._pushed = false;
 				
 				if(this._overflew) {
+					this._onClick(event);
 					this._clickListeners.forEach((el) => el(this));
 				}
 			}
 		}
 		else if(event.getType() == EventType.MOUSE_OUT) {
 			if(this._pushed) {
+				this._onRelease(event);
 				this._releasedListeners.forEach((el) => el(this));
 				this._pushed = false;
 			}
 			if(this._overflew) {
+				this._onOverflowOut(event);
 				this._overflewOutListeners.forEach((el) => el(this));
 				this._overflew = false;
 			}

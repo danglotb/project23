@@ -6,4 +6,6 @@ abstract class TextInputStyle extends SelectableComponentStyle {
 		
 	}
 	
+	int getCursorPosition(utils.Coordinates2D coordinates);
+	
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Canvas Test</title>
+
+		<link rel="shortcut icon" href="favicon.ico">
+
+		<link rel="stylesheet" href="main.css" media="screen">
+ 
+	</head>
+
+ 
+	<body>
+		<canvas id="canvas"></canvas>
+		<script src="lodash.js"></script>
+		<script src="platform.js"></script>
+		<script src="benchmark.js"></script>
+		<script>
+			window.onerror = function(message, fileName, lineNumber) {
+				console.log('[Error]'+message);
+				console.log('In '+fileName+' at '+lineNumber);
+			};
+			
+			var nb_object_x = 10;
+			var nb_object_y = 10;
+
+			var viewport_width;
+			var viewport_height;
+
+			var canvas_context;
+
+			var object_width;
+			var object_height;
+			
+			var suite = new Benchmark.Suite('Canvas test', {
+				'onStart': function() {
+					console.log('Start tests...');
+					
+					var canvas = document.getElementById('canvas');
+
+					viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+					viewport_height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+					canvas.width = viewport_width;
+					canvas.height = viewport_height;
+					
+					object_width = (viewport_width/nb_object_x) | 0;
+					object_height = (viewport_height/nb_object_y) | 0;
+
+					document.body.appendChild(canvas);
+
+					canvas_context = canvas.getContext("2d");
+				},
+				
+				'onError': window.onerror
+			});
+			
+			suite.add('Base draw', function() {
+				canvas_context.fillStyle = "#f00";
+				canvas_context.strokeStyle = "#000";
+				canvas_context.lineWidth = 1;
+				
+				for(var i=0; i<nb_object_x; i++) {
+					for(var j=0; j<nb_object_y; j++) {
+						canvas_context.rect(object_width*i, object_height*j, object_width, object_height);
+						canvas_context.fill();
+						canvas_context.stroke();
+					}
+				}
+			})
+			.add('clip draw', function() {
+				canvas_context.fillStyle = "#f00";
+				canvas_context.strokeStyle = "#000";
+				canvas_context.lineWidth = 1;
+				for(var i=0; i<nb_object_x; i++) {
+					for(var j=0; j<nb_object_y; j++) {
+						canvas_context.save();
+						canvas_context.rect(object_width*i, object_height*j, object_width, object_height);
+						canvas_context.clip();
+						canvas_context.fill();
+						canvas_context.stroke();
+						canvas_context.restore();
+					}
+				}
+			})
+			// add listeners
+			.on('cycle', function(event) {
+			  console.log(String(event.target));
+			})
+			.on('complete', function() {
+			  console.log('Fastest is ' + this.filter('fastest').pluck('name'));
+			})
+			// run async
+			.run({ 'async': true });
+	</script>
+
+	</body>
+ 
+</html>
+

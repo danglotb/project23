@@ -6,8 +6,8 @@ class BidonStyle extends SelectableComponentStyle {
 		
 	}
 	
-	void draw(Component model) {
-		Bidon castModel = model as Bidon;
+	void draw() {
+		Bidon castModel = this._model as Bidon;
 		
 		String color = "#f00";
 		

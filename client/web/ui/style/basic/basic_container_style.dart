@@ -10,12 +10,14 @@ class BasicContainerStyle extends ContainerStyle {
 		this._backgroundImage = backgroundImage;
 	}
 	
-	void draw(Component model) {
+	void draw() {
 		
-		if(this._backgroundColor != null) {
-			core.Window.getInstance().getContext()..fillStyle = this._backgroundColor
-																						..fillRect(model.getPosition().x, model.getPosition().y, model.getSize().x, model.getSize().y);
-		}
+		core.DrawManager.getInstance().addToBackgroundLayer(new ComponentDrawable(() {
+			if(this._backgroundColor != null) {
+				core.Window.getInstance().getContext()..fillStyle = this._backgroundColor
+																							..fillRect(this._model.getPosition().x, this._model.getPosition().y, this._model.getSize().x, this._model.getSize().y);
+			}
+		}));
 	}
 	
 }

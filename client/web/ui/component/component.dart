@@ -28,6 +28,11 @@ abstract class Component {
 	
 	Component(ComponentStyle style) {
 		this._style = style;
+		if(this._style != null)
+			this._style.setModel(this);
+		else
+			this._style = new EmptyStyle();
+		
 		this._position = new utils.Coordinates2D(0, 0);
 		this._size = new utils.Vector2D(0, 0);
 		this._visible = true;
@@ -51,8 +56,8 @@ abstract class Component {
 	
 	/* Draw the component */
 	void draw() {
-		if(this._visible && this._style != null)
-			_style.draw(this);
+		if(this._visible)
+			_style.draw();
 	}
 	
 	/* Validate the component */
@@ -101,8 +106,8 @@ abstract class Component {
 	utils.Vector2D getMinimalSize() {
 		if(this._minimalSize.x != 0 || this._minimalSize.y != 0)
 			return this._minimalSize;
-	
-		return this._style != null ? this._style.getMinimalSize() : new utils.Vector2D(0, 0);
+		else
+			return this._style.getMinimalSize();
 	}
 	
 	void pack() {

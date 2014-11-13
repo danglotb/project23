@@ -43,8 +43,6 @@ class ResolutionManager {
 			
 		}
 		
-		print("currentRatio : "+currentRatio.toString()+"bestRatio : "+bestRatio.toString());
-		
 		return currentRatio < bestRatio ? new utils.Vector2D(screenSize.x, screenSize.x~/bestRatio) : new utils.Vector2D((screenSize.y*bestRatio).toInt(), screenSize.y);
 		
 	}

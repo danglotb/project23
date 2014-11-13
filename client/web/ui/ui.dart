@@ -8,6 +8,7 @@ import "dart:math" as math;
 
 part 'event.dart';
 part 'selectable_manager.dart';
+part 'component_drawable.dart';
 
 /*
  * Component
@@ -30,6 +31,7 @@ part 'component/text_label.dart';
  * Style
  */
 part 'style/component_style.dart';
+part 'style/empty_style.dart';
 part 'style/container_style.dart';
 part 'style/interactive_component_style.dart';
 part 'style/selectable_component_style.dart';

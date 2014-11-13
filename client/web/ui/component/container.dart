@@ -20,9 +20,7 @@ class Container extends Component {
 	/* Draw the component */
 	void draw() {
 		if(this._visible) {
-			
-			if(_style != null)
-				_style.draw(this);
+			_style.draw();
 			
 			for(Component component in this._children) {
 				component.draw();

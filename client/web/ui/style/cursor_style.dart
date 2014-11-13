@@ -10,10 +10,10 @@ class CursorStyle extends SelectableComponentStyle {
 	/* Methods */
 	
 	/* Draw the style */
-	void draw(Component model) {
+	void draw() {
 		
 		/* Cast the model */
-		Cursor castModel = model as Cursor;
+		Cursor castModel = this._model as Cursor;
     
 		/* Colors */
 		String color = "#000";

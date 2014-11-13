@@ -94,6 +94,7 @@ class Window {
 		this._currentFpsNumber = 0;
 		this._lastFpsNumber = 0;
 		this._lastTimerSec = 0;
+		_instance._content.draw();
 		_run(0);
 	}
 	
@@ -109,7 +110,9 @@ class Window {
 		        ..fillStyle = "#fff"
 		        ..rect(0, 0, _size.x, _size.y)
 		        ..fill();
-		_instance._content.draw();
+
+		DrawManager.getInstance().draw();
+		
 		if(ACTIVE_DEBUG) {
 			_instance._drawDebug(timer);
 		}

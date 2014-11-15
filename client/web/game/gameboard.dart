@@ -74,14 +74,27 @@ class Gameboard {
 	
 	void draw(num timer) {
 	  
+	  int endX, endY;
 	  
-		for (int y = this._camera.getCoordinates().y ; y < this._camera.getDimensions().y ; y++) {
-      			for (int x = this._camera.getCoordinates().x ; x < this._camera.getDimensions().y ; x++) {
-      				if (this._gameboardTab[x+(y*this._camera.getDimensions().y)].getSpriteValue() == 1)
+	  /* cleaning the canvas */
+	  canvas.context2D..fillStyle = "#eee"
+              ..rect(0, 0, this._dimensions.x, this._dimensions.y)
+              ..fill();
+	  
+	  /* calculation on border */
+	  endX = this._camera.getCoordinates().x + this._camera._dimensions.x > this._dimensions.x?
+	      this._dimensions.x:this._camera.getCoordinates().x + this._camera._dimensions.x;
+	  
+	  endY = this._camera.getCoordinates().y + this._camera._dimensions.y > this._dimensions.y?
+            this._dimensions.y:this._camera.getCoordinates().y + this._camera._dimensions.y;
+	  
+		for(int y = this._camera.getCoordinates().y ; y < endY ; y++) {
+      			for (int x = this._camera.getCoordinates().x ; x < endX ; x++) {
+      	//	   if (this._gameboardTab[b].getSpriteValue() == 1)
       					canvas.context2D.drawImageScaled(this.grass, x*50, y*50, 50,50);
-      				else
-      					canvas.context2D.drawImageScaled(this.sand, x*50, y*50, 50,50);
-      			}
+      	/*		else
+      					canvas.context2D.drawImageScaled(this.sand, x, y, 1,1);
+      		*/	}
       		}
 		canvas.context2D.drawImageScaled(this.player.getSkin(), this.player.getCoordinates2D().x, 
 		this.player.getCoordinates2D().y, 50 ,50);

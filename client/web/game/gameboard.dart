@@ -53,26 +53,27 @@ class Gameboard {
 	}
 	
 	void setTarget(html.MouseEvent e) {
-		this.player.setTarget(e.client.x, e.client.y);
+		this.player.setTarget(this._camera.getCoordinates().x + e.client.x,
+		    this._camera.getCoordinates().y + e.client.y);
 	}
 	
 	void moveCamera(html.KeyboardEvent e) {
 		switch (e.keyCode) {
 		case 37:
-			this._camera.getCoordinates().x = this._camera.getCoordinates().x-SIZE_CASE<0?
-			    0:this._camera.getCoordinates().x-SIZE_CASE;
+			this._camera.getCoordinates().x = this._camera.getCoordinates().x-this._camera.getSpeed()<0?
+			    0:this._camera.getCoordinates().x-this._camera.getSpeed();
 			break;
 		case 38:
-		  this._camera.getCoordinates().y = this._camera.getCoordinates().y-SIZE_CASE<0?
-                0:this._camera.getCoordinates().y-SIZE_CASE;
+		  this._camera.getCoordinates().y = this._camera.getCoordinates().y-this._camera.getSpeed()<0?
+                0:this._camera.getCoordinates().y-this._camera.getSpeed();
 			break;
 		case 39:
-    	this._camera.getCoordinates().x = this._camera.getCoordinates().x + this._camera.getDimensions().x + SIZE_CASE != this._dimensions.x * SIZE_CASE?
-    	    this._camera.getCoordinates().x+SIZE_CASE:this._camera.getCoordinates().x;
+    	this._camera.getCoordinates().x = this._camera.getCoordinates().x + this._camera.getDimensions().x+this._camera.getSpeed()!= this._dimensions.x * SIZE_CASE?
+    	    this._camera.getCoordinates().x+this._camera.getSpeed():this._camera.getCoordinates().x;
     	break;
 		case 40:
-		  this._camera.getCoordinates().y = this._camera.getCoordinates().y + this._camera.getDimensions().y + SIZE_CASE != this._dimensions.y * SIZE_CASE?
-        this._camera.getCoordinates().y+SIZE_CASE:this._camera.getCoordinates().y;
+		  this._camera.getCoordinates().y = this._camera.getCoordinates().y + this._camera.getDimensions().y+this._camera.getSpeed()!= this._dimensions.y * SIZE_CASE?
+        this._camera.getCoordinates().y+this._camera.getSpeed():this._camera.getCoordinates().y;
     	break;
 		}
 	}

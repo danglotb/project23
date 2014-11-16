@@ -18,7 +18,7 @@ class Camera {
 	
 	bool onRange(utils.Coordinates2D area) {
 	   return this._coordinates.x <= area.x && this._coordinates.x + this._dimensions.x >= area.x
-	       && this._coordinates.x <= area.y && this._coordinates.y + this._dimensions.y >= area.y;
+	       && this._coordinates.y <= area.y && this._coordinates.y + this._dimensions.y >= area.y;
 	}
 
 }

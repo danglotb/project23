@@ -14,4 +14,8 @@ class Coordinates2D {
 		return this.x == coordinates.x && this.y == coordinates.y;
 	}
 	
+	String toString() {
+	  return "("+this.x.toString()+";"+this.y.toString()+")";
+	}
+	
 }

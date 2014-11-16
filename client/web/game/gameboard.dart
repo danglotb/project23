@@ -25,7 +25,9 @@ class Gameboard {
     										..rect(0, 0, html.window.innerWidth, html.window.innerHeight)
     										..fill();
 		canvas.onClick.listen(setTarget);
-		canvas.onKeyDown.listen(moveCamera);
+		
+		html.window.onKeyDown.listen(moveCamera);
+		
 		//
 		
 		this._dimensions = dimensions;
@@ -55,47 +57,55 @@ class Gameboard {
 	}
 	
 	void moveCamera(html.KeyboardEvent e) {
-		print("MOVE CAMERA");
+	  print(this._camera.getCoordinates().toString());
 		switch (e.keyCode) {
 		case 37:
-			this._camera.getCoordinates().x--;
+			this._camera.getCoordinates().x = this._camera.getCoordinates().x-1<0?
+			    0:this._camera.getCoordinates().x-1;
 			break;
 		case 38:
-			this._camera.getCoordinates().y--;
+		  this._camera.getCoordinates().y = this._camera.getCoordinates().y-1<0?
+                0:this._camera.getCoordinates().y-1;
 			break;
 		case 39:
-    	this._camera.getCoordinates().x++;
+    	this._camera.getCoordinates().x = this._camera.getCoordinates().x + this._camera.getDimensions().x + 1 != this._dimensions.x?
+    	    this._camera.getCoordinates().x+1:this._camera.getCoordinates().x;
     	break;
 		case 40:
-    	this._camera.getCoordinates().y++;
+		  this._camera.getCoordinates().y = this._camera.getCoordinates().y + this._camera.getDimensions().y + 1 != this._dimensions.y?
+        this._camera.getCoordinates().y+1:this._camera.getCoordinates().y;
     	break;
 		}
 	}
 	
 	void draw(num timer) {
 	  
-	  int endX, endY;
+	  int endX, endY, i;
 	  
 	  /* cleaning the canvas */
 	  canvas.context2D..fillStyle = "#eee"
               ..rect(0, 0, this._dimensions.x, this._dimensions.y)
               ..fill();
 	  
-	  /* calculation on border */
+	  /* calculation of border */
 	  endX = this._camera.getCoordinates().x + this._camera._dimensions.x > this._dimensions.x?
 	      this._dimensions.x:this._camera.getCoordinates().x + this._camera._dimensions.x;
 	  
 	  endY = this._camera.getCoordinates().y + this._camera._dimensions.y > this._dimensions.y?
             this._dimensions.y:this._camera.getCoordinates().y + this._camera._dimensions.y;
+	 
+	  int iX, iY;
 	  
-		for(int y = this._camera.getCoordinates().y ; y < endY ; y++) {
-      			for (int x = this._camera.getCoordinates().x ; x < endX ; x++) {
-      	//	   if (this._gameboardTab[b].getSpriteValue() == 1)
-      					canvas.context2D.drawImageScaled(this.grass, x*50, y*50, 50,50);
-      	/*		else
-      					canvas.context2D.drawImageScaled(this.sand, x, y, 1,1);
-      		*/	}
-      		}
+		for(int y = this._camera.getCoordinates().y , iY = 0; y < endY ; y += SIZE_CASE, iY++) {
+      			for (int x = this._camera.getCoordinates().x , iX = 0 ; x < endX ; x += SIZE_CASE, iX++) {
+      			  int i = (x + (y*SIZE_CASE)) ~/ SIZE_CASE;
+      			  if (this._gameboardTab[i].getSpriteValue() == 1)
+      					canvas.context2D.drawImage(this.grass, iX*SIZE_CASE, iY*SIZE_CASE);
+      			  else
+      			    canvas.context2D.drawImage(this.sand, iX*SIZE_CASE, iY*SIZE_CASE);
+      	}
+    }
+		
 		canvas.context2D.drawImageScaled(this.player.getSkin(), this.player.getCoordinates2D().x, 
 		this.player.getCoordinates2D().y, 50 ,50);
  			if (this.player.onMove)

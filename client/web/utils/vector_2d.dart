@@ -9,4 +9,8 @@ class Vector2D {
 		this.x = x;
 		this.y = y;
 	}
+	
+	 String toString() {
+     return "("+this.x.toString()+";"+this.y.toString()+")";
+   }
 }

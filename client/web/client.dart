@@ -1,5 +1,4 @@
 import 'dart:html' as html;
-
 import 'ui/ui.dart' as ui;
 import 'utils/utils.dart' as utils;
 import 'core/core.dart' as core;
@@ -18,20 +17,6 @@ void main() {
 		canvas.style.marginLeft = margin.x.toString()+"px";
 		canvas.style.marginTop  = margin.y.toString()+"px";
 		core.Window.initialize(canvas, margin);
-		/*
-	   	ui.Container container = new ui.Container();
-	   	container.setLayout(new ui.VerticalLayout());
-	   	
-	   	ui.Bidon bidon = new ui.Bidon(new ui.BidonStyle());
-	   	bidon..addOverflewInListener((s) => print('overflew in'))
-	   			 ..addOverflewOutListener((s) => print('overflew out'))
-	   			 ..addPushedListener((s) => print('pushed'))
-	   			 ..addReleasedListener((s) => print('released'))
-	   			 ..addClickListener((s) => print('cliked'));
-	   	
-	   	container.addChild(bidon);
-	   	container.addChild(new ui.TextField(new ui.BasicTextFieldStyle()));
-	   	container.addChild(new ui.Bidon(new ui.BidonStyle()));*/
 	   	
 		core.Window.getInstance().setContent(new ui.ScreenMenuUnlogged());
 	   	
@@ -43,6 +28,4 @@ void main() {
 		print(exception); 
 		print(stackTrace); 
 	}
-
-
 }

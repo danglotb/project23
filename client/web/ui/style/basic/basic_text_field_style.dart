@@ -91,22 +91,47 @@ class BasicTextFieldStyle extends TextFieldStyle {
 			html.TextMetrics textMetric = core.Window.getInstance().getContext().measureText(castModel.getText());
 			
 			if(textMetric.width > castModel.getSize().x-2*IMG_BORDER_WIDTH) {
-				core.Window.getInstance().getContext()..save()
-	      																			..beginPath()
-	      																			..rect(castModel.getPosition().x+IMG_TEXT_BORDER_WIDTH, castModel.getPosition().y, castModel.getSize().x-IMG_TEXT_BORDER_WIDTH*2, castModel.getSize().y)
-	      																			..clip()
-	      																			..fillText(castModel.getText(), castModel.getPosition().x+castModel.getSize().x-IMG_BORDER_WIDTH-textMetric.width.toInt(), castModel.getPosition().y+castModel.getSize().y/2)
-	      																			..restore();
-	      																			
 				
-				if(this._blinkOn) {
-					html.TextMetrics textMetricCursor = core.Window.getInstance().getContext().measureText(castModel.getText().substring(castModel.getTextCursorPosition()));
+				html.TextMetrics textMetric2 = core.Window.getInstance().getContext().measureText(castModel.getText().substring(castModel.getTextCursorPosition()));
+				
+				if(textMetric2.width > castModel.getSize().x-2*IMG_BORDER_WIDTH) {
 					
-					core.Window.getInstance().getContext()..strokeStyle = "#222"
-					    																	..beginPath()
-																								..moveTo(castModel.getPosition().x+castModel.getSize().x-IMG_BORDER_WIDTH-textMetricCursor.width.toInt(), castModel.getPosition().y+IMG_TEXT_BORDER_HEIGHT)
-																								..lineTo(castModel.getPosition().x+castModel.getSize().x-IMG_BORDER_WIDTH-textMetricCursor.width.toInt(), castModel.getPosition().y+castModel.getSize().y-IMG_TEXT_BORDER_HEIGHT)
-																								..stroke();
+					html.TextMetrics textMetricCursor = core.Window.getInstance().getContext().measureText(castModel.getText().substring(0, castModel.getTextCursorPosition()));
+					
+					core.Window.getInstance().getContext()..save()
+          		      															..beginPath()
+          		      															..rect(castModel.getPosition().x+IMG_TEXT_BORDER_WIDTH, castModel.getPosition().y, castModel.getSize().x-IMG_TEXT_BORDER_WIDTH*2, castModel.getSize().y)
+          		      															..clip()
+          		      															..fillText(castModel.getText(), castModel.getPosition().x+IMG_BORDER_WIDTH-textMetricCursor.width, castModel.getPosition().y+castModel.getSize().y/2)
+          		      															..restore();
+  				
+  				if(this._blinkOn) {
+  					core.Window.getInstance().getContext()..strokeStyle = "#222"
+  																								..beginPath()
+  																								..moveTo(castModel.getPosition().x+IMG_BORDER_WIDTH, castModel.getPosition().y+IMG_TEXT_BORDER_HEIGHT)
+  																								..lineTo(castModel.getPosition().x+IMG_BORDER_WIDTH, castModel.getPosition().y+castModel.getSize().y-IMG_TEXT_BORDER_HEIGHT)
+  																								..stroke();
+  				}
+				}
+				else {
+				
+					core.Window.getInstance().getContext()..save()
+		      																			..beginPath()
+		      																			..rect(castModel.getPosition().x+IMG_TEXT_BORDER_WIDTH, castModel.getPosition().y, castModel.getSize().x-IMG_TEXT_BORDER_WIDTH*2, castModel.getSize().y)
+		      																			..clip()
+		      																			..fillText(castModel.getText(), castModel.getPosition().x+castModel.getSize().x-IMG_BORDER_WIDTH-textMetric.width.toInt(), castModel.getPosition().y+castModel.getSize().y/2)
+		      																			..restore();
+		      																			
+					
+					if(this._blinkOn) {
+						html.TextMetrics textMetricCursor = core.Window.getInstance().getContext().measureText(castModel.getText().substring(castModel.getTextCursorPosition()));
+						
+						core.Window.getInstance().getContext()..strokeStyle = "#222"
+						    																	..beginPath()
+																									..moveTo(castModel.getPosition().x+castModel.getSize().x-IMG_BORDER_WIDTH-textMetricCursor.width.toInt(), castModel.getPosition().y+IMG_TEXT_BORDER_HEIGHT)
+																									..lineTo(castModel.getPosition().x+castModel.getSize().x-IMG_BORDER_WIDTH-textMetricCursor.width.toInt(), castModel.getPosition().y+castModel.getSize().y-IMG_TEXT_BORDER_HEIGHT)
+																									..stroke();
+					}
 				}
 			}
 			else {

@@ -21,6 +21,11 @@ abstract class TextInput extends SelectableComponent {
 						this._textCursorPosition--;
 					}
 				}
+				else if(event.getKeyCode() == 46) { // delete
+					if(this._textCursorPosition < this._text.length) {
+						this._text = this._text.substring(0, this._textCursorPosition)+this._text.substring(this._textCursorPosition+1);
+					}
+				}
 				else if(event.getKeyCode() == 37) { //left arrow
 					if(this._textCursorPosition > 0)
 						this._textCursorPosition--;

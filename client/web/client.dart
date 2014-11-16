@@ -10,7 +10,7 @@ void main() {
 	List<Case> cases = new List<Case>(size*size);
 	for (int y = 0 ; y < size ; y++) {
   			for (int x = 0 ; x < size; x++) {
-					if (x+(y*size) % 2 == 0)
+					if (x % 10 == 0 || y % 10 == 0)
 						cases[x+(y*size)] = new Case(new utils.Coordinates2D(x,y) , spriteValue:0);
 					else
 						cases[x+(y*size)] = new Case(new utils.Coordinates2D(x,y) , spriteValue:1);

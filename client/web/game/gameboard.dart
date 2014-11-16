@@ -15,7 +15,7 @@ class Gameboard {
 	Player player;
 	
 	Gameboard(utils.Vector2D dimensions , html.CanvasElement canvas, {List<Case> gameCase}) {
-		this._camera = new Camera(new utils.Vector2D(10*SIZE_CASE ,10*SIZE_CASE ), new utils.Coordinates2D(0,0));
+		this._camera = new Camera(new utils.Vector2D(10*SIZE_CASE ,10*SIZE_CASE ), new utils.Coordinates2D(0,0), SIZE_CASE);
 		//TO REMOVE
 		this.canvas = canvas;
 	  this.canvas.width =  html.window.innerWidth;
@@ -57,23 +57,22 @@ class Gameboard {
 	}
 	
 	void moveCamera(html.KeyboardEvent e) {
-	  print(this._camera.getCoordinates().toString());
 		switch (e.keyCode) {
 		case 37:
-			this._camera.getCoordinates().x = this._camera.getCoordinates().x-1<0?
-			    0:this._camera.getCoordinates().x-1;
+			this._camera.getCoordinates().x = this._camera.getCoordinates().x-SIZE_CASE<0?
+			    0:this._camera.getCoordinates().x-SIZE_CASE;
 			break;
 		case 38:
-		  this._camera.getCoordinates().y = this._camera.getCoordinates().y-1<0?
-                0:this._camera.getCoordinates().y-1;
+		  this._camera.getCoordinates().y = this._camera.getCoordinates().y-SIZE_CASE<0?
+                0:this._camera.getCoordinates().y-SIZE_CASE;
 			break;
 		case 39:
-    	this._camera.getCoordinates().x = this._camera.getCoordinates().x + this._camera.getDimensions().x + 1 != this._dimensions.x?
-    	    this._camera.getCoordinates().x+1:this._camera.getCoordinates().x;
+    	this._camera.getCoordinates().x = this._camera.getCoordinates().x + this._camera.getDimensions().x + SIZE_CASE != this._dimensions.x * SIZE_CASE?
+    	    this._camera.getCoordinates().x+SIZE_CASE:this._camera.getCoordinates().x;
     	break;
 		case 40:
-		  this._camera.getCoordinates().y = this._camera.getCoordinates().y + this._camera.getDimensions().y + 1 != this._dimensions.y?
-        this._camera.getCoordinates().y+1:this._camera.getCoordinates().y;
+		  this._camera.getCoordinates().y = this._camera.getCoordinates().y + this._camera.getDimensions().y + SIZE_CASE != this._dimensions.y * SIZE_CASE?
+        this._camera.getCoordinates().y+SIZE_CASE:this._camera.getCoordinates().y;
     	break;
 		}
 	}
@@ -106,11 +105,12 @@ class Gameboard {
       	}
     }
 		
-		canvas.context2D.drawImageScaled(this.player.getSkin(), this.player.getCoordinates2D().x, 
-		this.player.getCoordinates2D().y, 50 ,50);
+	 if (this._camera.onRange(this.player.getCoordinates2D())) {
+		canvas.context2D.drawImageScaled(this.player.getSkin(), this.player.getCoordinates2D().x -  this._camera.getCoordinates().x, 
+		this.player.getCoordinates2D().y  -  this._camera.getCoordinates().y , 50 ,50);
  			if (this.player.onMove)
  				this.player.move();
- 			
+	 }
   	html.window.requestAnimationFrame(draw);
 	}
 }

@@ -55,9 +55,9 @@ abstract class Component {
 	/* Methods */
 	
 	/* Draw the component */
-	void draw() {
+	void buildDraw() {
 		if(this._visible)
-			_style.draw();
+			_style.buildDraw();
 	}
 	
 	/* Validate the component */
@@ -108,6 +108,10 @@ abstract class Component {
 			return this._minimalSize;
 		else
 			return this._style.getMinimalSize();
+	}
+	
+	ComponentStyle getStyle() {
+		return this._style;
 	}
 	
 	void pack() {

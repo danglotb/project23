@@ -18,12 +18,12 @@ class Container extends Component {
 	/* Methods */
 	
 	/* Draw the component */
-	void draw() {
+	void buildDraw() {
 		if(this._visible) {
-			_style.draw();
+			_style.buildDraw();
 			
 			for(Component component in this._children) {
-				component.draw();
+				component.buildDraw();
 			}
 		}
 	}
@@ -50,6 +50,13 @@ class Container extends Component {
 		
 		if(this._addedToWindow)
 			component.addedToWindow();
+		
+		core.Window.getInstance().requireRebuildDraw();
+	}
+	
+	void removeChild(Component component) {
+		this._children.remove(component);
+		core.Window.getInstance().requireRebuildDraw();
 	}
 	
 	void clearChild() {

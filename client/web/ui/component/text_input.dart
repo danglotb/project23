@@ -31,8 +31,8 @@ abstract class TextInput extends SelectableComponent {
 				}
 			}
 			if(event.getType() == EventType.KEY_PRESSED) {
-				this._text += new String.fromCharCode(event.getCharCode());
-				this._textCursorPosition = this._text.length;
+				this._text = this._text.substring(0, this._textCursorPosition)+(new String.fromCharCode(event.getCharCode()))+this._text.substring(this._textCursorPosition);
+				this._textCursorPosition++;
 			}
 		}
 	}

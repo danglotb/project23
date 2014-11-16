@@ -26,7 +26,7 @@ part 'component/cursor.dart';
 part 'component/checkbox_container.dart';
 part 'component/label.dart';
 part 'component/text_label.dart';
-
+part 'component/combobox.dart';
 /*
  * Style
  */
@@ -43,6 +43,7 @@ part 'style/bidon_style.dart';
 part 'style/cursor_style.dart';
 part 'style/label_style.dart';
 part 'style/text_label_style.dart';
+part 'style/combobox_style.dart';
 
 //Basic style
 part 'style/basic/basic_style_manager.dart';
@@ -50,6 +51,7 @@ part 'style/basic/basic_container_style.dart';
 part 'style/basic/basic_button_style.dart';
 part 'style/basic/basic_text_field_style.dart';
 part 'style/basic/basic_text_label_style.dart';
+part 'style/basic/basic_combobox_style.dart';
 
 //Menu style
 part 'style/menu/menu_button_style.dart';

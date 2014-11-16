@@ -21,7 +21,6 @@ class DrawManager {
 	int _currentWindow;
 	List<DrawLayer> _layers;
 	
-	
 	_DrawManager() {
 
 	}
@@ -74,7 +73,5 @@ class DrawManager {
 			this._layers[i].draw();
 		}
 	}
-	
-	
 	
 }

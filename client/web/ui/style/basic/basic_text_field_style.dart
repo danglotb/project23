@@ -47,9 +47,9 @@ class BasicTextFieldStyle extends TextFieldStyle {
 		}
 	}
 	
-	void draw() {
+	void buildDraw() {
 		
-		core.DrawManager.getInstance().addToContentFrontLayer(new ComponentDrawable(() {
+		core.DrawManager.getInstance().addToContentLayer(new ComponentDrawable(() {
 			TextField castModel = this._model as TextField;
 			
 			_checkBlink();
@@ -92,6 +92,15 @@ class BasicTextFieldStyle extends TextFieldStyle {
 	      																			..clip()
 	      																			..fillText(castModel.getText(), castModel.getPosition().x+castModel.getSize().x-IMG_TEXT_BORDER_WIDTH-textMetric.width, castModel.getPosition().y+castModel.getSize().y/2)
 	      																			..restore();
+				
+				if(this._blinkOn) {
+					html.TextMetrics textMetricCursor = core.Window.getInstance().getContext().measureText(castModel.getText().substring(castModel.getTextCursorPosition()));
+					
+					core.Window.getInstance().getContext()..strokeStyle = "#222"
+																								..moveTo(castModel.getPosition().x+castModel.getSize().x-2*IMG_TEXT_BORDER_WIDTH-textMetricCursor.width.toInt(), castModel.getPosition().y+IMG_TEXT_BORDER_HEIGHT)
+																								..lineTo(castModel.getPosition().x+castModel.getSize().x-2*IMG_TEXT_BORDER_WIDTH-textMetricCursor.width.toInt(), castModel.getPosition().y+castModel.getSize().y-IMG_TEXT_BORDER_HEIGHT)
+																								..stroke();
+				}
 			}
 			else {
 				core.Window.getInstance().getContext()..fillText(castModel.getText(), castModel.getPosition().x+IMG_BORDER_WIDTH, castModel.getPosition().y+castModel.getSize().y/2);

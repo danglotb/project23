@@ -12,6 +12,7 @@ class Window {
 	ui.Component _content;
 	utils.Vector2D _size;
 	utils.Vector2D _offset;
+	bool _requireRebuildDraw;
 	
 	//fps
 	int _currentFpsNumber;
@@ -30,6 +31,7 @@ class Window {
 		_instance._context = canvas.context2D;
 		_instance._size = new utils.Vector2D(canvas.width, canvas.height);
 		_instance._offset = margin;
+		_instance._requireRebuildDraw= true; 
 		canvas.addEventListener('mousemove', (e) => _instance._dispatchEvent(
 				new ui.Event(ui.EventType.MOUSE_MOVE, mousePosition:new utils.Coordinates2D(e.client.x-_instance._offset.x, e.client.y-_instance._offset.y))));
 		canvas.addEventListener('mousedown', (e) => _instance._dispatchEvent(
@@ -94,7 +96,6 @@ class Window {
 		this._currentFpsNumber = 0;
 		this._lastFpsNumber = 0;
 		this._lastTimerSec = 0;
-		_instance._content.draw();
 		_run(0);
 	}
 	
@@ -110,6 +111,13 @@ class Window {
 		        ..fillStyle = "#fff"
 		        ..rect(0, 0, _size.x, _size.y)
 		        ..fill();
+		
+		if(this._requireRebuildDraw) {
+			DrawManager.getInstance().clear();
+			this._content.validate();
+			this._content.buildDraw();
+			this._requireRebuildDraw = false;
+		}
 
 		DrawManager.getInstance().draw();
 		
@@ -138,4 +146,7 @@ class Window {
 		_content.dispatchEvent(event);
 	}
 	
+	void requireRebuildDraw() {
+		this._requireRebuildDraw = true;
+	}
 }

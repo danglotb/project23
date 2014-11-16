@@ -10,7 +10,7 @@ class BasicContainerStyle extends ContainerStyle {
 		this._backgroundImage = backgroundImage;
 	}
 	
-	void draw() {
+	void buildDraw() {
 		
 		core.DrawManager.getInstance().addToBackgroundLayer(new ComponentDrawable(() {
 			if(this._backgroundColor != null) {

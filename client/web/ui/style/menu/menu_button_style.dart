@@ -9,7 +9,7 @@ class MenuButtonStyle extends ButtonStyle {
 		this._spriteButton = new html.ImageElement(src: current ? "image/ui/menu-button-sprite-current.png" : "image/ui/menu-button-sprite.png");
 	}
 	
-	void draw() {
+	void buildDraw() {
 		
 		
 		core.DrawManager.getInstance().addToContentFrontLayer(new ComponentDrawable(() {

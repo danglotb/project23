@@ -14,6 +14,11 @@ class ScreenMenuUnloggedHome extends Container {
 		
 		logginPartInner.setLayout(new VerticalPassifLayout());
 		
+		Combobox cbtest = new Combobox(new BasicComboboxStyle());
+		cbtest.setSize(new utils.Vector2D(250, 50));
+		cbtest.setListChoice(['choice1', 'choice2', 'choice3']);
+		logginPartInner.addChild(cbtest);
+		
 		Container logginField = new Container();
 		logginField.setLayout(new VerticalPassifLayout());
 		logginPartInner.addChild(logginField);

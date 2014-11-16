@@ -56,7 +56,6 @@ class Cursor extends SelectableComponent {
   		num cursorPosY = this._position.y + this._size.y/2;			
 			
   		this._value = (mousePosX - cursorPosMinX)/this._size.x * (this._max - this._min);
-  		draw();
 		
 		}
   		

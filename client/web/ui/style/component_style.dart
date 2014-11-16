@@ -18,7 +18,7 @@ abstract class ComponentStyle {
 	/* Methods */
 	
 	/* Draw the component model */
-	void draw();
+	void buildDraw();
 	
 	utils.Vector2D getMinimalSize() {
 		return new utils.Vector2D(0, 0);

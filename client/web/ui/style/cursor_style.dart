@@ -10,7 +10,7 @@ class CursorStyle extends SelectableComponentStyle {
 	/* Methods */
 	
 	/* Draw the style */
-	void draw() {
+	void buildDraw() {
 		
 		/* Cast the model */
 		Cursor castModel = this._model as Cursor;

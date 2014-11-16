@@ -3,9 +3,9 @@ part of ui;
 class BasicTextLabelStyle extends TextLabelStyle {
 	
 	
-	void draw() {
+	void buildDraw() {
 		
-		core.DrawManager.getInstance().addToContentFrontLayer(new ComponentDrawable(() {
+		core.DrawManager.getInstance().addToContentLayer(new ComponentDrawable(() {
 			TextLabel castModel = this._model as TextLabel;
 			
 			core.Window.getInstance().getContext()..font = "30px arial"

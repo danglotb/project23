@@ -6,7 +6,7 @@ class EmptyStyle extends ComponentStyle {
 		
 	}
 	
-	void draw() {
+	void buildDraw() {
 		
 	}
 }

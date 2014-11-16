@@ -9,9 +9,9 @@ class BasicButtonStyle extends ButtonStyle {
 		this._spriteButton = new html.ImageElement(src: "image/ui/button-sprite.png");
 	}
 	
-	void draw() {
+	void buildDraw() {
 		
-		core.DrawManager.getInstance().addToContentFrontLayer(new ComponentDrawable(() {
+		core.DrawManager.getInstance().addToContentLayer(new ComponentDrawable(() {
 			Button castModel = this._model as Button;
 			
 			if(castModel.isSelected()) {

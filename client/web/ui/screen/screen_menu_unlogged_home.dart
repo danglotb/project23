@@ -27,6 +27,7 @@ class ScreenMenuUnloggedHome extends Container {
 		loginLBorder.setLayout(new BorderLayout(bottom : 5));
 		
 		TextLabel loginL = new TextLabel("Nom de compte", new BasicTextLabelStyle());
+		loginL.setTextSize(TextLabel.H2);
 		loginL.setSize(new utils.Vector2D(250, 50));
 		loginLBorder.addChild(loginL);
 		loginLBorder.pack();
@@ -45,6 +46,7 @@ class ScreenMenuUnloggedHome extends Container {
 		passwordLBorder.setLayout(new BorderLayout(bottom : 5));
 		
 		TextLabel passwordL = new TextLabel("Mot de passe", new BasicTextLabelStyle());
+		passwordL.setTextSize(TextLabel.H2);
 		passwordL.setSize(new utils.Vector2D(250, 50));
 		passwordLBorder.addChild(passwordL);
 		passwordLBorder.pack();

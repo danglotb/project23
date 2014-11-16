@@ -53,6 +53,7 @@ abstract class TextInput extends SelectableComponent {
 	
 	void _onPush(Event event) {
 		super._onPush(event);
+		this._textCursorPosition = (this._style as TextInputStyle).getCursorPosition(event.getMousePosition());
 	}
 	
 }

@@ -67,7 +67,7 @@ class BasicButtonStyle extends ButtonStyle {
 				}
 			}
 			
-			core.Window.getInstance().getContext()..font = "30px arial"
+			core.Window.getInstance().getContext()..font = BasicStyleManager.getInstance().getFontSizeH3().toString()+'px '+BasicStyleManager.getInstance().getFontName()
 																						..textAlign = "left"
 																						..fillStyle = "#fff"
 																					 	..textBaseline = 'middle';

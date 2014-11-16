@@ -8,8 +8,8 @@ class ResolutionManager {
 	static ResolutionManager _instance;
 	
 	
-	utils.Vector2D _scale;
-	num _fontSizeRatio;
+	utils.Vector2D _vectorScale;
+	num _fontScale;
 	num resolutionType;
 	
 	
@@ -36,6 +36,12 @@ class ResolutionManager {
 		
 		_instance.resolutionType = bestRatio;
 		
+		/*
+		 * landmark : 1280 * 800 (16:9)
+		 */
+		_instance._fontScale = 1.0;
+		_instance._vectorScale = new utils.Vector2D(1.0, 1.0);
+		
 		if(_instance.resolutionType == RESOLUTION_16_9) {
 			
 		}
@@ -45,6 +51,18 @@ class ResolutionManager {
 		
 		return currentRatio < bestRatio ? new utils.Vector2D(screenSize.x, screenSize.x~/bestRatio) : new utils.Vector2D((screenSize.y*bestRatio).toInt(), screenSize.y);
 		
+	}
+	
+	static ResolutionManager getInstance() {
+		return _instance;
+	}
+	
+	num getFontScale() {
+		return this._fontScale;
+	}
+	
+	utils.Vector2D getVectorScale() {
+		return this._vectorScale;
 	}
 	
 }

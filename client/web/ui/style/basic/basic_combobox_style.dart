@@ -71,8 +71,8 @@ class BasicComboboxStyleInputArea extends ComboboxStyleInputArea {
 			else {
 				core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteCombobox, 92, 0, 40, IMG_HEIGHT, castModel.getPosition().x+castModel.getSize().x-40-IMG_BORDER_WIDTH, castModel.getPosition().y, 40, castModel.getSize().y);
 			}
-			core.Window.getInstance().getContext()..fillStyle = "#000"
-			    																	..font = "20px arial"
+			core.Window.getInstance().getContext()..fillStyle = "#444"
+			    																	..font = BasicStyleManager.getInstance().getFontSizeH3().toString()+'px '+BasicStyleManager.getInstance().getFontName()
 																						..fillText(castModel.getCombobox().getCurrentChoice(), castModel.getPosition().x+IMG_BORDER_WIDTH, castModel.getPosition().y+castModel.getSize().y/2);
 		}));
 	}
@@ -99,8 +99,8 @@ class BasicComboboxStyleDropDownUnit extends ComboboxStyleDropDownUnit {
         																			..fillRect(castModel.getPosition().x, castModel.getPosition().y, castModel.getSize().x, castModel.getSize().y);
 
 			}
-			core.Window.getInstance().getContext()..fillStyle = "#000"
-			   																		..font = "20px arial"
+			core.Window.getInstance().getContext()..fillStyle = "#444"
+			   																		..font = BasicStyleManager.getInstance().getFontSizeH3().toString()+'px '+BasicStyleManager.getInstance().getFontName()
 																						..fillText(castModel.getText(), castModel.getPosition().x+BasicComboboxStyleInputArea.IMG_BORDER_WIDTH, castModel.getPosition().y+castModel.getSize().y/2);
 		}));
 	}

@@ -4,38 +4,24 @@ part of ui;
  * Singleton
 */
 
-class BasicStyleConfig {
-	
-	int _fontSize;
-	
-	BasicStyleConfig(int fontSize) {
-		this._fontSize = fontSize;
-	}
-	
-	int getFontSize() {
-		return this._fontSize;
-	}
-}
-
 class BasicStyleManager {
 	
 	static BasicStyleManager _instance;
-	BasicStyleConfig _config;
+	
+	int _fontSizeH1;
+	int _fontSizeH2;
+	int _fontSizeH3;
+	String _fontName;
 	
 	_BasicStyleManager() {
 		
 	}
 	
 	void _init() {
-
-		int width = html.window.innerWidth;
-		int height = html.window.innerHeight;
-		if(width >= 800 && height >= 600) {
-			this._config = new BasicStyleConfig(14);
-		}
-		else {
-			this._config = new BasicStyleConfig(20);
-		}
+		this._fontSizeH1 = (36.0*core.ResolutionManager.getInstance().getFontScale()).toInt();
+		this._fontSizeH2 = (28.0*core.ResolutionManager.getInstance().getFontScale()).toInt();
+		this._fontSizeH3 = (20.0*core.ResolutionManager.getInstance().getFontScale()).toInt();
+		this._fontName = "arial";
 	}
 	
 	static BasicStyleManager getInstance() {
@@ -46,7 +32,20 @@ class BasicStyleManager {
 		return _instance;
 	}
 	
-	BasicStyleConfig getConfig() {
-		return this._config;
+	int getFontSizeH1() {
+		return this._fontSizeH1;
 	}
+	
+	int getFontSizeH2() {
+		return this._fontSizeH2;
+	}
+	
+	int getFontSizeH3() {
+		return this._fontSizeH3;
+	}
+	
+	String getFontName() {
+		return this._fontName;
+	}
+
 }

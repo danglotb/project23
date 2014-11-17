@@ -15,7 +15,7 @@ class VerticalPassifLayout extends Layout {
 		num currentY = this._model.getPosition().y;
 		for(int i = 0; i<this._model.getChildNumber(); i++) {
 			currentY += totalY/(this._model.getChildNumber()*2);
-			this._model.getChild(i).setPosition(new utils.Coordinates2D(this._model.getPosition().x+(this._model.getSize().x-this._model.getChild(i).getSize().x)/2, currentY));
+			this._model.getChild(i).setPosition(new utils.Coordinates2D(this._model.getPosition().x+(this._model.getSize().x-this._model.getChild(i).getSize().x)~/2, currentY));
 			currentY += totalY/(this._model.getChildNumber()*2)+this._model.getChild(i).getSize().y;
 		}
 	}

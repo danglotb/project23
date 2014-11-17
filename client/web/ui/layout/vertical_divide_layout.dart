@@ -31,7 +31,7 @@ class VerticalDivideLayout extends Layout {
 			this._model.getChild(0).setPosition(new utils.Coordinates2D(this._model.getPosition().x, this._model.getPosition().y));
 			this._model.getChild(0).setSize(new utils.Vector2D(this._leftPartSize, this._model.getSize().y));
 			
-			this._model.getChild(1).setPosition(new utils.Coordinates2D(this._model.getPosition().x+this._leftPartSize, this._model.getPosition().y+0));
+			this._model.getChild(1).setPosition(new utils.Coordinates2D(this._model.getPosition().x+this._leftPartSize, this._model.getPosition().y));
 			this._model.getChild(1).setSize(new utils.Vector2D(this._model.getSize().x-this._leftPartSize, this._model.getSize().y));
 		}
 		else if(this._rightPartFixed) {

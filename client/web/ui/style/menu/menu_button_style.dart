@@ -12,7 +12,9 @@ class MenuButtonStyle extends ButtonStyle {
 	void buildDraw() {
 		
 		
-		core.DrawManager.getInstance().addToContentFrontLayer(new ComponentDrawable(() {
+		ComponentDrawable drawable = new ComponentDrawable();
+		
+		drawable.setDrawFunction(() {
 			
 			Button castModel = this._model as Button;
 			if(castModel.isSelected()) {
@@ -73,7 +75,9 @@ class MenuButtonStyle extends ButtonStyle {
   																					..fillText(castModel.getText(), castModel.getPosition().x+(castModel.getSize().x-metric.width)/2, castModel.getPosition().y+(castModel.getSize().y)/2);
   		core.Window.getInstance().getContext().shadowBlur = 0;
 			
-		}));	
+		});
+		
+		core.DrawManager.getInstance().addToContentFrontLayer(drawable);
 		
 
 	}

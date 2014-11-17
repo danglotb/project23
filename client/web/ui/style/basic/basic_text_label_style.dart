@@ -5,7 +5,9 @@ class BasicTextLabelStyle extends TextLabelStyle {
 	
 	void buildDraw() {
 		
-		core.DrawManager.getInstance().addToContentLayer(new ComponentDrawable(() {
+		ComponentDrawable drawable = new ComponentDrawable();
+		
+		drawable.setDrawFunction(() {
 			TextLabel castModel = this._model as TextLabel;
 			
 			switch(castModel.getTextSize()) {
@@ -24,6 +26,8 @@ class BasicTextLabelStyle extends TextLabelStyle {
 			core.Window.getInstance().getContext()..textAlign = "left"
 																						..fillStyle = "#222"
 	                                        	..fillText(castModel.getText(), castModel.getPosition().x, castModel.getPosition().y+(castModel.getSize().y)/2+10);
-		}));
+		});
+		
+		core.DrawManager.getInstance().addToContentLayer(drawable);
 	}
 }

@@ -34,10 +34,12 @@ abstract class TextInput extends SelectableComponent {
 					if(this._textCursorPosition < this._text.length)
 						this._textCursorPosition++;
 				}
+				notify();
 			}
 			if(event.getType() == EventType.KEY_PRESSED) {
 				this._text = this._text.substring(0, this._textCursorPosition)+(new String.fromCharCode(event.getCharCode()))+this._text.substring(this._textCursorPosition);
 				this._textCursorPosition++;
+				notify();
 			}
 		}
 	}
@@ -59,6 +61,7 @@ abstract class TextInput extends SelectableComponent {
 	void _onPush(Event event) {
 		super._onPush(event);
 		this._textCursorPosition = (this._style as TextInputStyle).getCursorPosition(event.getMousePosition());
+		notify();
 	}
 	
 }

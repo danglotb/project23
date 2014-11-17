@@ -24,4 +24,11 @@ abstract class ComponentStyle {
 		return new utils.Vector2D(0, 0);
 	}
 	
+	/*
+	 * Called when notify() is invoked on component model
+	 */
+	void update() {
+		
+	}
+	
 }

@@ -117,5 +117,12 @@ abstract class Component {
 	void pack() {
 		this._size = this.getMinimalSize();
 	}
+	
+	/*
+	 * Call update of the model
+	 */
+	void notify() {
+		this._style.update();
+	}
 								
 }

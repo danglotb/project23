@@ -3,7 +3,7 @@ part of ui;
 class FormatedLabel extends Label {
 	
 	FormatedLabel(String text, FormatedLabelStyle style) : super(style) {
-		parse(text);
+		//parse(text);
 	}
 	
 	List<FormatedUnit> parse(String text) {

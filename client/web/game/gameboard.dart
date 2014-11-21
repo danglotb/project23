@@ -15,7 +15,7 @@ class Gameboard {
 	Player player;
 	
 	Gameboard(utils.Vector2D dimensions , html.CanvasElement canvas, {List<Case> gameCase}) {
-		this._camera = new Camera(new utils.Vector2D(10*SIZE_CASE ,10*SIZE_CASE ), new utils.Coordinates2D(0,0), SIZE_CASE);
+		this._camera = new Camera(new utils.Vector2D(10*SIZE_CASE ,10*SIZE_CASE ), new utils.Coordinates2D(0,0), SIZE_CASE~/2);
 		//TO REMOVE
 		this.canvas = canvas;
 	  this.canvas.width =  html.window.innerWidth;
@@ -53,8 +53,11 @@ class Gameboard {
 	}
 	
 	void setTarget(html.MouseEvent e) {
+	  utils.Vector2D area =  new utils.Vector2D(e.client.x, e.client.y);
+	  if (this._camera.onRange(this.player.getCoordinates2D() + area)){
 		this.player.setTarget(this._camera.getCoordinates().x + e.client.x,
 		    this._camera.getCoordinates().y + e.client.y);
+	  }
 	}
 	
 	void moveCamera(html.KeyboardEvent e) {
@@ -96,6 +99,7 @@ class Gameboard {
 	 
 	  int iX, iY;
 	  
+	  /* draw each case on the gameboard */
 		for(int y = this._camera.getCoordinates().y , iY = 0; y < endY ; y += SIZE_CASE, iY++) {
       			for (int x = this._camera.getCoordinates().x , iX = 0 ; x < endX ; x += SIZE_CASE, iX++) {
       			  int i = (x + (y*SIZE_CASE)) ~/ SIZE_CASE;
@@ -106,12 +110,17 @@ class Gameboard {
       	}
     }
 		
+		
+	 /* moving the player */
+	 if (this.player.onMove)
+         this.player.move();	
+		
+	 /* If the player is in the range of camera, display it */
 	 if (this._camera.onRange(this.player.getCoordinates2D())) {
 		canvas.context2D.drawImageScaled(this.player.getSkin(), this.player.getCoordinates2D().x -  this._camera.getCoordinates().x, 
 		this.player.getCoordinates2D().y  -  this._camera.getCoordinates().y , 50 ,50);
- 			if (this.player.onMove)
- 				this.player.move();
 	 }
+	 
   	html.window.requestAnimationFrame(draw);
 	}
 }

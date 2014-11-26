@@ -12,16 +12,17 @@ class BasicContainerStyle extends ContainerStyle {
 	
 	void buildDraw() {
 		
-		ComponentDrawable drawable = new ComponentDrawable();
-		
-		drawable.setDrawFunction(() {
-			if(this._backgroundColor != null) {
+		if(this._backgroundColor != null) {
+			ComponentDrawable drawable = new ComponentDrawable(this._model);
+			
+			drawable.setDrawFunction(() {
 				core.Window.getInstance().getContext()..fillStyle = this._backgroundColor
 																							..fillRect(this._model.getPosition().x, this._model.getPosition().y, this._model.getSize().x, this._model.getSize().y);
-			}
-		});
+			});
+			
+			this.addToBackgroundLayer(drawable);
+		}
 		
-		core.DrawManager.getInstance().addToBackgroundLayer(drawable);
 	}
 	
 }

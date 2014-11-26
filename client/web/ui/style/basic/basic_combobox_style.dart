@@ -33,7 +33,6 @@ class BasicComboboxStyleInputArea extends ComboboxStyleInputArea {
 	static const int IMG_HEIGHT = 80;
 	static const int ICON_WIDTH = 40;
 	static const int ICON_HEIGHT = 80;
-	ComponentDrawable _drawable;
 	
 	BasicComboboxStyleInputArea() {
 		this._spriteCombobox = new html.ImageElement(src: "image/ui/combobox-sprite.png");
@@ -57,9 +56,9 @@ class BasicComboboxStyleInputArea extends ComboboxStyleInputArea {
 		num iconWidth;
 		
 		
-		this._drawable = new ComponentDrawable();
+		ComponentDrawable drawable = new ComponentDrawable(this._model);
 		
-		this._drawable.setComputeFunction(() {
+		drawable.setComputeFunction(() {
 			backgroundLeftX = castModel.getPosition().x;
 			backgroundMiddleX = castModel.getPosition().x + IMG_BORDER_WIDTH;
 			backgroundMiddleWidth = castModel.getSize().x - 2 * IMG_BORDER_WIDTH;
@@ -77,7 +76,7 @@ class BasicComboboxStyleInputArea extends ComboboxStyleInputArea {
 			iconX = castModel.getPosition().x+castModel.getSize().x-iconWidth-IMG_BORDER_WIDTH;
 		});
 		
-		this._drawable.setDrawFunction(() {
+		drawable.setDrawFunction(() {
 			if(castModel.isSelected()) {
 				if(castModel.isOverflew()) {
 					core.Window.getInstance().getContext()..drawImageScaledFromSource(this._spriteCombobox, 69, 0, IMG_BORDER_WIDTH, IMG_HEIGHT, backgroundLeftX, backgroundY, IMG_BORDER_WIDTH, backgroundHeight)
@@ -114,7 +113,7 @@ class BasicComboboxStyleInputArea extends ComboboxStyleInputArea {
 																						..fillText(text, textX, textY);
 		});
 		
-		core.DrawManager.getInstance().addToContentLayer(this._drawable);
+		this.addToContentLayer(drawable);
 	}
 }
 
@@ -128,7 +127,7 @@ class BasicComboboxStyleDropDown extends ComboboxStyleDropDown {
 class BasicComboboxStyleDropDownUnit extends ComboboxStyleDropDownUnit {
 	
 	void buildDraw() {
-		ComponentDrawable drawable = new ComponentDrawable();
+		ComponentDrawable drawable = new ComponentDrawable(this._model);
 		
 		drawable.setDrawFunction(() {
 			_ComboboxDropDownUnit castModel = this._model as _ComboboxDropDownUnit;
@@ -147,6 +146,6 @@ class BasicComboboxStyleDropDownUnit extends ComboboxStyleDropDownUnit {
 																						..fillText(castModel.getText(), castModel.getPosition().x+BasicComboboxStyleInputArea.IMG_BORDER_WIDTH, castModel.getPosition().y+castModel.getSize().y/2);
 		});
 		
-		core.DrawManager.getInstance().addToContentFrontLayer(drawable);
+		this.addToContentFrontLayer(drawable);
 	}
 }

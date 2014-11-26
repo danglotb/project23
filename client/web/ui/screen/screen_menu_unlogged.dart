@@ -32,13 +32,13 @@ class ScreenMenuUnlogged extends Container {
 		Container upButtonMenu = new Container();
 		upButtonMenu.setLayout(new VerticalLayout());
 		
-		this._homeButton = new Button("Accueil", new MenuButtonStyle(screen == SCREEN_HOME));
+		this._homeButton = new Button.text("Accueil", new MenuButtonStyle(screen == SCREEN_HOME));
 		this._homeButton.addClickListener((source) {
 			if(this._currentScreen != SCREEN_HOME)
 			setScreen(SCREEN_HOME);
 		});
 		upButtonMenu.addChild(this._homeButton);
-		this._signupButton = new Button("Inscription", new MenuButtonStyle(screen == SCREEN_SIGNUP));
+		this._signupButton = new Button.text("Inscription", new MenuButtonStyle(screen == SCREEN_SIGNUP));
 		this._signupButton.addClickListener((source) {
 			if(this._currentScreen != SCREEN_SIGNUP)
 			setScreen(SCREEN_SIGNUP);
@@ -49,8 +49,8 @@ class ScreenMenuUnlogged extends Container {
 		
 		Container downButtonMenu = new Container();
 		downButtonMenu.setLayout(new VerticalLayout());
-		downButtonMenu.addChild(new Button("Aide", new MenuButtonStyle(false)));
-		downButtonMenu.addChild(new Button("A propros", new MenuButtonStyle(false)));
+		downButtonMenu.addChild(new Button.text("Aide", new MenuButtonStyle(false)));
+		downButtonMenu.addChild(new Button.text("A propros", new MenuButtonStyle(false)));
 		mainLeftPart.addChild(downButtonMenu);
 		
 		

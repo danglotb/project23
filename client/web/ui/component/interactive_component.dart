@@ -72,33 +72,34 @@ abstract class InteractiveComponent extends Container {
 	}
 	
 	
-	void _onOverflowIn(Event event) {
+	void _onOverflowIn(core.Event event) {
 		
 	}
 	
-	void _onOverflowOut(Event event) {
+	void _onOverflowOut(core.Event event) {
 		
 	}
 	
-	void _onPush(Event event) {
+	void _onPush(core.Event event) {
 		
 	}
 	
-	void _onRelease(Event event) {
+	void _onRelease(core.Event event) {
 		
 	}
 	
-	void _onClick(Event event) {
+	void _onClick(core.Event event) {
 		
 	}
 	
-	void dispatchEvent(Event event) {
+	void processEvent(core.Event event, utils.Rect viewport) {
 		
 		InteractiveComponentStyle castStyle = this._style as InteractiveComponentStyle;
 
-		if(event.getType() == EventType.MOUSE_MOVE) {
-			if(castStyle.isInteractiveArea(event.getMousePosition()) && !event.isComsumed()) {
-				
+		if(event.getType() == core.EventType.MOUSE_MOVE) {
+			if(castStyle.isInteractiveArea(event.getMousePosition()) && 
+					(viewport != null ? event.getMousePosition().x >= viewport.left && event.getMousePosition().y >= viewport.top && event.getMousePosition().x < viewport.left+viewport.right && event.getMousePosition().y < viewport.top+viewport.bottom: true) && 
+					!event.isComsumed()) {
 				//overflew in event
 				if(!this._overflew) {
 					this._onOverflowIn(event);
@@ -120,8 +121,10 @@ abstract class InteractiveComponent extends Container {
 				
 			}
 		}
-		else if(event.getType() == EventType.MOUSE_PUSH) {
-			if(castStyle.isInteractiveArea(event.getMousePosition()) && !event.isComsumed()) {
+		else if(event.getType() == core.EventType.MOUSE_PUSH) {
+			if(castStyle.isInteractiveArea(event.getMousePosition()) && 
+					(viewport != null ? event.getMousePosition().x >= viewport.left && event.getMousePosition().y >= viewport.top && event.getMousePosition().x < viewport.left+viewport.right && event.getMousePosition().y < viewport.top+viewport.bottom: true) &&
+					!event.isComsumed()) {
 				
 				if(!this._pushed) {
 					this._onPush(event);
@@ -132,7 +135,7 @@ abstract class InteractiveComponent extends Container {
 				event.setComsumed();
 			}
 		}
-		else if(event.getType() == EventType.MOUSE_RELEASE) {
+		else if(event.getType() == core.EventType.MOUSE_RELEASE) {
 			if(this._pushed) {
 				this._onRelease(event);
 				this._releasedListeners.forEach((el) => el(this));
@@ -144,7 +147,7 @@ abstract class InteractiveComponent extends Container {
 				}
 			}
 		}
-		else if(event.getType() == EventType.MOUSE_OUT) {
+		else if(event.getType() == core.EventType.MOUSE_OUT) {
 			if(this._pushed) {
 				this._onRelease(event);
 				this._releasedListeners.forEach((el) => el(this));

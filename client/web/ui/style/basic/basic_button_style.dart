@@ -6,10 +6,17 @@ class BasicButtonStyle extends ButtonStyle {
 	static const int IMG_BORDER_WIDTH = 11;
 	
 	html.ImageElement _spriteButton;
-	ComponentDrawable _drawable;
-	
+
 	BasicButtonStyle() {
 		this._spriteButton = new html.ImageElement(src: "image/ui/button-sprite.png");
+	}
+	
+	TextLabelStyle getTextLabelStyle() {
+		return new BasicTextLabelStyle();
+	}
+	
+	utils.Rect getBorderSize() {
+		return new utils.Rect(left: IMG_BORDER_WIDTH, right: IMG_BORDER_WIDTH, top: IMG_BORDER_WIDTH, bottom: IMG_BORDER_WIDTH);
 	}
 	
 	void buildDraw() {
@@ -23,27 +30,18 @@ class BasicButtonStyle extends ButtonStyle {
 		num backgroundY;
 		num backgroundHeight;
 		
-		num textX;
-		num textY;
+		ComponentDrawable drawable = new ComponentDrawable(this._model);
 		
-		
-		this._drawable = new ComponentDrawable();
-		
-		
-		this._drawable.setComputeFunction(() {
+		drawable.setComputeFunction(() {
 			backgroundLeftX = castModel.getPosition().x;
 			backgroundMiddleX = castModel.getPosition().x + IMG_BORDER_WIDTH;
 			backgroundMiddleWidth = castModel.getSize().x - 2 * IMG_BORDER_WIDTH;
 			backgroundRightX = castModel.getPosition().x + castModel.getSize().x - IMG_BORDER_WIDTH;
 			backgroundY = castModel.getPosition().y;
 			backgroundHeight = castModel.getSize().y;
-	
-			core.Window.getInstance().getContext().font = BasicStyleManager.getInstance().getFontSizeH3().toString()+'px '+BasicStyleManager.getInstance().getFontName();
-			textX = castModel.getPosition().x+(castModel.getSize().x-core.Window.getInstance().getContext().measureText(castModel.getText()).width)~/2;
-			textY = castModel.getPosition().y+(castModel.getSize().y)~/2;
 		});
 		
-		this._drawable.setDrawFunction(() {
+		drawable.setDrawFunction(() {
 			
 			
 			if(castModel.isSelected()) {
@@ -98,24 +96,13 @@ class BasicButtonStyle extends ButtonStyle {
 					}
 				}
 			}
-			
-			core.Window.getInstance().getContext()..font = BasicStyleManager.getInstance().getFontSizeH3().toString()+'px '+BasicStyleManager.getInstance().getFontName()
-																						..textAlign = "left"
-																						..fillStyle = "#fff"
-																					 	..textBaseline = 'middle';
-			
-			core.Window.getInstance().getContext()..shadowColor = "#000"
-																						..shadowBlur = 5
-																						..fillText(castModel.getText(), textX, textY);
-			core.Window.getInstance().getContext().shadowBlur = 0;
 		});
 		
-		core.DrawManager.getInstance().addToContentLayer(this._drawable);
+		this.addToContentLayer(drawable);
 	}
 	
 	utils.Vector2D getMinimalSize() {
 		return new utils.Vector2D(1, 74);
 	}
-	
-	
+
 }

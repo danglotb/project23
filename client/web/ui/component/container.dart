@@ -28,6 +28,14 @@ class Container extends Component {
 		}
 	}
 	
+	void clearDraw() {
+		_style.clearDraw();
+		
+		for(Component component in this._children) {
+			component.clearDraw();
+		}
+	}
+	
 	/* Validate the component */
 	void validate() {
 		if(this._layout != null)
@@ -35,13 +43,8 @@ class Container extends Component {
 		for(Component component in this._children) {
 			component.validate();
 		}
-	}
-	
-	/* Spread the event to the component */
-	void dispatchEvent(Event event) {
-		for(Component component in this._children) {
-			component.dispatchEvent(event);
-		}
+		
+		this.notify();
 	}
 	
 	/* Add a component in this container */

@@ -9,29 +9,22 @@ class DrawManager {
 	
 	static DrawManager _instance;
 	
-	static const int MAX_LAYER = 8;
+	int _currentFrameLevel;
+	int _currentPaneLevel;
+	utils.Rect _currentViewport;
 	
-	static const int NB_LAYER_PER_WINDOW = 4;
-	
-	static const int BACKGROUND_LAYER = 0;
-	static const int CONTENT_LAYER = 1;
-	static const int CONTENT_FRONT_LAYER = 2;
-	static const int TOOLTIP_LAYER = 3;
-	
-	int _currentWindow;
-	List<DrawLayer> _layers;
+	DrawPane _tooltipLayer;
+	List<DrawFrame> _frames;
 	
 	_DrawManager() {
 
 	}
 	
 	void initialize() {
-		this._currentWindow = 0;
-		this._layers = new List<DrawLayer>(MAX_LAYER);
-		
-		for(int i=0; i<this._layers.length; i++) {
-			this._layers[i] = new DrawLayer();
-		}	
+		this._tooltipLayer = new DrawPane();
+		this._frames = new List<DrawFrame>();
+		this._frames.add(new DrawFrame());
+
 	}
 	
 	static DrawManager getInstance() {
@@ -42,36 +35,82 @@ class DrawManager {
 		return _instance;
 	}
 	
-	void setCurrentWindow(int i) {
-		_currentWindow = i;
+	void newBuild() {
+		this._currentFrameLevel = 0;
+		this._currentPaneLevel = 0;
+		this._currentViewport = null;
 	}
 	
-	void addToBackgroundLayer(DrawableItem item) {
-		this._layers[_currentWindow* NB_LAYER_PER_WINDOW+BACKGROUND_LAYER].add(item);
+	void setCurrentFrameLevel(int level) {
+		assert(level >= 0);
+		this._currentFrameLevel = level;
+		this._currentPaneLevel = 0;
+		
+		while(this._currentFrameLevel >= this._frames.length) {
+			this._frames.add(new DrawFrame());
+		}
 	}
 	
-	void addToContentLayer(DrawableItem item) {
-		this._layers[_currentWindow* NB_LAYER_PER_WINDOW+CONTENT_LAYER].add(item);
+	int getCurrentFrameLevel() {
+		return this._currentFrameLevel;
 	}
 	
-	void addToContentFrontLayer(DrawableItem item) {
-		this._layers[_currentWindow* NB_LAYER_PER_WINDOW+CONTENT_FRONT_LAYER].add(item);
+	void setCurrentPaneLevel(int level) {
+		assert(level >= 0);
+		this._currentPaneLevel = level;
+	}	
+	
+	
+	int getCurrentPaneLevel() {
+		return this._currentPaneLevel;
 	}
 	
-	void addToTooltipLayer(DrawableItem item) {
-		this._layers[_currentWindow* NB_LAYER_PER_WINDOW+TOOLTIP_LAYER].add(item);
+	void setCurrentViewport(utils.Rect rect) {
+		this._currentViewport = rect;
+	}
+	
+	utils.Rect getCurrentViewport() {
+		return this._currentViewport;
+	}
+	
+	void addToBackgroundLayer(DrawableItem item, bool enableEvent) {
+		item.setViewport(this._currentViewport);
+		this._frames[this._currentFrameLevel].addToBackgroundLayer(item, enableEvent);
+	}
+	
+	void addToContentLayer(DrawableItem item, bool enableEvent) {
+		item.setViewport(this._currentViewport);
+		this._frames[this._currentFrameLevel].addToContentLayer(item, enableEvent, this._currentPaneLevel);
+	}
+	
+	void addToContentFrontLayer(DrawableItem item, bool enableEvent) {
+		this._frames[this._currentFrameLevel].addToFrontLayer(item, enableEvent);
+	}
+	
+	void addToTooltipLayer(DrawableItem item, bool enableEvent) {
+		this._tooltipLayer.add(item, enableEvent);
 	}
 	
 	void clear() {
-		for(int i=0; i<this._layers.length; i++) {
-			this._layers[i].clear();
-		}
+		this._tooltipLayer.clear();
+		
+  	this._frames.forEach((DrawFrame e) => e.clear());
 	}
 	
 	void draw() {
-		for(int i=0; i<this._layers.length; i++) {
-			this._layers[i].draw();
+		for(int i=0; i<this._frames.length; i++) {
+			this._frames[i].draw();
 		}
+		
+		this._tooltipLayer.draw();
 	}
 	
+	void dispatchEvent(Event event) {
+		
+		this._tooltipLayer.dispatchEvent(event);
+		
+		for(int i=this._frames.length-1; i>=0; i--) {
+			this._frames[i].dispatchEvent(event);
+		}
+	}
 }

@@ -24,6 +24,8 @@ abstract class Component {
 	/* is added to window */
 	bool _addedToWindow;
 	
+	bool _enableEvent;
+	
 	/* Constructors */
 	
 	Component(ComponentStyle style) {
@@ -38,6 +40,7 @@ abstract class Component {
 		this._visible = true;
 		this._addedToWindow = false;
 		this._minimalSize = new utils.Vector2D(0, 0);
+		this._enableEvent = true;
 		// To do : Init class variables
 	}
 	
@@ -60,13 +63,17 @@ abstract class Component {
 			_style.buildDraw();
 	}
 	
+	void clearDraw() {
+		_style.clearDraw();
+	}
+	
 	/* Validate the component */
 	void validate() {
-
+		
 	}
 	
 	/* Spread the event to the component */
-	void dispatchEvent(Event event) {
+	void processEvent(core.Event event, utils.Rect viewport) {
 
 	}
 	
@@ -99,8 +106,8 @@ abstract class Component {
 		this._size = size;
 	}
 	
-	void setMinimalSize(utils.Vector2D size) {
-		this._minimalSize = size;
+	void setMinimalSize([utils.Vector2D size]) {
+		this._minimalSize = size == null ? this.getMinimalSize() : size;
 	}
 	
 	utils.Vector2D getMinimalSize() {
@@ -124,5 +131,14 @@ abstract class Component {
 	void notify() {
 		this._style.update();
 	}
+	
+	void setEnableEvent(bool state) {
+		this._enableEvent = state;
+	}
+	
+	bool isEnableEvent() {
+		return this._enableEvent;
+	}
+	
 								
 }

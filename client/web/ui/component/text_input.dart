@@ -10,11 +10,12 @@ abstract class TextInput extends SelectableComponent {
 		this._textCursorPosition = 0;
 	}
 	
-	void dispatchEvent(Event event) {
+	void processEvent(core.Event event, utils.Rect viewport) {
 		
-		super.dispatchEvent(event);
+		super.processEvent(event, viewport);
+		
 		if(this._selected) {
-			if(event.getType() == EventType.KEY_PUSHED) {
+			if(event.getType() == core.EventType.KEY_PUSHED) {
 				if(event.getKeyCode() == 8) { // backspace
 					if(this._textCursorPosition > 0) {
 						this._text = this._text.substring(0, this._textCursorPosition-1)+this._text.substring(this._textCursorPosition);
@@ -36,7 +37,7 @@ abstract class TextInput extends SelectableComponent {
 				}
 				notify();
 			}
-			if(event.getType() == EventType.KEY_PRESSED) {
+			if(event.getType() == core.EventType.KEY_PRESSED) {
 				this._text = this._text.substring(0, this._textCursorPosition)+(new String.fromCharCode(event.getCharCode()))+this._text.substring(this._textCursorPosition);
 				this._textCursorPosition++;
 				notify();
@@ -58,7 +59,7 @@ abstract class TextInput extends SelectableComponent {
 		this._textCursorPosition = index;
 	}
 	
-	void _onPush(Event event) {
+	void _onPush(core.Event event) {
 		super._onPush(event);
 		this._textCursorPosition = (this._style as TextInputStyle).getCursorPosition(event.getMousePosition());
 		notify();

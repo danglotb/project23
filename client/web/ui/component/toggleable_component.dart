@@ -21,14 +21,4 @@ abstract class ToggleableComponent extends SelectableComponent{
 	addToggledListener(ListenerToggleableFunc func) {
 		this._toggledListener.add(func);
 	}
-	
-	void dispatchEvent(Event event) {
-		bool wasPushed = this._pushed;
-		
-		super.dispatchEvent(event);
-		
-		if(wasPushed && !this._pushed && this._overflew) {
-			this._toggledListener.forEach((el) => el(this));
-		}
-	}
 }

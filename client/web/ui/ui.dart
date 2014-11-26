@@ -6,7 +6,6 @@ import 'dart:html' as html;
 import 'dart:async' as async;
 import "dart:math" as math;
 
-part 'event.dart';
 part 'selectable_manager.dart';
 part 'component_drawable.dart';
 
@@ -28,6 +27,10 @@ part 'component/label.dart';
 part 'component/text_label.dart';
 part 'component/formated_label.dart';
 part 'component/combobox.dart';
+part 'component/inner_window.dart';
+part 'component/scroll_bar.dart';
+part 'component/scroll_pane.dart';
+
 /*
  * Style
  */
@@ -46,6 +49,9 @@ part 'style/label_style.dart';
 part 'style/text_label_style.dart';
 part 'style/formated_label_style.dart';
 part 'style/combobox_style.dart';
+part 'style/inner_window_style.dart';
+part 'style/scroll_pane_style.dart';
+part 'style/scroll_bar_style.dart';
 
 //Basic style
 part 'style/basic/basic_style_manager.dart';
@@ -55,6 +61,9 @@ part 'style/basic/basic_text_field_style.dart';
 part 'style/basic/basic_text_label_style.dart';
 part 'style/basic/basic_formated_label_style.dart';
 part 'style/basic/basic_combobox_style.dart';
+part 'style/basic/basic_inner_window_style.dart';
+part 'style/basic/basic_scroll_bar_style.dart';
+part 'style/basic/basic_scroll_pane_style.dart';
 
 //Menu style
 part 'style/menu/menu_button_style.dart';

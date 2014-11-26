@@ -44,6 +44,19 @@ class BasicStyleManager {
 		return this._fontSizeH3;
 	}
 	
+	int getFontSize(int num) {
+		switch(num) {
+			case 1:
+				return this._fontSizeH1;
+			case 2:
+				return this._fontSizeH2;
+			case 3:
+				return this._fontSizeH3;
+			default:
+				return 0;
+		}
+	}
+	
 	String getFontName() {
 		return this._fontName;
 	}

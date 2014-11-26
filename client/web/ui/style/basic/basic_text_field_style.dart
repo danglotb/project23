@@ -17,15 +17,16 @@ class BasicTextFieldStyle extends TextFieldStyle {
 	bool _blinkOn;
 	bool _wasSelected;
 	String _oldText;
+	int _oldCursorPosition;
 
 	async.Timer _currentTimer;
 	html.ImageElement _spriteTextField;
-	ComponentDrawable _drawable;
 
 	BasicTextFieldStyle() {
 		this._blinkOn = false;
 		this._wasSelected = false;
 		this._oldText = "";
+		this._oldCursorPosition = 0;
 		this._spriteTextField = new html.ImageElement(src: "image/ui/textfield-sprite.png");
 	}
 
@@ -37,12 +38,13 @@ class BasicTextFieldStyle extends TextFieldStyle {
 	void _checkBlink() {
 		TextField castModel = this._model as TextField;
 
-		if (castModel.isSelected() && !this._wasSelected || this._oldText != castModel.getText()) {
+		if (castModel.isSelected() && !this._wasSelected || this._oldText != castModel.getText() || this._oldCursorPosition != castModel.getTextCursorPosition()) {
 			if (this._currentTimer != null) this._currentTimer.cancel();
 			this._blinkOn = true;
 			this._wasSelected = true;
 			this._currentTimer = new async.Timer(new Duration(milliseconds: BLINK_TIMER), _blink);
 			this._oldText = castModel.getText();
+			this._oldCursorPosition = castModel.getTextCursorPosition();
 		}
 
 		if (!castModel.isSelected() && this._wasSelected) {
@@ -77,9 +79,9 @@ class BasicTextFieldStyle extends TextFieldStyle {
 		num cursorBottomY;
 
 
-		this._drawable = new ComponentDrawable();
+		ComponentDrawable drawable = new ComponentDrawable(this._model);
 
-		this._drawable.setComputeFunction(() {
+		drawable.setComputeFunction(() {
 			backgroundLeftX = castModel.getPosition().x;
 			backgroundMiddleX = castModel.getPosition().x + IMG_BORDER_WIDTH;
 			backgroundMiddleWidth = castModel.getSize().x - 2 * IMG_BORDER_WIDTH;
@@ -133,7 +135,7 @@ class BasicTextFieldStyle extends TextFieldStyle {
 			}
 		});
 		
-		this._drawable.setDrawFunction(() {
+		drawable.setDrawFunction(() {
 			_checkBlink();
 
 			if (castModel.isSelected()) {
@@ -184,7 +186,7 @@ class BasicTextFieldStyle extends TextFieldStyle {
 			}
 		});
 
-		core.DrawManager.getInstance().addToContentLayer(this._drawable);
+		this.addToContentLayer(drawable);
 	}
 
 	int getCursorPosition(utils.Coordinates2D coordinates) {
@@ -224,11 +226,5 @@ class BasicTextFieldStyle extends TextFieldStyle {
 
 		}
 		return 0;
-	}
-
-	void update() {
-		if (this._drawable != null) {
-			this._drawable.compute();
-		}
 	}
 }

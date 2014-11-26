@@ -23,8 +23,9 @@ class VerticalLayout extends Layout {
 	}
 	
 	utils.Vector2D getMinimalSize() {
-		int minX = 0;
-		int minY = 0;
+		num minX = 0;
+		num minY = 0;
+		
 		
 		for(int i = 0; i<this._model.getChildNumber(); i++) {
 			utils.Vector2D currentMin = this._model.getChild(i).getMinimalSize();

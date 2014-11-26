@@ -34,7 +34,7 @@ abstract class SelectableComponent extends InteractiveComponent {
 		SelectableManager.getInstance().remove(this);
 	}
 	
-	void _onPush(Event event) {
+	void _onPush(core.Event event) {
 		if(!this._selected) {
 			SelectableManager.getInstance().select(this);
 			this._selectedListeners.forEach((el) => el(this));

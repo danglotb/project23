@@ -14,11 +14,33 @@ class ScreenMenuUnloggedHome extends Container {
 		
 		logginPartInner.setLayout(new VerticalPassifLayout());
 		
-		
+		/*
 		Combobox cb = new Combobox(new BasicComboboxStyle());
 		cb.setListChoice(['c1', 'c2', 'c3']);
 		cb.setSize(new utils.Vector2D(250, 50));
 		logginPartInner.addChild(cb);
+		*/
+		/*
+		ScrollBar sb1 = new HorizontalScrollBar(new BasicHorizontalScrollBarStyle());
+		sb1.setSize(new utils.Vector2D(250, 20));
+		logginPartInner.addChild(sb1);
+		
+		ScrollBar sb2 = new VerticalScrollBar(new BasicVerticalScrollBarStyle());
+		sb2.setSize(new utils.Vector2D(20, 100));
+		logginPartInner.addChild(sb2);*/
+		
+		Container sub1 = new Container();
+		sub1.setLayout(new VerticalLayout());
+		sub1.setSize(new utils.Vector2D(300, 300));
+		TextField tf1 = new TextField(new BasicTextFieldStyle());
+		sub1.addChild(tf1);
+		
+		ScrollPane sp = new ScrollPane(new BasicScrollPaneStyle());
+		sp.setContent(sub1);
+		sp.setSize(new utils.Vector2D(200, 200));
+		logginPartInner.addChild(sp);
+		
+		
 		
 		Container logginField = new Container();
 		logginField.setLayout(new VerticalPassifLayout());
@@ -59,7 +81,7 @@ class ScreenMenuUnloggedHome extends Container {
 		
 		passwordField.pack();
 		
-		Button connectionB = new Button("Connexion", new BasicButtonStyle());
+		Button connectionB = new Button.text("Connexion", new BasicButtonStyle());
 		connectionB.setSize(new utils.Vector2D(250, 50));
 		logginPartInner.addChild(connectionB);
 		

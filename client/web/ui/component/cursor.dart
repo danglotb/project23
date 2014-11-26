@@ -42,7 +42,7 @@ class Cursor extends SelectableComponent {
 	void addListenerSelected(Function fun) {
 		this._valueChangedListener.add(fun);
 	}
-	
+	/*
 	void dispatchEvent(Event event) {
 		
 		super.dispatchEvent(event);
@@ -59,7 +59,7 @@ class Cursor extends SelectableComponent {
 		
 		}
   		
-  }
+  }*/
 	
 	/* Getters & Setters */
 	

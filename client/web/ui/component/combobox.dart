@@ -70,7 +70,7 @@ class _ComboboxInputArea extends SelectableComponent {
 		this._combobox = combobox;
 	}
 	
-	void _onClick(Event event) {
+	void _onClick(core.Event event) {
 		super._onPush(event);
 		this._combobox.setDropDownstate(!this._combobox.isDropDownUnroll());
 	}
@@ -102,7 +102,7 @@ class _ComboboxDropDownUnit extends InteractiveComponent {
 		 return this._text;
 	 }
 	 
-		void _onClick(Event event) {
+		void _onClick(core.Event event) {
  		super._onPush(event);
  		this._combobox.setCurrentChoice(this._text);
  	}

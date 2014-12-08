@@ -15,7 +15,7 @@ class Gameboard {
 	Player player;
 	
 	Gameboard(utils.Vector2D dimensions , html.CanvasElement canvas, {List<Case> gameCase}) {
-		this._camera = new Camera(new utils.Vector2D(10*SIZE_CASE ,10*SIZE_CASE ), new utils.Coordinates2D(0,0), SIZE_CASE~/2);
+		this._camera = new Camera(new utils.Vector2D(10*SIZE_CASE ,10*SIZE_CASE ), new utils.Coordinates2D(0,0), 10);
 		//TO REMOVE
 		this.canvas = canvas;
 	  this.canvas.width =  html.window.innerWidth;
@@ -83,7 +83,8 @@ class Gameboard {
 	
 	void draw(num timer) {
 	  
-	  int endX, endY, i;
+	  int endX, endY, i, startX, startY;
+	  int resteX, resteY;
 	  
 	  /* cleaning the canvas */
 	  canvas.context2D..fillStyle = "#eee"
@@ -96,22 +97,60 @@ class Gameboard {
 	  
 	  endY = this._camera.getCoordinates().y + this._camera._dimensions.y > this._dimensions.y?
             this._dimensions.y:this._camera.getCoordinates().y + this._camera._dimensions.y;
-	 
-	  int iX, iY;
 	  
-	  /* draw each case on the gameboard */
-		for(int y = this._camera.getCoordinates().y , iY = 0; y < endY ; y += SIZE_CASE, iY++) {
-      			for (int x = this._camera.getCoordinates().x , iX = 0 ; x < endX ; x += SIZE_CASE, iX++) {
-      			  int i = (x + (y*SIZE_CASE)) ~/ SIZE_CASE;
-      			  if (this._gameboardTab[i].getSpriteValue() == 1)
-      					canvas.context2D.drawImage(this.grass, iX*SIZE_CASE, iY*SIZE_CASE);
-      			  else
-      			    canvas.context2D.drawImage(this.sand, iX*SIZE_CASE, iY*SIZE_CASE);
-      	}
+	  endX ~/= SIZE_CASE;
+	  endY ~/= SIZE_CASE;
+	  
+	  resteX = SIZE_CASE - (this._camera.getCoordinates().x % SIZE_CASE);
+	  resteY = SIZE_CASE - (this._camera.getCoordinates().y % SIZE_CASE);
+	  
+	  /* for the case 0;0 */
+	  html.Rectangle sourceRect = new html.Rectangle(this._camera.getCoordinates().x % SIZE_CASE, 
+	      this._camera.getCoordinates().y % SIZE_CASE, resteX, resteY);
+	  canvas.context2D.drawImageToRect(this.grass, 
+	      new html.Rectangle(0,0,resteX,resteY), sourceRect:sourceRect);
+	  
+	  /* for the line 0 */
+	  sourceRect = new html.Rectangle(0, this._camera.getCoordinates().y % SIZE_CASE,
+	      SIZE_CASE, resteY);
+	  i = (this._camera.getCoordinates().x ~/ SIZE_CASE) + ( (this._camera.getCoordinates().y ~/ SIZE_CASE) * (this._dimensions.x ~/ SIZE_CASE));
+	  for (int x = 0 ; x < this._camera.getDimensions().x ~/ SIZE_CASE - 1; x ++) {
+	    if (this._gameboardTab[i+x].getSpriteValue() == 1)
+	    canvas.context2D.drawImageToRect(this.grass,
+	        new html.Rectangle( (x * SIZE_CASE) + resteX
+	            , 0, SIZE_CASE, resteY), sourceRect:sourceRect);
+	    else
+	      canvas.context2D.drawImageToRect(this.sand,
+                 new html.Rectangle( (x * SIZE_CASE) + resteX
+                     , 0, SIZE_CASE, resteY), sourceRect:sourceRect);
+	  }
+	  
+	  /* for the column 0 */
+	  sourceRect = new html.Rectangle(this._camera.getCoordinates().x % SIZE_CASE, 0, resteX, SIZE_CASE);
+	  i = (this._camera.getCoordinates().x ~/ SIZE_CASE) + ( (this._camera.getCoordinates().y ~/ SIZE_CASE) * (this._dimensions.x ~/ SIZE_CASE));
+	  for (int y = 0 ; y < this._camera.getDimensions().y ~/ SIZE_CASE - 1; y ++) {
+          if (this._gameboardTab[(y*(this._dimensions.x  ~/ SIZE_CASE) )+i].getSpriteValue() == 1)
+          canvas.context2D.drawImageToRect(this.grass,
+              new html.Rectangle( 0, (y * SIZE_CASE) + resteY
+                  , resteX, SIZE_CASE), sourceRect:sourceRect);
+          else
+            canvas.context2D.drawImageToRect(this.sand,
+                new html.Rectangle( 0, (y * SIZE_CASE) + resteY
+                  , resteX, SIZE_CASE), sourceRect:sourceRect);
     }
-		
-		
-	 /* moving the player */
+	  
+	/* draw each case on the gameboard */
+  for(int iY = 0 , y = this._camera.getCoordinates().y ~/SIZE_CASE + 1 ; y < endY - 1; y++, iY++) {
+        for (int iX = 0 , x = this._camera.getCoordinates().x ~/SIZE_CASE +1 ; x < endX - 1; x++, iX++) {
+                  i = (x + (y*SIZE_CASE));
+                  if (this._gameboardTab[i].getSpriteValue() == 1)
+                    canvas.context2D.drawImage(this.grass,iX*SIZE_CASE+resteX,iY*SIZE_CASE+resteY);
+                  else
+                    canvas.context2D.drawImage(this.sand,iX*SIZE_CASE+resteX,iY*SIZE_CASE+resteY);
+         }
+  }
+  
+  /* moving the player */
 	 if (this.player.onMove)
          this.player.move();	
 		

@@ -6,7 +6,7 @@ part of ui;
  * if width or height is not given, component size is set to it minimal size
  */
 
-class CenterLayout extends Layout {
+class CenterLayout extends RelativeLayout {
 	
 	num _width;
 	num _height;
@@ -16,11 +16,11 @@ class CenterLayout extends Layout {
 		this._height = height;
 	}
 	
-	void validate() {
+	void update() {
 		assert(this._model.getChildNumber() == 1);
 		
 		this._model.getChild(0).setSize(this.getMinimalSize());
-		this._model.getChild(0).setPosition(new utils.Coordinates2D(this._model.getPosition().x+(this._model.getSize().x-this._model.getChild(0).getSize().x)~/2, this._model.getPosition().y+(this._model.getSize().y-this._model.getChild(0).getSize().y)~/2));
+		this._model.getChild(0).setRelativePosition(new utils.Coordinates2D((this._model.getSize().x-this._model.getChild(0).getSize().x)~/2, (this._model.getSize().y-this._model.getChild(0).getSize().y)~/2));
 		
 	}
 	

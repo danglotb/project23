@@ -82,23 +82,23 @@ class BasicTextFieldStyle extends TextFieldStyle {
 		ComponentDrawable drawable = new ComponentDrawable(this._model);
 
 		drawable.setComputeFunction(() {
-			backgroundLeftX = castModel.getPosition().x;
-			backgroundMiddleX = castModel.getPosition().x + IMG_BORDER_WIDTH;
+			backgroundLeftX = castModel.getAbsolutePosition().x;
+			backgroundMiddleX = castModel.getAbsolutePosition().x + IMG_BORDER_WIDTH;
 			backgroundMiddleWidth = castModel.getSize().x - 2 * IMG_BORDER_WIDTH;
-			backgroundRightX = castModel.getPosition().x + castModel.getSize().x - IMG_BORDER_WIDTH;
-			backgroundY = castModel.getPosition().y;
+			backgroundRightX = castModel.getAbsolutePosition().x + castModel.getSize().x - IMG_BORDER_WIDTH;
+			backgroundY = castModel.getAbsolutePosition().y;
 			backgroundHeight = castModel.getSize().y;
 
-			clipX = castModel.getPosition().x + IMG_TEXT_BORDER_WIDTH;
-			clipY = castModel.getPosition().y;
+			clipX = castModel.getAbsolutePosition().x + IMG_TEXT_BORDER_WIDTH;
+			clipY = castModel.getAbsolutePosition().y;
 			clipWidth = castModel.getSize().x - IMG_TEXT_BORDER_WIDTH * 2;
 			clipHeight = castModel.getSize().y;
 
 
 			//compute text
 			text = castModel.getText();
-			cursorTopY = castModel.getPosition().y + IMG_TEXT_BORDER_HEIGHT;
-			cursorBottomY = castModel.getPosition().y + castModel.getSize().y - IMG_TEXT_BORDER_HEIGHT;
+			cursorTopY = castModel.getAbsolutePosition().y + IMG_TEXT_BORDER_HEIGHT;
+			cursorBottomY = castModel.getAbsolutePosition().y + castModel.getSize().y - IMG_TEXT_BORDER_HEIGHT;
 
 			core.Window.getInstance().getContext()
 					..fillStyle = "#444"
@@ -114,23 +114,23 @@ class BasicTextFieldStyle extends TextFieldStyle {
 				if (textMetric2.width > castModel.getSize().x - 2 * IMG_BORDER_WIDTH) {
 
 					text = castModel.getText();
-					textX = castModel.getPosition().x + IMG_BORDER_WIDTH - core.Window.getInstance().getContext().measureText(castModel.getText().substring(0, castModel.getTextCursorPosition())).width;
-					textY = castModel.getPosition().y + castModel.getSize().y ~/ 2;
+					textX = castModel.getAbsolutePosition().x + IMG_BORDER_WIDTH - core.Window.getInstance().getContext().measureText(castModel.getText().substring(0, castModel.getTextCursorPosition())).width;
+					textY = castModel.getAbsolutePosition().y + castModel.getSize().y ~/ 2;
 
-					cursorX = castModel.getPosition().x + IMG_BORDER_WIDTH;
+					cursorX = castModel.getAbsolutePosition().x + IMG_BORDER_WIDTH;
 				} else {
 
-					textX = castModel.getPosition().x + castModel.getSize().x - IMG_BORDER_WIDTH - textMetric.width.toInt();
-					textY = castModel.getPosition().y + castModel.getSize().y ~/ 2;
+					textX = castModel.getAbsolutePosition().x + castModel.getSize().x - IMG_BORDER_WIDTH - textMetric.width.toInt();
+					textY = castModel.getAbsolutePosition().y + castModel.getSize().y ~/ 2;
 
 
-					cursorX = castModel.getPosition().x + castModel.getSize().x - IMG_BORDER_WIDTH - core.Window.getInstance().getContext().measureText(castModel.getText().substring(castModel.getTextCursorPosition())).width.toInt();
+					cursorX = castModel.getAbsolutePosition().x + castModel.getSize().x - IMG_BORDER_WIDTH - core.Window.getInstance().getContext().measureText(castModel.getText().substring(castModel.getTextCursorPosition())).width.toInt();
 
 				}
 			} else {
-				textX = castModel.getPosition().x + IMG_BORDER_WIDTH;
-				textY = castModel.getPosition().y + castModel.getSize().y ~/ 2;
-				cursorX = castModel.getPosition().x + IMG_BORDER_WIDTH + core.Window.getInstance().getContext().measureText(castModel.getText().substring(0, castModel.getTextCursorPosition())).width.toInt();
+				textX = castModel.getAbsolutePosition().x + IMG_BORDER_WIDTH;
+				textY = castModel.getAbsolutePosition().y + castModel.getSize().y ~/ 2;
+				cursorX = castModel.getAbsolutePosition().x + IMG_BORDER_WIDTH + core.Window.getInstance().getContext().measureText(castModel.getText().substring(0, castModel.getTextCursorPosition())).width.toInt();
 
 			}
 		});
@@ -199,12 +199,12 @@ class BasicTextFieldStyle extends TextFieldStyle {
 		if (textMetric.width > this._model.getSize().x - 2 * IMG_BORDER_WIDTH) {
 			int i = castModel.getText().length - 1;
 
-			while (i >= 0 && castModel.getPosition().x + castModel.getSize().x - IMG_BORDER_WIDTH - core.Window.getInstance().getContext().measureText(castModel.getText().substring(i)).width >= coordinates.x) {
+			while (i >= 0 && castModel.getAbsolutePosition().x + castModel.getSize().x - IMG_BORDER_WIDTH - core.Window.getInstance().getContext().measureText(castModel.getText().substring(i)).width >= coordinates.x) {
 				i--;
 			}
 
-			num i1 = castModel.getPosition().x + castModel.getSize().x - IMG_BORDER_WIDTH - core.Window.getInstance().getContext().measureText(castModel.getText().substring(i)).width;
-			num i2 = castModel.getPosition().x + castModel.getSize().x - IMG_BORDER_WIDTH - core.Window.getInstance().getContext().measureText(i < castModel.getText().length ? castModel.getText().substring(i + 1) : castModel.getText()).width;
+			num i1 = castModel.getAbsolutePosition().x + castModel.getSize().x - IMG_BORDER_WIDTH - core.Window.getInstance().getContext().measureText(castModel.getText().substring(i)).width;
+			num i2 = castModel.getAbsolutePosition().x + castModel.getSize().x - IMG_BORDER_WIDTH - core.Window.getInstance().getContext().measureText(i < castModel.getText().length ? castModel.getText().substring(i + 1) : castModel.getText()).width;
 
 			num ri = coordinates.x - i1 < i2 - coordinates.x ? i : i + 1;
 
@@ -212,12 +212,12 @@ class BasicTextFieldStyle extends TextFieldStyle {
 
 		} else {
 			int i = 0;
-			while (i < castModel.getText().length && this._model.getPosition().x + IMG_BORDER_WIDTH + core.Window.getInstance().getContext().measureText(castModel.getText().substring(0, i)).width <= coordinates.x) {
+			while (i < castModel.getText().length && this._model.getAbsolutePosition().x + IMG_BORDER_WIDTH + core.Window.getInstance().getContext().measureText(castModel.getText().substring(0, i)).width <= coordinates.x) {
 				i++;
 			}
 
-			num i1 = this._model.getPosition().x + IMG_BORDER_WIDTH + (i > 0 ? core.Window.getInstance().getContext().measureText(castModel.getText().substring(0, i - 1)).width : 0);
-			num i2 = this._model.getPosition().x + IMG_BORDER_WIDTH + core.Window.getInstance().getContext().measureText(castModel.getText().substring(0, i)).width;
+			num i1 = this._model.getAbsolutePosition().x + IMG_BORDER_WIDTH + (i > 0 ? core.Window.getInstance().getContext().measureText(castModel.getText().substring(0, i - 1)).width : 0);
+			num i2 = this._model.getAbsolutePosition().x + IMG_BORDER_WIDTH + core.Window.getInstance().getContext().measureText(castModel.getText().substring(0, i)).width;
 
 
 			num ri = coordinates.x - i1 < i2 - coordinates.x ? i - 1 : i;

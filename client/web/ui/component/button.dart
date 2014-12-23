@@ -17,18 +17,18 @@ class Button extends SelectableComponent {
 
 }
 
-class _ButtonLayout extends Layout {
+class _ButtonLayout extends RelativeLayout {
 	
 	
 	
-	void validate() {
+	void update() {
 		
 		num totalSize = this.getMinimalSize().x;
 		num currentPosition = 0;
 		
 		for(int i=0; i<this._model.getChildNumber(); i++) {
 			this._model.getChild(i).setSize(this._model.getChild(i).getMinimalSize());
-			this._model.getChild(i).setPosition(new utils.Coordinates2D(this._model.getPosition().x+(this._model.getSize().x-totalSize)~/2+currentPosition, this._model.getPosition().y+(this._model.getSize().y-this._model.getChild(i).getSize().y)~/2));
+			this._model.getChild(i).setRelativePosition(new utils.Coordinates2D((this._model.getSize().x-totalSize)~/2+currentPosition, (this._model.getSize().y-this._model.getChild(i).getSize().y)~/2));
 			currentPosition += this._model.getChild(i).getSize().x;
 		}
 		

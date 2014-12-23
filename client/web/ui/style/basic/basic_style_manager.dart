@@ -13,6 +13,8 @@ class BasicStyleManager {
 	int _fontSizeH3;
 	String _fontName;
 	
+	String _textColor;
+	
 	_BasicStyleManager() {
 		
 	}
@@ -22,6 +24,7 @@ class BasicStyleManager {
 		this._fontSizeH2 = (28.0*core.ResolutionManager.getInstance().getFontScale()).toInt();
 		this._fontSizeH3 = (20.0*core.ResolutionManager.getInstance().getFontScale()).toInt();
 		this._fontName = "arial";
+		this._textColor = "#111";
 	}
 	
 	static BasicStyleManager getInstance() {
@@ -59,6 +62,10 @@ class BasicStyleManager {
 	
 	String getFontName() {
 		return this._fontName;
+	}
+	
+	String getTextColor() {
+		return this._textColor;
 	}
 
 }

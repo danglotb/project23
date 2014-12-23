@@ -86,7 +86,8 @@ class Window {
 		ui.SelectableManager.getInstance().reset();
 		
 		_content = component;
-		_content.setPosition(new utils.Coordinates2D(0, 0));
+		_content.setRelativePosition(new utils.Coordinates2D(0, 0));
+		_content.setAbsolutePosition(new utils.Coordinates2D(0, 0));
 		_content.setSize(new utils.Vector2D(_size.x, _size.y));
 		_content. addedToWindow();
 	}
@@ -131,6 +132,7 @@ class Window {
 			DrawManager.getInstance().newBuild();
 			this._content.buildDraw();
 			this._requireRebuildDraw = false;
+			this._content.notify();
 		}
 
 		DrawManager.getInstance().draw();

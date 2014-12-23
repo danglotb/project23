@@ -4,7 +4,7 @@ part of ui;
  * 
  * Must have exactly 1 child
  */
-class BorderLayout extends Layout {
+class BorderLayout extends RelativeLayout {
 	
 	num _left;
 	num _right;
@@ -18,10 +18,10 @@ class BorderLayout extends Layout {
 		this._bottom = bottom;
 	}
 	
-	void validate() {
-		
+	void update() {
 		assert(this._model.getChildNumber() == 1);
-		this._model.getChild(0).setPosition(new utils.Coordinates2D(this._model.getPosition().x+this._left, this._model.getPosition().y+this._top));
+		
+		this._model.getChild(0).setRelativePosition(new utils.Coordinates2D(this._left, this._top));
 	}
 	
 	utils.Vector2D getMinimalSize() {

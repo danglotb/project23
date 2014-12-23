@@ -33,8 +33,9 @@ abstract class ComponentStyle {
 	 * Called when notify() is invoked on component model
 	 */
 	void update() {
-		if(this._drawable != null)
+		if(this._drawable != null) {
 			this._drawable.compute();
+		}
 	}
 	
 	/*

@@ -14,32 +14,13 @@ class ScreenMenuUnloggedHome extends Container {
 		
 		logginPartInner.setLayout(new VerticalPassifLayout());
 		
-		/*
-		Combobox cb = new Combobox(new BasicComboboxStyle());
-		cb.setListChoice(['c1', 'c2', 'c3']);
-		cb.setSize(new utils.Vector2D(250, 50));
-		logginPartInner.addChild(cb);
-		*/
-		/*
-		ScrollBar sb1 = new HorizontalScrollBar(new BasicHorizontalScrollBarStyle());
-		sb1.setSize(new utils.Vector2D(250, 20));
-		logginPartInner.addChild(sb1);
+		ScrollPane sc = new ScrollPane(new BasicScrollPaneStyle());
 		
-		ScrollBar sb2 = new VerticalScrollBar(new BasicVerticalScrollBarStyle());
-		sb2.setSize(new utils.Vector2D(20, 100));
-		logginPartInner.addChild(sb2);*/
-		
-		Container sub1 = new Container();
-		sub1.setLayout(new VerticalLayout());
-		sub1.setSize(new utils.Vector2D(300, 300));
-		TextField tf1 = new TextField(new BasicTextFieldStyle());
-		sub1.addChild(tf1);
-		
-		ScrollPane sp = new ScrollPane(new BasicScrollPaneStyle());
-		sp.setContent(sub1);
-		sp.setSize(new utils.Vector2D(200, 200));
-		logginPartInner.addChild(sp);
-		
+		TextArea ta = new TextArea("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a diam dictum, posuere velit quis, posuere augue. Quisque sem nulla, facilisis a hendrerit quis, porta ac metus. Suspendisse vulputate facilisis eros, dapibus malesuada neque dignissim sit amet. Aliquam eleifend velit arcu, vitae suscipit massa faucibus ac. Ut dictum dui ac finibus tempor. Praesent pretium tristique convallis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam congue pretium suscipit. Phasellus id lectus non ligula convallis sollicitudin. Duis tincidunt ligula non molestie eleifend. Duis imperdiet felis vitae leo fermentum feugiat. Donec non lectus sem. Sed eu lorem a augue viverra efficitur non nec neque.", new BasicTextAreaStyle());
+		ta.setSize(new utils.Vector2D(220, 500));
+		sc.setContent(ta);
+		sc.setSize(new utils.Vector2D(250, 200));
+		logginPartInner.addChild(sc);
 		
 		
 		Container logginField = new Container();
@@ -49,8 +30,7 @@ class ScreenMenuUnloggedHome extends Container {
 		Container loginLBorder = new Container();
 		loginLBorder.setLayout(new BorderLayout(bottom : 5));
 		
-		TextLabel loginL = new TextLabel("Nom de compte", new BasicTextLabelStyle());
-		loginL.setTextSize(TextLabel.H2);
+		Text loginL = new Text("Nom de compte", new BasicTextStyle(textSize: BasicTextStyle.TEXT_SIZE_H2));
 		loginL.setSize(new utils.Vector2D(250, 50));
 		loginLBorder.addChild(loginL);
 		loginLBorder.pack();
@@ -68,8 +48,7 @@ class ScreenMenuUnloggedHome extends Container {
 		Container passwordLBorder = new Container();
 		passwordLBorder.setLayout(new BorderLayout(bottom : 5));
 		
-		TextLabel passwordL = new TextLabel("Mot de passe", new BasicTextLabelStyle());
-		passwordL.setTextSize(TextLabel.H2);
+		Text passwordL = new Text("Mot de passe", new BasicTextStyle(textSize: BasicTextStyle.TEXT_SIZE_H2));
 		passwordL.setSize(new utils.Vector2D(250, 50));
 		passwordLBorder.addChild(passwordL);
 		passwordLBorder.pack();
@@ -90,8 +69,7 @@ class ScreenMenuUnloggedHome extends Container {
 		this.addChild(logginPart);
 		
 		Container newsPart = new Container();
-		newsPart.addChild(new Bidon(new BidonStyle()));
-		
+
 		this.addChild(newsPart);
 	}
 }

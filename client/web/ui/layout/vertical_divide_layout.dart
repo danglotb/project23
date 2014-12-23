@@ -5,7 +5,7 @@ part of ui;
  * Goal of this layout is to separate 2 part. one part can be fixed size, or else the separation is compute by ratio
  * 
  */
-class VerticalDivideLayout extends Layout {
+class VerticalDivideLayout extends RelativeLayout {
 	
 	bool _leftPartFixed;
 	int _leftPartSize;
@@ -24,14 +24,13 @@ class VerticalDivideLayout extends Layout {
 		this._rightPartSize = rightPartSize;
 	}
 	
-	void validate() {
+	void update() {
 		assert(this._model.getChildNumber() == 2);
 		
 		if(this._leftPartFixed) {
-			this._model.getChild(0).setPosition(new utils.Coordinates2D(this._model.getPosition().x, this._model.getPosition().y));
 			this._model.getChild(0).setSize(new utils.Vector2D(this._leftPartSize, this._model.getSize().y));
 			
-			this._model.getChild(1).setPosition(new utils.Coordinates2D(this._model.getPosition().x+this._leftPartSize, this._model.getPosition().y));
+			this._model.getChild(1).setRelativePosition(new utils.Coordinates2D(this._leftPartSize, 0));
 			this._model.getChild(1).setSize(new utils.Vector2D(this._model.getSize().x-this._leftPartSize, this._model.getSize().y));
 		}
 		else if(this._rightPartFixed) {

@@ -4,7 +4,7 @@ part of ui;
  * This layout need contains exactly 1 or 2 children.
  */
 
-class VerticalGapLayout extends Layout {
+class VerticalGapLayout extends RelativeLayout {
 	
 	bool _gapBottom;
 	
@@ -13,16 +13,15 @@ class VerticalGapLayout extends Layout {
 	}
 	
 	
-	void validate() {
+	void update() {
 		
 		if(this._model.getChildNumber() == 2) { //gap between
 			utils.Vector2D minimal1 = this._model.getChild(0).getMinimalSize();
 			utils.Vector2D minimal2 = this._model.getChild(1).getMinimalSize();
 			
-			this._model.getChild(0).setPosition(new utils.Coordinates2D(this._model.getPosition().x, this._model.getPosition().y));
 			this._model.getChild(0).setSize(new utils.Vector2D(this._model.getSize().x, minimal1.y));
 			
-			this._model.getChild(1).setPosition(new utils.Coordinates2D(this._model.getPosition().x, this._model.getPosition().y+this._model.getSize().y-this._model.getChild(1).getMinimalSize().y));
+			this._model.getChild(1).setRelativePosition(new utils.Coordinates2D(0,this._model.getSize().y-this._model.getChild(1).getMinimalSize().y));
 			this._model.getChild(1).setSize(new utils.Vector2D(this._model.getSize().x, minimal2.y));
 			
 		}

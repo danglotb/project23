@@ -7,8 +7,14 @@ part of ui;
  */
 abstract class Component {
 	
-	/* The position of the component in the window */
-	utils.Coordinates2D _position;
+	/* The relative position of the component compared to the parent component */
+	utils.Coordinates2D _relativePosition;
+	
+	/* The absolute position of the component  compared to the Window root */
+	utils.Coordinates2D _absolutePosition;
+	
+	/* Is component is computed in absolute coordinates */
+	bool _isAbsolutePosition;
 	
 	/* The size of the component */
 	utils.Vector2D _size;
@@ -35,7 +41,10 @@ abstract class Component {
 		else
 			this._style = new EmptyStyle();
 		
-		this._position = new utils.Coordinates2D(0, 0);
+		this._relativePosition = new utils.Coordinates2D(0, 0);
+		this._absolutePosition = new utils.Coordinates2D(0, 0);
+		this._isAbsolutePosition = false;
+		
 		this._size = new utils.Vector2D(0, 0);
 		this._visible = true;
 		this._addedToWindow = false;
@@ -77,6 +86,13 @@ abstract class Component {
 
 	}
 	
+	void computeAbsolutePosition(utils.Coordinates2D reference) {
+		if(!this._isAbsolutePosition) {
+			this._absolutePosition = new utils.Coordinates2D(reference.x+this._relativePosition.x, reference.y+this._relativePosition.y);
+		}
+
+	}
+	
 	/* Getters & Setters */
 	
 	/* Getters & setters of _visible */
@@ -88,13 +104,29 @@ abstract class Component {
 		this._visible = state;
 	}
 	     
-	/* Getters & setters of _position */
-	utils.Coordinates2D getPosition() {
-		return this._position;
+	/* Getters & setters of _relativePosition & _absolutePosition */
+	utils.Coordinates2D getRelativePosition() {
+		return this._relativePosition;
 	}
 
-	void setPosition(utils.Coordinates2D position) {
-		this._position = position;
+	void setRelativePosition(utils.Coordinates2D position) {
+		this._relativePosition = position;
+	}
+	
+	utils.Coordinates2D getAbsolutePosition() {
+		return this._absolutePosition;
+	}
+
+	void setAbsolutePosition(utils.Coordinates2D position) {
+		this._absolutePosition = position;
+	}
+	
+	void setIsAbsolutePosition(bool state) {
+		this._isAbsolutePosition = state;
+	}
+	
+	bool isAbsolutePosition() {
+		return this._isAbsolutePosition;
 	}
 	
 	/* Getters & setters of _size */

@@ -1,12 +1,12 @@
 part of ui;
 
-class PassifLayout extends Layout {
+class PassifLayout extends AbsoluteLayout {
 	
 	PassifLayout() {
 		
 	}
 	
-	void validate() {
+	void update() {
 		
 	}
 	

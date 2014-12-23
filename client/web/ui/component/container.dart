@@ -40,11 +40,21 @@ class Container extends Component {
 	void validate() {
 		if(this._layout != null)
 			_layout.validate();
+		
 		for(Component component in this._children) {
 			component.validate();
 		}
+	}
+	
+	void notify() {
 		
-		this.notify();
+		for(Component component in this._children) {
+			component.computeAbsolutePosition(this.getAbsolutePosition());
+			component.notify();
+		}
+		
+		
+		super.notify();
 	}
 	
 	/* Add a component in this container */
@@ -59,6 +69,11 @@ class Container extends Component {
 	
 	void removeChild(Component component) {
 		this._children.remove(component);
+		core.Window.getInstance().requireRebuildDraw();
+	}
+	
+	void removeAllChildren() {
+		this._children.clear();
 		core.Window.getInstance().requireRebuildDraw();
 	}
 	

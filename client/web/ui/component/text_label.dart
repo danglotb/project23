@@ -1,5 +1,8 @@
 part of ui;
 
+/*
+ * TODO Change TextLabel to generic Label
+ */
 /* A text label */
 class TextLabel extends Label {
 	

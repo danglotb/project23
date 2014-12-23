@@ -38,6 +38,7 @@ class ComponentDrawable extends core.DrawableItem {
 	}
 	
 	void compute() {
+		
 		this._computeFunction();
 	}
 	

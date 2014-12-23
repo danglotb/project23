@@ -59,21 +59,21 @@ class BasicComboboxStyleInputArea extends ComboboxStyleInputArea {
 		ComponentDrawable drawable = new ComponentDrawable(this._model);
 		
 		drawable.setComputeFunction(() {
-			backgroundLeftX = castModel.getPosition().x;
-			backgroundMiddleX = castModel.getPosition().x + IMG_BORDER_WIDTH;
+			backgroundLeftX = castModel.getAbsolutePosition().x;
+			backgroundMiddleX = castModel.getAbsolutePosition().x + IMG_BORDER_WIDTH;
 			backgroundMiddleWidth = castModel.getSize().x - 2 * IMG_BORDER_WIDTH;
-			backgroundRightX = castModel.getPosition().x + castModel.getSize().x - IMG_BORDER_WIDTH;
-			backgroundY = castModel.getPosition().y;
+			backgroundRightX = castModel.getAbsolutePosition().x + castModel.getSize().x - IMG_BORDER_WIDTH;
+			backgroundY = castModel.getAbsolutePosition().y;
 			backgroundHeight = castModel.getSize().y;
 			
 			text = castModel.getCombobox().getCurrentChoice();
-			textX = castModel.getPosition().x+IMG_BORDER_WIDTH;
-			textY = castModel.getPosition().y+castModel.getSize().y~/2;
+			textX = castModel.getAbsolutePosition().x+IMG_BORDER_WIDTH;
+			textY = castModel.getAbsolutePosition().y+castModel.getSize().y~/2;
 			
 			iconWidth = (ICON_WIDTH*(castModel.getSize().y/ICON_HEIGHT)).toInt();
 			
 			
-			iconX = castModel.getPosition().x+castModel.getSize().x-iconWidth-IMG_BORDER_WIDTH;
+			iconX = castModel.getAbsolutePosition().x+castModel.getSize().x-iconWidth-IMG_BORDER_WIDTH;
 		});
 		
 		drawable.setDrawFunction(() {
@@ -134,16 +134,16 @@ class BasicComboboxStyleDropDownUnit extends ComboboxStyleDropDownUnit {
 			
 			if(castModel.isOverflew()) {
 				core.Window.getInstance().getContext()..fillStyle = "#ddd"
-        																			..fillRect(castModel.getPosition().x, castModel.getPosition().y, castModel.getSize().x, castModel.getSize().y);
+        																			..fillRect(castModel.getAbsolutePosition().x, castModel.getAbsolutePosition().y, castModel.getSize().x, castModel.getSize().y);
 
 			}
 			else {
 				core.Window.getInstance().getContext()..fillStyle = "#aaa"
-        																			..fillRect(castModel.getPosition().x, castModel.getPosition().y, castModel.getSize().x, castModel.getSize().y);
+        																			..fillRect(castModel.getAbsolutePosition().x, castModel.getAbsolutePosition().y, castModel.getSize().x, castModel.getSize().y);
 			}
 			core.Window.getInstance().getContext()..fillStyle = "#444"
 			   																		..font = BasicStyleManager.getInstance().getFontSizeH3().toString()+'px '+BasicStyleManager.getInstance().getFontName()
-																						..fillText(castModel.getText(), castModel.getPosition().x+BasicComboboxStyleInputArea.IMG_BORDER_WIDTH, castModel.getPosition().y+castModel.getSize().y/2);
+																						..fillText(castModel.getText(), castModel.getAbsolutePosition().x+BasicComboboxStyleInputArea.IMG_BORDER_WIDTH, castModel.getAbsolutePosition().y+castModel.getSize().y/2);
 		});
 		
 		this.addToContentFrontLayer(drawable);

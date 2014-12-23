@@ -22,7 +22,7 @@ void main() {
 		
 		
 		//text innerWIndow
-		/*ui.Container mainC = new ui.Container();
+	/*	ui.Container mainC = new ui.Container();
 		
 		ui.Container backgroundC = new ui.Container();
 		ui.Button newWinB = new ui.Button.text("New Window", new ui.BasicButtonStyle());
@@ -30,7 +30,7 @@ void main() {
 		newWinB.addClickListener((ui.InteractiveComponent source) {
 			ui.InnerWindow win = new ui.InnerWindow("A Window", new ui.BasicInnerWindowStyle());
   		win.setSize(new utils.Vector2D(400, 550));
-  		win.setPosition(new utils.Coordinates2D(100, 100));
+  		win.setAbsolutePosition(new utils.Coordinates2D(100, 100));
   		win.setContent(new ui.ScreenMenuUnloggedHome());
   		win.setCloseAction(() {
   			mainC.removeChild(win);

@@ -110,14 +110,13 @@ class _ComboboxDropDownUnit extends InteractiveComponent {
 }
 
 
-class _ComboboxLayout extends Layout {
+class _ComboboxLayout extends RelativeLayout {
 	
-	void validate() {
-		this._model.getChild(0).setPosition(this._model.getPosition());
+	void update() {
 		this._model.getChild(0).setSize(this._model.getSize());
 		
 		if(this._model.getChildNumber() == 2) { //open list
-			this._model.getChild(1).setPosition(new utils.Coordinates2D(this._model.getPosition().x, this._model.getPosition().y+this._model.getSize().y));
+			this._model.getChild(1).setRelativePosition(new utils.Coordinates2D(0, this._model.getSize().y));
   		this._model.getChild(1).setSize(new utils.Vector2D(this._model.getSize().x, (this._model.getStyle() as ComboboxStyle).getDropDownUnitHeight()*(this._model.getChild(1) as Container).getChildNumber()));
 		}
 

@@ -18,7 +18,44 @@
 		<script src="platform.js"></script>
 		<script src="benchmark.js"></script>
 		<script>
-			window.onerror = function(message, fileName, lineNumber) {
+										var nb_object_x = 10;
+			var nb_object_y = 10;
+
+			var viewport_width;
+			var viewport_height;
+
+			var canvas_context;
+
+			var object_width;
+			var object_height;
+			
+			var canvas = document.getElementById('canvas');
+
+					viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+					viewport_height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+					canvas.width = viewport_width;
+					canvas.height = viewport_height;
+					
+					object_width = (viewport_width/nb_object_x) | 0;
+					object_height = (viewport_height/nb_object_y) | 0;
+
+					document.body.appendChild(canvas);
+
+					canvas_context = canvas.getContext("2d");
+					canvas_context.fillStyle = "#f00";
+						//canvas_context.strokeStyle = "#000";
+				canvas_context.lineWidth = 1;
+				
+				for(var i=0; i<nb_object_x; i++) {
+					for(var j=0; j<nb_object_y; j++) {
+						canvas_context.setTransform(1.0, 0.0, 0.0, 1.0, object_width*i, object_height*j)
+						canvas_context.rect(0, 0, object_width, object_height);
+						canvas_context.fill();
+						canvas_context.stroke();
+					}
+				}
+			/*window.onerror = function(message, fileName, lineNumber) {
 				console.log('[Error]'+message);
 				console.log('In '+fileName+' at '+lineNumber);
 			};
@@ -64,13 +101,14 @@
 				
 				for(var i=0; i<nb_object_x; i++) {
 					for(var j=0; j<nb_object_y; j++) {
-						canvas_context.rect(object_width*i, object_height*j, object_width, object_height);
+						canvas_context.setTransform(object_width, 0.0, 0.0, object_height, object_width*i, object_height*j)
+						canvas_context.rect(0, 0, 1, 1);
 						canvas_context.fill();
 						canvas_context.stroke();
 					}
 				}
 			})
-			.add('clip draw', function() {
+		/*	.add('clip draw', function() {
 				canvas_context.fillStyle = "#f00";
 				canvas_context.strokeStyle = "#000";
 				canvas_context.lineWidth = 1;
@@ -84,7 +122,8 @@
 						canvas_context.restore();
 					}
 				}
-			})
+			})*/
+			/*
 			// add listeners
 			.on('cycle', function(event) {
 			  console.log(String(event.target));
@@ -93,7 +132,7 @@
 			  console.log('Fastest is ' + this.filter('fastest').pluck('name'));
 			})
 			// run async
-			.run({ 'async': true });
+			.run({ 'async': true });*/
 	</script>
 
 	</body>

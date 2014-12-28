@@ -21,7 +21,7 @@ class BorderLayout extends RelativeLayout {
 	void update() {
 		assert(this._model.getChildNumber() == 1);
 		
-		this._model.getChild(0).setRelativePosition(new utils.Coordinates2D(this._left, this._top));
+		this._model.getChild(0).setPosition(new utils.Coordinates2D(this._left, this._top));
 	}
 	
 	utils.Vector2D getMinimalSize() {

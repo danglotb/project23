@@ -25,8 +25,8 @@ class CursorStyle extends SelectableComponentStyle {
     }
 
 		/* Start position */
-		num x = castModel.getAbsolutePosition().x;
-		num y = castModel.getAbsolutePosition().y + castModel.getSize().y/2;
+		num x = castModel.getPosition().x;
+		num y = castModel.getPosition().y + castModel.getSize().y/2;
 		
 		/* Drawing */
     core.Window.getInstance().getContext()..beginPath()

@@ -43,15 +43,15 @@ class BasicHorizontalScrollBarStyle extends HorizontalScrollBarStyle {
 		ComponentDrawable drawable = new ComponentDrawable(this._model);
 		
 		drawable.setComputeFunction(() {
-			backgroundLeftX = castModel.getAbsolutePosition().x;
-			backgroundMiddleX = castModel.getAbsolutePosition().x + BACKGROUND_BORDER_WIDTH;
+			backgroundLeftX = castModel.getPosition().x;
+			backgroundMiddleX = castModel.getPosition().x + BACKGROUND_BORDER_WIDTH;
 			backgroundMiddleWidth = castModel.getSize().x - 2 * BACKGROUND_BORDER_WIDTH;
-			backgroundRightX = castModel.getAbsolutePosition().x + castModel.getSize().x - BACKGROUND_BORDER_WIDTH;
-			backgroundY = castModel.getAbsolutePosition().y;
+			backgroundRightX = castModel.getPosition().x + castModel.getSize().x - BACKGROUND_BORDER_WIDTH;
+			backgroundY = castModel.getPosition().y;
 			backgroundHeight = castModel.getSize().y;
 			
 			this._barSize = new utils.Vector2D((castModel.getSize().x-2*BACKGROUND_BORDER_WIDTH)*castModel.getViewportRatio(), castModel.getSize().y);
-			this._barPosition = new utils.Coordinates2D(castModel.getAbsolutePosition().x + BACKGROUND_BORDER_WIDTH + castModel.getBarPositionRatio()*(castModel.getSize().x-2*BACKGROUND_BORDER_WIDTH-this._barSize.x), castModel.getAbsolutePosition().y);
+			this._barPosition = new utils.Coordinates2D(castModel.getPosition().x + BACKGROUND_BORDER_WIDTH + castModel.getBarPositionRatio()*(castModel.getSize().x-2*BACKGROUND_BORDER_WIDTH-this._barSize.x), castModel.getPosition().y);
 			
 			
 			barLeftX = this._barPosition.x;
@@ -132,15 +132,15 @@ class BasicVerticalScrollBarStyle extends VerticalScrollBarStyle {
 		ComponentDrawable drawable = new ComponentDrawable(this._model);
 		
 		drawable.setComputeFunction(() {
-			backgroundX = castModel.getAbsolutePosition().x;
+			backgroundX = castModel.getPosition().x;
   		backgroundWidth = castModel.getSize().x;
-  		backgroundTopY = castModel.getAbsolutePosition().y;
-  		backgroundMiddleY = castModel.getAbsolutePosition().y+BACKGROUND_BORDER_HEIGHT;
+  		backgroundTopY = castModel.getPosition().y;
+  		backgroundMiddleY = castModel.getPosition().y+BACKGROUND_BORDER_HEIGHT;
   		backgroundMiddleHeight = castModel.getSize().y - 2 * BACKGROUND_BORDER_HEIGHT;
-  		backgroundBottomY = castModel.getAbsolutePosition().y + castModel.getSize().y - BACKGROUND_BORDER_HEIGHT;
+  		backgroundBottomY = castModel.getPosition().y + castModel.getSize().y - BACKGROUND_BORDER_HEIGHT;
   		
 			this._barSize = new utils.Vector2D(castModel.getSize().x, (castModel.getSize().y-2*BACKGROUND_BORDER_HEIGHT)*castModel.getViewportRatio());
-			this._barPosition = new utils.Coordinates2D(castModel.getAbsolutePosition().x, castModel.getAbsolutePosition().y + BACKGROUND_BORDER_HEIGHT + castModel.getBarPositionRatio()*(castModel.getSize().y-2*BACKGROUND_BORDER_HEIGHT-this._barSize.y));
+			this._barPosition = new utils.Coordinates2D(castModel.getPosition().x, castModel.getPosition().y + BACKGROUND_BORDER_HEIGHT + castModel.getBarPositionRatio()*(castModel.getSize().y-2*BACKGROUND_BORDER_HEIGHT-this._barSize.y));
 			
   		barTopY = this._barPosition.y;
   		barMiddleY = barTopY + BAR_BORDER_HEIGHT;

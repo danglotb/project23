@@ -33,11 +33,11 @@ class BasicButtonStyle extends ButtonStyle {
 		ComponentDrawable drawable = new ComponentDrawable(this._model);
 		
 		drawable.setComputeFunction(() {
-			backgroundLeftX = castModel.getAbsolutePosition().x;
-			backgroundMiddleX = castModel.getAbsolutePosition().x + IMG_BORDER_WIDTH;
+			backgroundLeftX = castModel.getPosition().x;
+			backgroundMiddleX = castModel.getPosition().x + IMG_BORDER_WIDTH;
 			backgroundMiddleWidth = castModel.getSize().x - 2 * IMG_BORDER_WIDTH;
-			backgroundRightX = castModel.getAbsolutePosition().x + castModel.getSize().x - IMG_BORDER_WIDTH;
-			backgroundY = castModel.getAbsolutePosition().y;
+			backgroundRightX = castModel.getPosition().x + castModel.getSize().x - IMG_BORDER_WIDTH;
+			backgroundY = castModel.getPosition().y;
 			backgroundHeight = castModel.getSize().y;
 		});
 		

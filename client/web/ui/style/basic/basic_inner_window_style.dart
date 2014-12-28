@@ -14,8 +14,8 @@ class BasicInnerWindowStyle extends InnerWindowStyle {
 		num windowHeight;
 		
 		drawable.setComputeFunction(() {
-			windowX = this._model.getAbsolutePosition().x;
-  		windowY = this._model.getAbsolutePosition().y;
+			windowX = this._model.getPosition().x;
+  		windowY = this._model.getPosition().y;
   		windowWidth = this._model.getSize().x;
   		windowHeight = this._model.getSize().y;
 		});

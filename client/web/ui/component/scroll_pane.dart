@@ -70,8 +70,8 @@ class ScrollPane extends Container {
 		
 		super.notify();
 	
-		this._viewport.left = this._absolutePosition.x;
-		this._viewport.top = this._absolutePosition.y;
+		this._viewport.left = this.getPosition().x;
+		this._viewport.top = this.getPosition().y;
 		this._viewport.right = this._size.x-(this._verticalScrollBar != null ? this._verticalScrollBar.getMinimalSize().x : 0);
 		this._viewport.bottom = this._size.y-(this._horizontalScrollBar != null ? this._horizontalScrollBar.getMinimalSize().y : 0);
 	}
@@ -88,7 +88,7 @@ class _ScrollPaneLayout extends RelativeLayout {
 		if(this._model.getChild(0).getSize().x > this._model.getSize().x && castModel.getHorizontalScrollBar() == null) {
 			HorizontalScrollBar hsb = new HorizontalScrollBar(castStyle.getHorizontalScrollBarStyle());
 			hsb.addValueChangedListener((ScrollBar source) {
-				this._model.getChild(0).setRelativePosition(new utils.Coordinates2D(-source.getBarPositionRatio()*(this._model.getChild(0).getSize().x-this._model.getSize().x+(castModel.getVerticalScrollBar() != null ? castModel.getVerticalScrollBar().getMinimalSize().x : 0)), this._model.getChild(0).getRelativePosition().y));
+				this._model.getChild(0).setPosition(new utils.Coordinates2D(-source.getBarPositionRatio()*(this._model.getChild(0).getSize().x-this._model.getSize().x+(castModel.getVerticalScrollBar() != null ? castModel.getVerticalScrollBar().getMinimalSize().x : 0)), this._model.getChild(0).getUserPosition().y));
 				this._model.notify();
 			});
 				
@@ -98,7 +98,7 @@ class _ScrollPaneLayout extends RelativeLayout {
 		if(this._model.getChild(0).getSize().y > this._model.getSize().y && castModel.getVerticalScrollBar() == null) {
 			VerticalScrollBar vsb = new VerticalScrollBar(castStyle.getVerticalScrollBarStyle());
 			vsb.addValueChangedListener((ScrollBar source) {
-				this._model.getChild(0).setRelativePosition(new utils.Coordinates2D(this._model.getChild(0).getRelativePosition().x, -source.getBarPositionRatio()*(this._model.getChild(0).getSize().y-this._model.getSize().y+(castModel.getHorizontalScrollBar() != null ? castModel.getHorizontalScrollBar().getMinimalSize().y : 0))));
+				this._model.getChild(0).setPosition(new utils.Coordinates2D(this._model.getChild(0).getUserPosition().x, -source.getBarPositionRatio()*(this._model.getChild(0).getSize().y-this._model.getSize().y+(castModel.getHorizontalScrollBar() != null ? castModel.getHorizontalScrollBar().getMinimalSize().y : 0))));
 				this._model.notify();
 			});
 				
@@ -107,13 +107,13 @@ class _ScrollPaneLayout extends RelativeLayout {
 		
 		
 		if(castModel.getHorizontalScrollBar() != null) {
-			castModel.getHorizontalScrollBar().setRelativePosition(new utils.Coordinates2D(0, this._model.getSize().y-castModel.getHorizontalScrollBar().getMinimalSize().y));
+			castModel.getHorizontalScrollBar().setPosition(new utils.Coordinates2D(0, this._model.getSize().y-castModel.getHorizontalScrollBar().getMinimalSize().y));
 			castModel.getHorizontalScrollBar().setSize(new utils.Vector2D(this._model.getSize().x-(castModel.getVerticalScrollBar() != null ? castModel.getVerticalScrollBar().getMinimalSize().x : 0), castModel.getHorizontalScrollBar().getMinimalSize().y));
 			castModel.getHorizontalScrollBar().setViewportRatio((this._model.getSize().x-(castModel.getVerticalScrollBar() != null ? castModel.getVerticalScrollBar().getMinimalSize().x : 0))/this._model.getChild(0).getSize().x);
 		}
 		
 		if(castModel.getVerticalScrollBar() != null) {
-			castModel.getVerticalScrollBar().setRelativePosition(new utils.Coordinates2D(this._model.getSize().x-castModel.getVerticalScrollBar().getMinimalSize().x, 0));
+			castModel.getVerticalScrollBar().setPosition(new utils.Coordinates2D(this._model.getSize().x-castModel.getVerticalScrollBar().getMinimalSize().x, 0));
 			castModel.getVerticalScrollBar().setSize(new utils.Vector2D(castModel.getVerticalScrollBar().getMinimalSize().x, this._model.getSize().y-(castModel.getHorizontalScrollBar() != null ? castModel.getHorizontalScrollBar().getMinimalSize().y : 0)));
 			castModel.getVerticalScrollBar().setViewportRatio((this._model.getSize().y-(castModel.getHorizontalScrollBar() != null ? castModel.getHorizontalScrollBar().getMinimalSize().y : 0))/this._model.getChild(0).getSize().x);
 		}
@@ -126,7 +126,7 @@ class _ScrollPaneLayout extends RelativeLayout {
 		num posY = 0;
 		if(castModel.getVerticalScrollBar() != null)
 			posY -= castModel.getVerticalScrollBar().getBarPositionRatio()*(this._model.getChild(0).getSize().y-this._model.getSize().y+(castModel.getHorizontalScrollBar() != null ? castModel.getHorizontalScrollBar().getMinimalSize().y : 0));
-		this._model.getChild(0).setRelativePosition(new utils.Coordinates2D(posX, posY));
+		this._model.getChild(0).setPosition(new utils.Coordinates2D(posX, posY));
 	}
 	
 	utils.Vector2D getMinimalSize() {

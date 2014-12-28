@@ -33,9 +33,9 @@ class MenuButtonStyle extends ButtonStyle {
 		num backgroundHeight;
 		
 		drawable.setComputeFunction(() {
-			backgroundLeftX = castModel.getAbsolutePosition().x;
-			backgroundY = castModel.getAbsolutePosition().y;
-			backgroundMiddleX = castModel.getAbsolutePosition().x+IMG_BORDER_WIDTH;
+			backgroundLeftX = castModel.getPosition().x;
+			backgroundY = castModel.getPosition().y;
+			backgroundMiddleX = castModel.getPosition().x+IMG_BORDER_WIDTH;
 			backgroundMiddleWidth = castModel.getSize().x-13;
 			backgroundHeight = castModel.getSize().y;
 		});
@@ -116,9 +116,9 @@ class _ButtonMenuTextStyle extends TextLabelStyle {
 		drawable.setComputeFunction(() {
 			text = castModel.getText();
 			num textLength = core.Window.getInstance().getContext().measureText(castModel.getText()).width.roundToDouble();
-			textX = castModel.getAbsolutePosition().x+(castModel.getSize().x-textLength)~/2;
+			textX = castModel.getPosition().x+(castModel.getSize().x-textLength)~/2;
 			font = BasicStyleManager.getInstance().getFontSize(castModel.getTextSize()).toString()+'px '+BasicStyleManager.getInstance().getFontName();
-			textY = castModel.getAbsolutePosition().y+(castModel.getSize().y-BasicStyleManager.getInstance().getFontSize(castModel.getTextSize()))~/2+BasicStyleManager.getInstance().getFontSize(castModel.getTextSize())~/2;
+			textY = castModel.getPosition().y+(castModel.getSize().y-BasicStyleManager.getInstance().getFontSize(castModel.getTextSize()))~/2+BasicStyleManager.getInstance().getFontSize(castModel.getTextSize())~/2;
 
 		});
 		

@@ -49,7 +49,7 @@ class Container extends Component {
 	void notify() {
 		
 		for(Component component in this._children) {
-			component.computeAbsolutePosition(this.getAbsolutePosition());
+			component.computePosition(this.getPosition());
 			component.notify();
 		}
 		

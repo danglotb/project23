@@ -1,5 +1,9 @@
 part of ui;
 
+enum PositionMode {
+	ABSOLUTE, RELATIVE
+}
+
 /* A component of the window 
  * 
  * the size, minimalSize & position properties correspond to the external (borders are including)
@@ -7,14 +11,14 @@ part of ui;
  */
 abstract class Component {
 	
-	/* The relative position of the component compared to the parent component */
-	utils.Coordinates2D _relativePosition;
-	
-	/* The absolute position of the component  compared to the Window root */
-	utils.Coordinates2D _absolutePosition;
-	
+	/*
+	 * Position management
+	 */
+	utils.Coordinates2D _userPosition;
+	utils.Coordinates2D _computedPosition;
+	PositionMode _positionMode;
 	/* Is component is computed in absolute coordinates */
-	bool _isAbsolutePosition;
+	
 	
 	/* The size of the component */
 	utils.Vector2D _size;
@@ -41,9 +45,9 @@ abstract class Component {
 		else
 			this._style = new EmptyStyle();
 		
-		this._relativePosition = new utils.Coordinates2D(0, 0);
-		this._absolutePosition = new utils.Coordinates2D(0, 0);
-		this._isAbsolutePosition = false;
+		this._userPosition = new utils.Coordinates2D(0, 0);
+		this._computedPosition = new utils.Coordinates2D(0, 0);
+		this._positionMode = PositionMode.RELATIVE;
 		
 		this._size = new utils.Vector2D(0, 0);
 		this._visible = true;
@@ -86,11 +90,16 @@ abstract class Component {
 
 	}
 	
-	void computeAbsolutePosition(utils.Coordinates2D reference) {
-		if(!this._isAbsolutePosition) {
-			this._absolutePosition = new utils.Coordinates2D(reference.x+this._relativePosition.x, reference.y+this._relativePosition.y);
+	void computePosition([utils.Coordinates2D reference]) {
+		switch(this._positionMode) {
+			case PositionMode.ABSOLUTE:
+				this._computedPosition = this._userPosition;
+				break;
+			case PositionMode.RELATIVE:
+				this._computedPosition = new utils.Coordinates2D(reference.x+this._userPosition.x, reference.y+this._userPosition.y);
+				break;
 		}
-
+		
 	}
 	
 	/* Getters & Setters */
@@ -105,28 +114,24 @@ abstract class Component {
 	}
 	     
 	/* Getters & setters of _relativePosition & _absolutePosition */
-	utils.Coordinates2D getRelativePosition() {
-		return this._relativePosition;
+	utils.Coordinates2D getPosition() {
+		return this._computedPosition;
+	}
+	
+	utils.Coordinates2D getUserPosition() {
+		return this._userPosition;
 	}
 
-	void setRelativePosition(utils.Coordinates2D position) {
-		this._relativePosition = position;
+	void setPosition(utils.Coordinates2D position) {
+		this._userPosition = position;
 	}
 	
-	utils.Coordinates2D getAbsolutePosition() {
-		return this._absolutePosition;
-	}
-
-	void setAbsolutePosition(utils.Coordinates2D position) {
-		this._absolutePosition = position;
+	void setPositionMode(PositionMode mode) {
+		this._positionMode = mode;
 	}
 	
-	void setIsAbsolutePosition(bool state) {
-		this._isAbsolutePosition = state;
-	}
-	
-	bool isAbsolutePosition() {
-		return this._isAbsolutePosition;
+	PositionMode getPositionMode() {
+		return this._positionMode;
 	}
 	
 	/* Getters & setters of _size */

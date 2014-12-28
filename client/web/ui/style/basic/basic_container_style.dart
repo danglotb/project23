@@ -17,7 +17,7 @@ class BasicContainerStyle extends ContainerStyle {
 			
 			drawable.setDrawFunction(() {
 				core.Window.getInstance().getContext()..fillStyle = this._backgroundColor
-																							..fillRect(this._model.getAbsolutePosition().x, this._model.getAbsolutePosition().y, this._model.getSize().x, this._model.getSize().y);
+																							..fillRect(this._model.getPosition().x, this._model.getPosition().y, this._model.getSize().x, this._model.getSize().y);
 			});
 			
 			this.addToBackgroundLayer(drawable);

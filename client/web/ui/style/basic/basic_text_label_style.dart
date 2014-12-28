@@ -20,18 +20,18 @@ class BasicTextLabelStyle extends TextLabelStyle {
 			num textLength = core.Window.getInstance().getContext().measureText(castModel.getText()).width.roundToDouble();
 			switch(castModel.getTextAlign()) {
 				case TextLabel.LEFT:
-					textX = castModel.getAbsolutePosition().x;
+					textX = castModel.getPosition().x;
 					break;
 				case TextLabel.CENTER:
-					textX = castModel.getAbsolutePosition().x+(castModel.getSize().x-textLength)~/2;
+					textX = castModel.getPosition().x+(castModel.getSize().x-textLength)~/2;
 					break;
 				case TextLabel.RIGHT:
-					textX = castModel.getAbsolutePosition().x+castModel.getSize().x-textLength;
+					textX = castModel.getPosition().x+castModel.getSize().x-textLength;
 					break;
 			}
 			
 			font = BasicStyleManager.getInstance().getFontSize(castModel.getTextSize()).toString()+'px '+BasicStyleManager.getInstance().getFontName();
-			textY = castModel.getAbsolutePosition().y+(castModel.getSize().y-BasicStyleManager.getInstance().getFontSize(castModel.getTextSize()))~/2+BasicStyleManager.getInstance().getFontSize(castModel.getTextSize())~/2;
+			textY = castModel.getPosition().y+(castModel.getSize().y-BasicStyleManager.getInstance().getFontSize(castModel.getTextSize()))~/2+BasicStyleManager.getInstance().getFontSize(castModel.getTextSize())~/2;
 
 		});
 		

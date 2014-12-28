@@ -63,7 +63,7 @@ class _TextAreaLayout extends RelativeLayout {
 			}
 			else {
 				Text t = new Text(line, castStyle.getTextStyle());
-				t.setRelativePosition(new utils.Coordinates2D(0, currentY));
+				t.setPosition(new utils.Coordinates2D(0, currentY));
 				t.setSize(new utils.Vector2D(currentSize.x, currentSize.y));
 				currentY += currentSize.y+castStyle.getInterlineHeight();
 				
@@ -75,7 +75,7 @@ class _TextAreaLayout extends RelativeLayout {
 		if(line != "") {
 			utils.Vector2D currentSize = castStyle.getTextStyle().getStringDimension(line);
 			Text t = new Text(line, castStyle.getTextStyle());
-			t.setRelativePosition(new utils.Coordinates2D(0, currentY));
+			t.setPosition(new utils.Coordinates2D(0, currentY));
 			t.setSize(new utils.Vector2D(currentSize.x, currentSize.y));
 			castModel.addChild(t);
 		}

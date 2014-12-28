@@ -14,8 +14,6 @@ class InnerWindow extends InteractiveComponent {
 	InnerWindow(String name, BasicInnerWindowStyle style) : super(style) {
 		this.setLayout(new _InnerWindowLayout());
 		
-		this._isAbsolutePosition = true;
-		
 		this._topBar = new Container();
 		this._topBar.setLayout(new _TopBarLayout());
 		
@@ -52,7 +50,7 @@ class InnerWindow extends InteractiveComponent {
 	
 	void _onPush(core.Event event) {
 		this._originMousePosition = event.getMousePosition();
-		this._originWindowPosition = this._absolutePosition;
+		this._originWindowPosition = this.getPosition();
 		core.InnerWindowManager.getInstance().setFrontground(this);
 		core.Window.getInstance().requireRebuildDraw();
 	}
@@ -73,7 +71,7 @@ class InnerWindow extends InteractiveComponent {
 		
 		if(event.getType() == core.EventType.MOUSE_MOVE) {
 			if(this._pushed) {
-				this._absolutePosition = new utils.Coordinates2D(this._originWindowPosition.x+event.getMousePosition().x-this._originMousePosition.x, this._originWindowPosition.y+event.getMousePosition().y-this._originMousePosition.y);
+				this.setPosition(new utils.Coordinates2D(this._originWindowPosition.x+event.getMousePosition().x-this._originMousePosition.x, this._originWindowPosition.y+event.getMousePosition().y-this._originMousePosition.y));
 				event.setComsumed();
 				this.notify();
 			}
@@ -92,7 +90,7 @@ class _InnerWindowLayout extends RelativeLayout {
 		
 		this._model.getChild(0).setSize(new utils.Vector2D(this._model.getSize().x, TOP_BAR_HEIGHT));
 		
-		this._model.getChild(1).setRelativePosition(new utils.Coordinates2D(0, TOP_BAR_HEIGHT));
+		this._model.getChild(1).setPosition(new utils.Coordinates2D(0, TOP_BAR_HEIGHT));
 		this._model.getChild(1).setSize(new utils.Vector2D(this._model.getSize().x, this._model.getSize().y-TOP_BAR_HEIGHT));
 	}
 	
@@ -110,10 +108,10 @@ class _TopBarLayout extends RelativeLayout {
 	void update() {
 		assert(this._model.getChildNumber() == 2);
 		
-		this._model.getChild(0).setRelativePosition(new utils.Coordinates2D(NAME_BORDER, 0));
+		this._model.getChild(0).setPosition(new utils.Coordinates2D(NAME_BORDER, 0));
 		this._model.getChild(0).setSize(new utils.Vector2D(this._model.getSize().x-BUTTON_SIZE-BUTTON_BORDER*2-NAME_BORDER, this._model.getSize().y));
 		
-		this._model.getChild(1).setRelativePosition(new utils.Coordinates2D(this._model.getSize().x-BUTTON_SIZE-BUTTON_BORDER*2, BUTTON_BORDER));
+		this._model.getChild(1).setPosition(new utils.Coordinates2D(this._model.getSize().x-BUTTON_SIZE-BUTTON_BORDER*2, BUTTON_BORDER));
 		this._model.getChild(1).setSize(new utils.Vector2D(BUTTON_SIZE, BUTTON_SIZE));
 	}
 	

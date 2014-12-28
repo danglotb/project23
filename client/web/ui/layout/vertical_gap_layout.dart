@@ -21,7 +21,7 @@ class VerticalGapLayout extends RelativeLayout {
 			
 			this._model.getChild(0).setSize(new utils.Vector2D(this._model.getSize().x, minimal1.y));
 			
-			this._model.getChild(1).setRelativePosition(new utils.Coordinates2D(0,this._model.getSize().y-this._model.getChild(1).getMinimalSize().y));
+			this._model.getChild(1).setPosition(new utils.Coordinates2D(0,this._model.getSize().y-this._model.getChild(1).getMinimalSize().y));
 			this._model.getChild(1).setSize(new utils.Vector2D(this._model.getSize().x, minimal2.y));
 			
 		}

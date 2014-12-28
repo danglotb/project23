@@ -43,19 +43,19 @@ class BasicTextStyle extends TextStyle {
 
 			switch(this._textAlign) {
 				case TextLabel.LEFT:
-					textX = castModel.getAbsolutePosition().x;
+					textX = castModel.getPosition().x;
 					break;
 				case TextLabel.CENTER:
-					textX = castModel.getAbsolutePosition().x+(castModel.getSize().x-textLength)~/2;
+					textX = castModel.getPosition().x+(castModel.getSize().x-textLength)~/2;
 					break;
 				case TextLabel.RIGHT:
-					textX = castModel.getAbsolutePosition().x+castModel.getSize().x-textLength;
+					textX = castModel.getPosition().x+castModel.getSize().x-textLength;
 					break;
 			}
 			
 			int fontSize = BasicStyleManager.getInstance().getFontSize(this._textSize);
 			
-			textY = castModel.getAbsolutePosition().y+(castModel.getSize().y-fontSize)~/2+fontSize~/2;
+			textY = castModel.getPosition().y+(castModel.getSize().y-fontSize)~/2+fontSize~/2;
 			font = fontSize.toString()+'px '+BasicStyleManager.getInstance().getFontName();
 
 		});

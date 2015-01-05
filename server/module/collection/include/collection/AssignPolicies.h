@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <cstring>
 
+#include "collection/Header.h"
+
 namespace GLOBAL_NS {
 
 	namespace COLLECTION_NS {
@@ -22,6 +24,13 @@ namespace GLOBAL_NS {
 				new((T*)target+i) T(element);
 			}
 		}
+
+		static void copyArray(const T* elements, T* target, unsigned int number) {
+			for(unsigned int i=0; i<number; i++) {
+				new(target+i) T(elements[i]);
+			}
+		}
+
 
 		static void destroy(const T& element) {
 			element.~T();
@@ -47,6 +56,10 @@ namespace GLOBAL_NS {
 			for(unsigned int i=0; i<number; i++) {
 				std::memcpy((T*)target+i, &element, sizeof(T));
 			}
+		}
+
+		static void copyArray(const T* elements, T* target, unsigned int number) {
+			std::memcpy(target, elements, number*sizeof(T));
 		}
 
 		static void destroy(UNUSED_PARAMETER(const T& element)) {

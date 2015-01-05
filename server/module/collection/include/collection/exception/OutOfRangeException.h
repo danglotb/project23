@@ -14,11 +14,11 @@ namespace GLOBAL_NS {
 		class OutOfRangeException : public std::runtime_error {
 
 		public:
-			OutOfRangeException(int index, int max_range) : std::runtime_error(
+			OutOfRangeException(UNUSED_PARAMETER(int index), UNUSED_PARAMETER(int max_range)) : std::runtime_error("TODO..."/*
 																"Out Of Range : try to access to the element "+
 																UTILITY_NS::Conversion::intToString(index)+
 																" with a max range of "+
-																UTILITY_NS::Conversion::intToString(max_range)
+																UTILITY_NS::Conversion::intToString(max_range)*/
 																) {
 
 			}

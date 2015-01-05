@@ -10,10 +10,6 @@ namespace GLOBAL_NS {
 
 	namespace UTILITY_NS {
 
-		namespace Conversion {
-
-			std::string intToString(int i);
-		}
 	}
 }
 

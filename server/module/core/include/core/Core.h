@@ -1,14 +1,14 @@
 #ifndef _CORE_CORE_H
 #define _CORE_CORE_H
 
-#include <iostream>
-
 #include "core/Header.h"
 
 #include "utility/Singleton.h"
 #include "utility/SingletonManager.h"
 
 #include "collection/Buffer.h"
+
+#include "output/LogManager.h"
 
 namespace GLOBAL_NS {
 
@@ -22,7 +22,7 @@ namespace GLOBAL_NS {
 			void run();
 		};
 
-		typedef Singleton<_Core, SingletonDefaultManager> Core;
+		typedef UTILITY_NS::Singleton<_Core, UTILITY_NS::SingletonDefaultManager> Core;
 
 	}
 

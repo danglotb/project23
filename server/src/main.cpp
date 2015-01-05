@@ -1,11 +1,17 @@
 #include "global/Header.h"
 
 #include "core/Core.h"
+#include "core/ThirdPart.h"
 
 #include "utility/SingletonManager.h"
 
 #include "collection/Buffer.h"
 #include "collection/String.h"
+
+#include "output/LogManager.h"
+#include "output/LogOutput.h"
+
+#include "output/Report.h"
 
 #include <vector>
 #include <iostream>
@@ -61,15 +67,22 @@ public:
 
 int main() {
 
+	OUTPUT_NS::LogManager::instance().initialize();
+
+	CORE_NS::ThirdPart::initialize();
+
 	CORE_NS::Core::instance().run();
 
 
 	//Destorying managed singleton
 	UTILITY_NS::SingletonManagerHandler::destroyAll();
 
-	COLLECTION_NS::ReferenceString str("Test");
+	OUTPUT_NS::lstd.duplicate(new OUTPUT_NS::LogFile("log"));
 
-	std::cout << str << std::endl;
+
+	CORE_NS::ThirdPart::destroy();
+
+	OUTPUT_NS::LogManager::instance().destroy();
 
 	return 0;
 }

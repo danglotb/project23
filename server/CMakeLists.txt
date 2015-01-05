@@ -14,19 +14,57 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Werror -Wextra -Wshado
 # Define Debug Level
 add_definitions(-DDEBUG_LEVEL_3)
 
+# Define cmake directory
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+if(MINGW)
+    add_definitions(-gstabs)
+endif()
+
 # Detect compiler
 if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
     add_definitions(-DCOMPILER_GCC)
     Message(STATUS "Compiler family : GNU/GCC")
+else()
+	Message(FATAL_ERROR "Unrecognized Compiler")
 endif()
 
+# Detect Platform
+if(WIN32)
+	add_definitions(-DPLATFORM_WIN32)
+	set(platform_name "win32")
+	Message(STATUS "Platform family : Win32")
+else()
+	Message(FATAL_ERROR "Unrecognized Platform")
+endif()
+
+# Architecture
+if(CMAKE_SYSTEM_PROCESSOR STREQUAL "AMD64")
+    Message(STATUS "Architecture family : ADM64")
+    add_definitions(-DARCHITECTURE_AMD64)
+else()
+    Message(FATAL_ERROR "Unrecognized Architecture")
+endif()
+
+include(Module)
+
+# Detecte pointer size
+if(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    add_definitions(-DPOINTER_SIZE=4)
+elseif(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    add_definitions(-DPOINTER_SIZE=8)
+else()
+    Message(FATAL_ERROR "Uncompatible Architecture (pointer size)")
+endif()
+
+# Includes
 include_directories(include)
+include_module(${server_module})
 
 # Build all module
 foreach(module_name ${server_module})
 	message(STATUS "Build module '${module_name}'")
 	add_subdirectory(module/${module_name})
-	include_directories(module/${module_name}/include)
 endforeach(module_name)
 
 # Main includes
@@ -50,3 +88,8 @@ add_executable(${server_executable} ${include_files} ${source_files})
 
 # Add module to executable
 target_link_libraries (${server_executable} ${server_module})
+
+#Compiler link dbg tool
+if(MINGW)
+    target_link_libraries (${server_executable} imagehlp)
+endif()

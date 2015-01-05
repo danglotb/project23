@@ -38,4 +38,11 @@
 	#error No debug level define (Please define DEBUG_LEVEL_X with X between 0 and 3)
 #endif
 
+/*
+ * Define
+ */
+#if defined(ARCHITECTURE_AMD64)
+#define CAST_POINTER_TO_INTEGER unsigned long long
+#endif
+
 #endif

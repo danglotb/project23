@@ -83,6 +83,7 @@ int main() {
 	CORE_NS::ThirdPart::destroy();
 
 	OUTPUT_NS::LogManager::instance().destroy();
+    OUTPUT_NS::LogManager::destroy();
 
 	return 0;
 }

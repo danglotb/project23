@@ -17,10 +17,26 @@ namespace GLOBAL_NS {
 		class SingletonWithoutManager {
 
 		public:
-			T* createInstance() {
-				return new T;
+            static T* getInstance() {
+                return _instance;
+            }
+
+            static T* createInstance() {
+                _instance = new T;
+                return _instance;
 			}
+
+            static void destroyInstance() {
+                delete _instance;
+            }
+
+        private:
+            static T* _instance;
+
 		};
+
+        template<typename T>
+        T* SingletonWithoutManager<T>::_instance = nullptr;
 
 		/*
 		 *	Desfault Manager
@@ -51,17 +67,26 @@ namespace GLOBAL_NS {
 		class SingletonDefaultManager {
 
 		public:
-			static T* createInstance() {
-				SingletonManagerHandler::add(SingletonDefaultManager<T>::destroyInstance);
+            static T* getInstance() {
+                return _instance;
+            }
+
+            static T* createInstance() {
+                SingletonManagerHandler::add(SingletonDefaultManager<T>::destroyHandler);
 				_instance = new T;
 				return _instance;
 			}
 
-			static void destroyInstance() {
-				delete _instance;
-			}
-
 		private:
+
+            static void destroyInstance() {
+
+            }
+
+            static void destroyHandler() {
+                delete _instance;
+            }
+
 			static T* _instance;
 
 		};

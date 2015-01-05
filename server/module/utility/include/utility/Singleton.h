@@ -21,11 +21,15 @@ namespace GLOBAL_NS {
 		public:
 
 			static T& instance() {
-				if(_instance == nullptr)
-					_instance = _manager.createInstance();
+                if(Manager<T>::getInstance() == nullptr)
+                    _instance = Manager<T>::createInstance();
 
-				return *_instance;
+                return *Manager<T>::getInstance();
 			}
+
+            static void destroy() {
+                Manager<T>::destroyInstance();
+            }
 
 		protected:
 			Singleton() {

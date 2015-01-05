@@ -9,6 +9,7 @@ using namespace OUTPUT_NS;
 
 static HANDLE console_out_handler;
 static HANDLE console_err_handler;
+static bool valid_handler = false;
 
 static void writeTo(HANDLE handle, const void* data, unsigned int size) {
 	unsigned int cursor = 0;
@@ -43,17 +44,22 @@ void ConsoleIO::initialize() {
 		//TODO centralized exit function
 		exit(1);
 	}
+
+	valid_handler = true;
 }
 
 void ConsoleIO::destroy() {
 	CloseHandle(console_out_handler);
 	CloseHandle(console_err_handler);
+	valid_handler = false;
 }
 
 void ConsoleIO::writeToStandartOutput(const void* data, unsigned int size) {
-	writeTo(console_out_handler, data, size);
+	if(valid_handler)
+		writeTo(console_out_handler, data, size);
 }
 
 void ConsoleIO::writeToStandartError(const void* data, unsigned int size) {
-	writeTo(console_err_handler, data, size);
+	if(valid_handler)
+		writeTo(console_err_handler, data, size);
 }

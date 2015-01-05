@@ -67,9 +67,9 @@ public:
 
 int main() {
 
-	OUTPUT_NS::LogManager::instance().initialize();
-
 	CORE_NS::ThirdPart::initialize();
+
+	OUTPUT_NS::LogManager::instance().initialize();
 
 	CORE_NS::Core::instance().run();
 
@@ -79,10 +79,9 @@ int main() {
 
 	OUTPUT_NS::lstd.duplicate(new OUTPUT_NS::LogFile("log"));
 
+	OUTPUT_NS::LogManager::instance().destroy();
 
 	CORE_NS::ThirdPart::destroy();
-
-	OUTPUT_NS::LogManager::instance().destroy();
 
 	return 0;
 }

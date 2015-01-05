@@ -32,9 +32,7 @@ namespace GLOBAL_NS {
 		}
 
 		~Buffer() {
-			for(unsigned int i=0; i<_size; i++) {
-				AssignPolicy<T>::destroy(*_alloc.getAddress(i));
-			}
+			AssignPolicy<T>::destroyArray(_alloc.getAddress(0), _size);
 		}
 
 		void requireSize(unsigned int p_size) {
@@ -58,6 +56,17 @@ namespace GLOBAL_NS {
 			AssignPolicy<T>::initialize(element, _alloc.getAddress(position));
 		}
 
+		void setArray(const T* elements, unsigned int position, unsigned int number) {
+			IF_DEBUG_2 (
+				if(position+number > _size) {
+					throw OutOfRangeException(position, _size);
+				}
+			)
+			AssignPolicy<T>::destroyArray(_alloc.getAddress(position), number);
+			AssignPolicy<T>::copyArray(elements, _alloc.getAddress(position), number);
+		}
+
+
 		const T& get(unsigned int position) const {
 			IF_DEBUG_2 (
 				if(position >= _size) {
@@ -80,8 +89,25 @@ namespace GLOBAL_NS {
 			_size++;
 		}
 
-		unsigned int size() const {
+		void pushArray(const T* elements, unsigned int number) {
+			requireSize(_size+number);
+
+			AssignPolicy<T>::copyArray(elements, _alloc.getAddress(_size), number);
+
+			_size += number;
+		}
+
+		void clear() {
+			AssignPolicy<T>::destroyArray(_alloc.getAddress(0), _size);
+			_size = 0;
+		}
+
+		unsigned int getSize() const {
 			return _size;
+		}
+
+		const T* getData() const {
+			return _alloc.getAddress(0);
 		}
 
 		/**
@@ -185,7 +211,7 @@ namespace GLOBAL_NS {
 			return *((T*)_buffer+position);
 		}
 
-		unsigned int size() const {
+		unsigned int getSize() const {
 			return Size;
 		}
 

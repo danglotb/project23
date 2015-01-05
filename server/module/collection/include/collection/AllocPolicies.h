@@ -3,8 +3,9 @@
 
 #include <cstdint>
 #include <cstring>
-
 #include <cstdlib>
+
+#include "collection/Header.h"
 
 namespace GLOBAL_NS {
 
@@ -15,8 +16,8 @@ namespace GLOBAL_NS {
 
 
 		public:
-			const unsigned int start_size = 1;
-			const unsigned int realloc_power = 1;
+			static const unsigned int start_size = 1;
+			static const unsigned int realloc_power = 1;
 
 
 			SeparateHeapAlloc() : _buffer((uint8_t*)std::malloc(start_size*sizeof(T))), _alloc_size(start_size) {

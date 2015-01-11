@@ -1,95 +1,60 @@
+project(Cliff)
+
 cmake_minimum_required(VERSION 2.8)
 
-project(Project23_server)
-
-# Define the executable name
-set(server_executable "server")
-
-# Define the module used 
-set(server_module core utility collection output)
-
-# Define Compiler flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Werror -Wextra -Wshadow -Wstrict-aliasing -pedantic -g3")
-
-# Define Debug Level
-add_definitions(-DDEBUG_LEVEL_3)
-
-# Define cmake directory
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-if(MINGW)
-    add_definitions(-gstabs)
-endif()
+include(Dependence)
 
-# Detect compiler
-if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
-    add_definitions(-DCOMPILER_GCC)
-    Message(STATUS "Compiler family : GNU/GCC")
-else()
-	Message(FATAL_ERROR "Unrecognized Compiler")
-endif()
+#########################################
+#			Configuration               #
+#########################################
 
-# Detect Platform
-if(WIN32)
-	add_definitions(-DPLATFORM_WIN32)
-	set(platform_name "win32")
-	Message(STATUS "Platform family : Win32")
-else()
-	Message(FATAL_ERROR "Unrecognized Platform")
-endif()
+set(BUILD_TYPE "Debug" CACHE TYPE STRING)
 
-# Architecture
-if(CMAKE_SYSTEM_PROCESSOR STREQUAL "AMD64")
-    Message(STATUS "Architecture family : ADM64")
-    add_definitions(-DARCHITECTURE_AMD64)
-else()
-    Message(FATAL_ERROR "Unrecognized Architecture")
-endif()
+#########################################
 
-include(Module)
+include(BuildType)
 
-# Detecte pointer size
-if(CMAKE_SIZEOF_VOID_P EQUAL 4)
-    add_definitions(-DPOINTER_SIZE=4)
-elseif(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    add_definitions(-DPOINTER_SIZE=8)
-else()
-    Message(FATAL_ERROR "Uncompatible Architecture (pointer size)")
-endif()
+message(STATUS "Build type : ${BUILD_TYPE}")
 
-# Includes
-include_directories(include)
-include_module(${server_module})
+add_definitions(-std=c++11)
 
-# Build all module
-foreach(module_name ${server_module})
-	message(STATUS "Build module '${module_name}'")
-	add_subdirectory(module/${module_name})
-endforeach(module_name)
+#########################################
+#		  Layer 1 : low_level           #
+#########################################
 
-# Main includes
-file(
-	GLOB_RECURSE
-	include_files
-	
-	include/*.h
-)
+set(low_level_project_name "Low_Level")
+set(low_level_directory "low_level")
 
-# Main sources
-file(
-	GLOB_RECURSE
-	source_files
-	
-	src/*.cpp
-)
+#########################################
 
-# Create executable
-add_executable(${server_executable} ${include_files} ${source_files})
+message(STATUS "### Builing ${low_level_project_name} ###")
 
-# Add module to executable
-target_link_libraries (${server_executable} ${server_module})
+include(TypeSize)
 
-#Compiler link dbg tool
-if(MINGW)
-    target_link_libraries (${server_executable} imagehlp)
-endif()
+add_subdirectory(layers/${low_level_directory})
+
+get_directory_property(includes_low_level DIRECTORY layers/${low_level_directory} DEFINITION includes)
+
+add_includes(${low_level_directory} ${includes_low_level})
+
+#########################################
+#	Layer 2 : platform_independence     #
+#########################################
+
+set(platform_independence_project_name "Platform_independence")
+set(platform_independence_directory "platform_independence")
+
+#########################################
+
+message(STATUS "### Builing ${platform_independence_project_name} ###")
+
+add_subdirectory(layers/${platform_independence_directory})
+
+get_directory_property(includes_platform_independence DIRECTORY layers/${platform_independence_directory} DEFINITION includes)
+
+add_includes(${platform_independence_directory} ${includes_platform_independence})
+
+add_executable(${platform_independence_project_name}_tests layers/${platform_independence_directory}/tests/main.cpp)
+target_link_libraries(${platform_independence_project_name}_tests ${low_level_project_name} ${platform_independence_project_name})

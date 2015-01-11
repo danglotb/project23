@@ -1,0 +1,5 @@
+function(add_includes layer_name)
+foreach(directory ${ARGN})
+	include_directories(layers/${layer_name}/${directory})
+endforeach(directory)
+endfunction(add_includes)

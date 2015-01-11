@@ -1,0 +1,45 @@
+include(CheckTypeSize) 
+
+# Type size
+
+check_type_size("void*" TYPE_POINTER)
+if(NOT HAVE_TYPE_POINTER)
+	Message(FATAL_ERROR "Missing TYPE_POINTER")
+endif()
+message(STATUS "Pointer size : ${TYPE_POINTER}")
+add_definitions(-DCLIFF_POINTER_SIZE=${TYPE_POINTER})
+
+check_type_size("char" TYPE_CHAR)
+if(NOT HAVE_TYPE_CHAR)
+	Message(FATAL_ERROR "Missing TYPE_CHAR")
+endif()
+message(STATUS "Char size : ${TYPE_CHAR}")
+add_definitions(-DCLIFF_CHAR_SIZE=${TYPE_CHAR})
+
+check_type_size("short" TYPE_SHORT)
+if(NOT HAVE_TYPE_SHORT)
+	Message(FATAL_ERROR "Missing TYPE_SHORT")
+endif()
+message(STATUS "Short size : ${TYPE_SHORT}")
+add_definitions(-DCLIFF_SHORT_SIZE=${TYPE_SHORT})
+
+check_type_size("int" TYPE_INT)
+if(NOT HAVE_TYPE_INT)
+	Message(FATAL_ERROR "Missing TYPE_INT")
+endif()
+message(STATUS "Int size : ${TYPE_INT}")
+add_definitions(-DCLIFF_INT_SIZE=${TYPE_INT})
+
+check_type_size("long" TYPE_LONG)
+if(NOT HAVE_TYPE_LONG)
+	Message(FATAL_ERROR "Missing TYPE_LONG")
+endif()
+message(STATUS "Long size : ${TYPE_LONG}")
+add_definitions(-DCLIFF_LONG_SIZE=${TYPE_LONG})
+	
+check_type_size("long long" TYPE_LONG_LONG)
+if(NOT HAVE_TYPE_LONG_LONG)
+	Message(FATAL_ERROR "Missing TYPE_LONG_LONG")
+endif()
+message(STATUS "Long long size : ${TYPE_LONG_LONG}")
+add_definitions(-DCLIFF_LONG_LONG_SIZE=${TYPE_LONG_LONG})

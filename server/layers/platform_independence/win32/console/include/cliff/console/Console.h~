@@ -28,6 +28,8 @@ namespace CLIFF {
 		static void setTextColor(ConsoleTextColor color);
 		static void setBackgroundColor(ConsoleBackgroundColor color);
 
+		static WORD getAttribute();
+
 	private:
 		static void changeTextAttribute();
 

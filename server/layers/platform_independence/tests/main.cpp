@@ -28,7 +28,7 @@ void cliffEntry() {
 	ConsoleAttribute::setTextColor(CONSOLE_TEXT_COLOR_BLUE);
 	Console<Ascii>::writeToStandart(sB, StringFunction<Ascii>::getLength(sB));
 
-	ConsoleAttribute::setTextColor(CONSOLE_TEXT_COLOR_WHITE);
+	ConsoleAttribute::setTextColor(CONSOLE_TEXT_COLOR_DEFAULT);
 
 	const charAscii* s3 = "[Test] Background Color :\n";
 
@@ -43,11 +43,16 @@ void cliffEntry() {
 	ConsoleAttribute::setBackgroundColor(CONSOLE_BACKGROUND_COLOR_BLUE);
 	Console<Ascii>::writeToStandart(sB, StringFunction<Ascii>::getLength(sB));
 
-	ConsoleAttribute::setBackgroundColor(CONSOLE_BACKGROUND_COLOR_BLACK);
+	ConsoleAttribute::setBackgroundColor(CONSOLE_BACKGROUND_COLOR_DEFAULT);
 
 
-	const charAscii* s4 = u8"[Test] >>> ø <<<\n";
-	Console<Utf8>::writeToStandart(s4, StringFunction<Ascii>::getLength(s4));
-	std::cout << "->" << StringFunction<Ascii>::getLength(s4) << "-" << StringFunction<Utf8>::getLength(s4) << ", " << StringFunction<Utf8>::getByteSize(s4)<< std::endl;
+	const charAscii* s4 = "[Test] UTF8 Encodage :\n";
+	const charAscii* s4_1 = u8"[Test] [\xc2\xb6]\n";
+	const charAscii* s4_2 = u8"[Test] [\xe0\xa4\x84]\n";
+	const charAscii* s4_3 = u8"[Test] [\xe1\x84\x80]\n";
+	Console<Ascii>::writeToStandart(s4, StringFunction<Ascii>::getLength(s4));
+	Console<Utf8>::writeToStandart(s4_1, StringFunction<Utf8>::getLength(s4_1));
+	Console<Utf8>::writeToStandart(s4_2, StringFunction<Utf8>::getLength(s4_2));
+	Console<Utf8>::writeToStandart(s4_3, StringFunction<Utf8>::getLength(s4_3));
 
 }
